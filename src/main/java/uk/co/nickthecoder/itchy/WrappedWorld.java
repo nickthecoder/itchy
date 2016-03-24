@@ -7,7 +7,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
-public interface Wrapped
+public interface WrappedWorld
 {
     public void normalise( Actor actor );
 

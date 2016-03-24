@@ -5,7 +5,7 @@
 package uk.co.nickthecoder.itchy.collision;
 
 /**
- * The default strategy for Actor's overlapping and pixelOverlap methods. It is Order n squared, and therefore slow for large values of n.
+ * The default collision strategy. Simple, but slow for large numbers of actors. 
  */
 
 import java.util.ArrayList;
@@ -16,85 +16,67 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.util.Filter;
 
-public class BruteForceCollisionStrategy implements CollisionStrategy
+public class BruteForceCollisionStrategy extends AbstractCollisionStrategy
 {
-    public static final BruteForceCollisionStrategy pixelCollision = new BruteForceCollisionStrategy();
-    
-    private CollisionTest collisionTest;
-    
+    /**
+     * One instance that can be shared. Uses a {@link PixelCollisionTest}.
+     */
+    public static final BruteForceCollisionStrategy instance = new BruteForceCollisionStrategy();
+
+    /**
+     * Create a new instance with a {@link PixelCollisionTest}.
+     */
     public BruteForceCollisionStrategy()
     {
-        this( PixelCollisionTest.instance );
+        this(PixelCollisionTest.instance);
     }
-    
-    public BruteForceCollisionStrategy( CollisionTest ct )
+
+    /**
+     * Create a new instance with a CollisionTest of your own choosing.
+     * 
+     * @param collisionTest
+     */
+    public BruteForceCollisionStrategy(CollisionTest collisionTest)
     {
-        this.collisionTest = ct;
+        super(collisionTest);
     }
-    
+
+    /**
+     * Does nothing.
+     * 
+     * @priority 3
+     */
     @Override
     public void update()
     {
         // Do nothing
     }
 
+    /**
+     * Does nothing.
+     * 
+     * @priority 3
+     */
     @Override
     public void remove()
     {
         // Do nothing
     }
 
-    /**
-     * Should the role be excluded from consideration based on the exclude tags?
-     * 
-     * @param role
-     *        The role who's tags are to be tested
-     * @param excludeTags
-     *        The list of tags which will exclude the role, or null to include all roles.
-     * @return true if the role is tagged with any one of the excludeTags.
-     */
-    public static boolean exclude( Role role, String[] excludeTags )
-    {
-        if (excludeTags == null) {
-            return false;
-        }
-
-        if (excludeTags != null) {
-            for (String excludeTag : excludeTags) {
-                if (role.hasTag(excludeTag)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    
     @Override
-    public List<Role> collisions( Actor actor, String[] tags )
-    {
-        return collisions(actor, tags, MAX_RESULTS, acceptFilter );
-    }
-    
-    @Override
-    public List<Role> collisions( Actor actor, String[] tags, int maxResults )
-    {
-        return collisions(actor, tags, maxResults, acceptFilter );
-    }
-    
-    @Override
-    public List<Role> collisions( Actor source, String[] includeTags, int maxResults, Filter<Role> filter )
+    public List<Role> collisions(Actor source, String[] includeTags, int maxResults, Filter<Role> filter)
     {
         List<Role> results = new ArrayList<Role>();
         for (String tag : includeTags) {
-            for (Role otherRole : AbstractRole.allByTag(tag)) {
+            for (Role otherRole : AbstractRole.findRolesByTag(tag)) {
                 Actor other = otherRole.getActor();
                 if (other == null) {
                     continue;
                 }
 
-                if ((other != source) && (filter.accept( otherRole ))) {
+                if ((other != source) && (filter.accept(otherRole))) {
                     if (!results.contains(other)) {
-                        if (this.collisionTest.collided(source,other)) {
+                        if (this.collisionTest.collided(source, other)) {
                             results.add(otherRole);
                             if (results.size() >= maxResults) {
                                 return results;
@@ -106,6 +88,5 @@ public class BruteForceCollisionStrategy implements CollisionStrategy
         }
         return results;
     }
-
 
 }

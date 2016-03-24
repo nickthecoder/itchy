@@ -11,14 +11,12 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.StringProperty;
-import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.itchy.util.Util;
 
-@Tag(names = { "deadly", "shootable" })
 public class Mothership extends Alien
 {
     protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
@@ -72,6 +70,8 @@ public class Mothership extends Alien
     {
         super.onBirth();
         this.firstBornTimer = Timer.createTimerSeconds(this.firstBornDelay);
+        this.addTag("deadly");
+        this.addTag("shootbale");
     }
 
     @Override

@@ -79,11 +79,6 @@ public class DrunkInvaders extends AbstractDirector
     @Override
     public void onKeyDown(KeyboardEvent ke)
     {
-        if (this.inputDebug.matches(ke)) {
-            debug();
-            ke.stopPropagation();
-        }
-
         if (this.inputToggleInfo.matches(ke)) {
             toggleInfo();
             ke.stopPropagation();
@@ -219,11 +214,6 @@ public class DrunkInvaders extends AbstractDirector
     {
         DecimalFormat df = new DecimalFormat("00");
         getGame().startScene("level" + df.format(this.levelNumber));
-    }
-
-    public void debug()
-    {
-        this.neighbourhood.debug();
     }
 
     public static void main(String argv[]) throws Exception

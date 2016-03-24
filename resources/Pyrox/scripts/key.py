@@ -23,7 +23,7 @@ class Key(GridRole) :
     def onHalfInvaded(self,invader) :
         if invader.hasTag("player") :
             self.deathEvent("collected")
-            for safe in game.findRoleByTag("safe-" + self.name) :
+            for safe in game.findRolesByTag("safe-" + self.name) :
                 safe.unlock()
         else :
             self.explode()

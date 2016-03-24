@@ -16,6 +16,7 @@ import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.Frame;
 import uk.co.nickthecoder.itchy.animation.FramedAnimation;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.NinePatch;
@@ -653,23 +654,17 @@ public class Resources extends Loadable
     }
 
     /**
-     * Creates the role object defined by a costume. If the costume is badly defined, then null is returned.
-     */
-    public Role createRole(Costume costume)
-    {
-        try {
-            return AbstractRole.createRole(this, costume.roleClassName);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    /**
      * Creates an Actor based on a Costume, and places it on a stage.
      */
     public Actor createActor(Costume costume, Stage stage)
     {
-        Role role = this.createRole(costume);
+        Role role;
+        try {
+            role = (Role) costume.roleClassName.createInstance(this);
+        } catch (Exception e) {
+            Itchy.handleException(e);
+            role = new PlainRole();
+        }
         Actor actor = new Actor(costume);
         actor.setRole(role);
         actor.setZOrder(costume.defaultZOrder);

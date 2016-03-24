@@ -14,7 +14,7 @@ import uk.co.nickthecoder.jame.Rect;
 /**
  * Like a normal StageView, but wrapped, so that if an object moves off of one edge, it appears on the opposite side.
  */
-public class WrappedStageView extends StageView implements Wrapped
+public class WrappedStageView extends StageView implements WrappedWorld
 {
     private static final List<Property<View,?>> properties = new ArrayList<Property<View,?>>();
 

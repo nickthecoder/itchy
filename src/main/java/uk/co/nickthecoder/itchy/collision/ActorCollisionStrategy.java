@@ -4,52 +4,27 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.collision;
 
-import java.util.List;
-
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.util.Filter;
 
 /**
- * A collision strategy which is owned by a single Actor. i.e. the is a 1:1 relationship. Use as a base class for any strategy which need to
- * hold state information about each Actor. This was initially create because strategies were needed, where each actor was placed in one of
- * more squares, and updated when the actor moved.
+ * A collision strategy which is owned by a single Actor. i.e. there is a 1:1 relationship. Use as a base class for any
+ * strategy which needs to hold state information about each Actor.
+ * 
+ * @priority 3
  */
-public abstract class ActorCollisionStrategy implements CollisionStrategy
+public abstract class ActorCollisionStrategy extends AbstractCollisionStrategy
 {
     protected Actor actor;
 
-    public ActorCollisionStrategy( Actor actor )
+    public ActorCollisionStrategy(CollisionTest collisionTest, Actor actor)
     {
+        super(collisionTest);
         this.actor = actor;
     }
 
     public Actor getActor()
     {
         return this.actor;
-    }
-
-    public List<Role> collisions( String[] tags )
-    {
-        return this.collisions(this.actor, tags);
-    }
-
-    public List<Role> collisions( String[] tags, int maxResults)
-    {
-        return this.collisions(this.actor, tags, maxResults);
-    }
-    
-    public List<Role> collisions( String[] tags, int maxResults, Filter<Role> filter)
-    {
-        return this.collisions(this.actor, tags, maxResults, filter);
-    }
-
-    public void update()
-    {
-    }
-
-    public void remove()
-    {
     }
 
 }

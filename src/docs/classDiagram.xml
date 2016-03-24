@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<diagram title="Itchy" filename="classDiagram.html" image="classDiagram.png" thumbnail="classDiagramThumb.png" thumbnailWidth="400" thumbnailHeight="400" width="1200" height="1600">
+<diagram title="Itchy Main Classes" filename="classDiagram.html" image="classDiagram.png" thumbnail="classDiagramThumb.png" thumbnailWidth="400" thumbnailHeight="400" width="1200" height="1600">
 
 <class name="uk.co.nickthecoder.itchy.Actor" x="646" y="145"/>
 

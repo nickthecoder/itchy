@@ -68,7 +68,7 @@ class Player(Big) :
     def getReady( self, wake ) :
     
         if wake :
-            for warp in game.findRoleByTag("warp") :
+            for warp in game.findRolesByTag("warp") :
                 director = game.getDirector()
                 if director.previousSceneName == warp.scene :
                     x = warp.actor.x + warp.exitX * director.squareSize

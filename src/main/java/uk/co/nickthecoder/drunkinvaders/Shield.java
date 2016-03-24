@@ -5,9 +5,7 @@
 package uk.co.nickthecoder.drunkinvaders;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.util.Tag;
 
-@Tag(names = { "killable", "shootable" })
 public class Shield extends Bouncy implements Shootable
 {
     public Shield()
@@ -21,6 +19,12 @@ public class Shield extends Bouncy implements Shootable
         this.deathEvent("shot");
     }
 
+    public void onBirth()
+    {
+        addTag("killable");
+        addTag("shootable");
+    }
+    
     @Override
     public void tick()
     {

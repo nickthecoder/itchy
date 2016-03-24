@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram title="Itchy Collision Strategy" filename="collisionStrategy.html" image="collisionStrategy.png" thumbnail="collisionStrategyThumb.png" thumbnailWidth="400" thumbnailHeight="400" width="1000" height="800">
+
+    <class name="uk.co.nickthecoder.itchy.AbstractRole" x="9" y="16" priority="0"/>
+    <class name="uk.co.nickthecoder.itchy.SceneDirector" x="12" y="93" priority="0"/>
+    <class name="uk.co.nickthecoder.itchy.collision.CollisionStrategy" x="359" y="27"/>
+    <class name="uk.co.nickthecoder.itchy.collision.AbstractCollisionStrategy" x="326" y="230"/>
+    <class name="uk.co.nickthecoder.itchy.collision.ActorCollisionStrategy" x="353" y="402"/>
+    <class name="uk.co.nickthecoder.itchy.collision.NeighbourhoodCollisionStrategy" x="142" y="620"/>
+    <class name="uk.co.nickthecoder.itchy.collision.SinglePointCollisionStrategy" x="429" y="622"/>
+    <class name="uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy" x="90" y="403"/>
+    <class name="uk.co.nickthecoder.itchy.collision.WrappedCollisionStrategy" x="52" y="232"/>
+    <class name="uk.co.nickthecoder.itchy.collision.CollisionTest" x="748" y="236"/>
+    <class name="uk.co.nickthecoder.itchy.collision.BoundingBoxCollisionTest" x="577" y="468"/>
+    <class name="uk.co.nickthecoder.itchy.collision.PixelCollisionTest" x="819" y="467"/>
+    
+    <association from="uk.co.nickthecoder.itchy.AbstractRole" to="uk.co.nickthecoder.itchy.collision.CollisionStrategy" toLabel="1 getCollisionStrategy"/>
+    <association from="uk.co.nickthecoder.itchy.SceneDirector" to="uk.co.nickthecoder.itchy.collision.CollisionStrategy" toLabel="chooseCollisionStrategy"/>
+    
+    <association from="uk.co.nickthecoder.itchy.collision.AbstractCollisionStrategy" to="uk.co.nickthecoder.itchy.collision.CollisionTest" toLabel="1 getCollisionTest"/>
+     
+    <generalisation from="uk.co.nickthecoder.itchy.collision.CollisionStrategy" to="uk.co.nickthecoder.itchy.collision.AbstractCollisionStrategy"/>
+    <generalisation from="uk.co.nickthecoder.itchy.collision.AbstractCollisionStrategy" to="uk.co.nickthecoder.itchy.collision.ActorCollisionStrategy"/>
+    <generalisation from="uk.co.nickthecoder.itchy.collision.ActorCollisionStrategy" to="uk.co.nickthecoder.itchy.collision.NeighbourhoodCollisionStrategy"/>
+    <generalisation from="uk.co.nickthecoder.itchy.collision.ActorCollisionStrategy" to="uk.co.nickthecoder.itchy.collision.SinglePointCollisionStrategy"/>
+    <generalisation from="uk.co.nickthecoder.itchy.collision.AbstractCollisionStrategy" to="uk.co.nickthecoder.itchy.collision.BruteForceCollisionStrategy"/>
+    <generalisation from="uk.co.nickthecoder.itchy.collision.CollisionStrategy" to="uk.co.nickthecoder.itchy.collision.WrappedCollisionStrategy"/>
+
+    <generalisation from="uk.co.nickthecoder.itchy.collision.CollisionTest" to="uk.co.nickthecoder.itchy.collision.BoundingBoxCollisionTest"/>
+    <generalisation from="uk.co.nickthecoder.itchy.collision.CollisionTest" to="uk.co.nickthecoder.itchy.collision.PixelCollisionTest"/>
+    
+</diagram>
+

@@ -7,17 +7,21 @@ package uk.co.nickthecoder.drunkinvaders;
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.util.Tag;
 
-@Tag(names = { "deadly" })
 public class Pacman extends AbstractRole
 {
+    @Override
+    public void onBirth()
+    {
+        addTag("deadly");
+    }
+
     @Override
     public void tick()
     {
         getCollisionStrategy().update();
 
-        for (Role role : getCollisionStrategy().collisions(getActor(),Alien.SHOOTABLE_LIST)) {
+        for (Role role : collisions(Alien.SHOOTABLE_LIST)) {
             Actor other = role.getActor();
 
             if ((getActor() != other) && (!role.hasTag("bouncy"))) {

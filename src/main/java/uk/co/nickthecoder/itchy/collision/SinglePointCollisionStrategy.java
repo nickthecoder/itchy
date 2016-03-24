@@ -12,82 +12,104 @@ import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.util.Filter;
 
 /**
- * Uses a Neighbourhood to optimise Actor's overlapping and pixelOcerlap methods. This strategy uses a grid based neighbourhood, when the
- * actor is placed into a single NeighbourhoodSquare based on the Actors x,y coordintate. When checking for collisions, actors in the same
- * square, and neighbouring squares are considered. This means that all of the actors which use this strategy must not be larger than the
- * neighbourhood's square size. In fact, if an actor's origin is not its center, then the length to all edges must not be larger than half
- * the neighbourhood's square size.
+ * Uses a {@link Neighbourhood} to optimise collision detection by only considering nearby Actors.
+ * Create a SinglePointCollisionStrategy for each Actor, using a shared Neighbourhood.
+ * <p>
+ * Each actor is placed into a single {@link Block} based on the Actors x,y coordinate.
+ * <p>
+ * When checking for collisions, only actors in the same block, and in neighbouring blocks are considered. This means
+ * that all of the actors which use this strategy must not be larger than the neighbourhood's block size. In fact, if an
+ * actor's origin is not its center, then the length to all edges must not be larger than half the neighbourhood's block
+ * size.
+ * <p>
+ * The block size must therefore be chosen very carefully. Too small, and some collisions will be missed. Too large will
+ * lead to inefficiency (because there will be many actors in each Block). If in doubt, err on the large side!
+ * <p>
+ * See {@link NeighbourhoodCollisionStrategy} for a strategy which is a little smarter, and doesn't have a lower limit
+ * on block size.
  * 
- * It is possbile to mix and match SinglePointCollisionStrategy, and a stategy which places the actor into more than one neighbourhood
- * square (because that actor is bigger than the square size). However, this other strategy hasn't been written yet! This alternative will
- * be useful for large, static actors, such as collidable scenery.
+ * @priority 2
  */
-
 public class SinglePointCollisionStrategy extends ActorCollisionStrategy
 {
-    protected CollisionTest collisionTest;
-
     private Neighbourhood neighbourhood;
 
-    private Square neighbourhoodSquare;
+    /**
+     * The Block that this Actor is in.
+     */
+    private Block block;
 
-    public SinglePointCollisionStrategy( Actor actor, Neighbourhood neighbourhood )
+    /**
+     * Create a CollisionStrategy for the Actor (with a shared Neighbourhood).
+     * The CollisionTest will be {@link PixelCollisionTest}.
+     * 
+     * @param actor
+     * @param neighbourhood
+     *            neighbourhood shared by all
+     */
+    public SinglePointCollisionStrategy(Actor actor, Neighbourhood neighbourhood)
     {
         this(PixelCollisionTest.instance, actor, neighbourhood);
     }
 
-    public SinglePointCollisionStrategy( CollisionTest collisionTest, Actor actor, Neighbourhood neighbourhood )
+    /**
+     * Create a CollisionStrategy for the Actor (with a shared Neighbourhood).
+     * 
+     * @param collisionTest
+     * @param actor
+     * @param neighbourhood
+     *            neighbourhood shared by all
+     */
+    public SinglePointCollisionStrategy(CollisionTest collisionTest, Actor actor, Neighbourhood neighbourhood)
     {
-        super(actor);
+        super(collisionTest, actor);
         this.neighbourhood = neighbourhood;
         this.update();
     }
 
-    public Square getSquare()
+    /**
+     * @return The Block that the Actor is in.
+     * @priority 3
+     */
+    public Block getBlock()
     {
-        return this.neighbourhoodSquare;
+        return this.block;
     }
 
+    /**
+     * Updates the Block that the Actor is in.
+     */
     @Override
     public void update()
     {
-        Square ns = this.neighbourhood.getSquare(this.actor.getX(), this.actor.getY());
-        if (ns != this.neighbourhoodSquare) {
-            if (this.neighbourhoodSquare != null) {
-                this.neighbourhoodSquare.remove(this.actor);
+        Block ns = this.neighbourhood.getBlock(this.actor.getX(), this.actor.getY());
+        if (ns != this.block) {
+            if (this.block != null) {
+                this.block.remove(this.actor);
             }
-            this.neighbourhoodSquare = ns;
-            this.neighbourhoodSquare.add(this.actor);
+            this.block = ns;
+            this.block.add(this.actor);
         }
     }
 
+    /**
+     * Removes the Actor from the block.
+     */
     @Override
     public void remove()
     {
-        if (this.neighbourhoodSquare != null) {
-            this.neighbourhoodSquare.remove(this.actor);
-            this.neighbourhoodSquare = null;
+        if (this.block != null) {
+            this.block.remove(this.actor);
+            this.block = null;
         }
     }
 
     @Override
-    public List<Role> collisions( Actor actor, String[] tags )
-    {
-        return collisions(actor, tags, MAX_RESULTS, acceptFilter );
-    }
-    
-    @Override
-    public List<Role> collisions( Actor actor, String[] tags, int maxResults )
-    {
-        return collisions(actor, tags, maxResults, acceptFilter );
-    }
-    
-    @Override
-    public List<Role> collisions( Actor source, String[] tags, int maxResults, Filter<Role> filter )
+    public List<Role> collisions(Actor source, String[] tags, int maxResults, Filter<Role> filter)
     {
         List<Role> results = new ArrayList<Role>();
 
-        for (Square square : this.neighbourhoodSquare.getNeighbouringSquares()) {
+        for (Block square : this.block.getNeighbouringBlocks()) {
 
             for (Actor actor : square.getOccupants()) {
                 Role role = actor.getRole();

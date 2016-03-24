@@ -76,7 +76,7 @@ public class Bouncy extends AbstractRole
 
         getCollisionStrategy().update();
 
-        for (Role role : getCollisionStrategy().collisions(getActor(), BOUNCY_LIST)) {
+        for (Role role : collisions(BOUNCY_LIST)) {
             collide(getActor(), role.getActor());
         }
 

@@ -393,19 +393,25 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     }
 
     /**
+     * Adds delta to the direction.
+     * 
+     * @param delta
+     * @priority 2
+     */
+    public void adjustDirection(double delta)
+    {
+        this.setDirection(this.direction + delta);
+    }
+
+    /**
      * Rotates this Actor so that it is pointing in the direction of the other Actor.
      * 
      * @param other
      * @priority 2
      */
-    public void setDirection(Actor other)
+    public void setDirectionTowards(Actor other)
     {
         this.setDirection(this.actor.directionOf(other));
-    }
-
-    public void adjustDirection(double degrees)
-    {
-        setDirection(this.direction + degrees);
     }
 
     /**
@@ -433,6 +439,12 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         }
     }
 
+    /**
+     * Adds delta to the scale.
+     * 
+     * @param delta
+     * @priority 2
+     */
     public void adjustScale(double delta)
     {
         this.setScale(this.scale + delta);

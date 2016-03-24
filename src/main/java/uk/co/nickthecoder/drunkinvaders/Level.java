@@ -73,7 +73,7 @@ public class Level extends PlainSceneDirector
     }
 
     @Override
-    public CollisionStrategy getCollisionStrategy( Actor actor )
+    public CollisionStrategy chooseCollisionStrategy( Actor actor )
     {
         return new NeighbourhoodCollisionStrategy(actor, DrunkInvaders.director.neighbourhood);
     }

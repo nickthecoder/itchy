@@ -56,7 +56,7 @@ class Level(PlainSceneDirector) :
         self.inputNextPlayer = Input.find("nextPlayer")
         print "Found all inputs"
 
-        for player in game.findRoleByTag("player") :
+        for player in game.findRolesByTag("player") :
             if self.player is None or player.awake :
                 self.player = player
 
@@ -73,10 +73,10 @@ class Level(PlainSceneDirector) :
         # This is used on the "play" scene, to allow the player to start near to the gate he
         # has just completed.
         # If there are more than one player, then the others will go to sleep.
-        for player in game.findRoleByTag("player") :
+        for player in game.findRolesByTag("player") :
             player.getReady( player == self.player )
     
-        for portcullis in game.findRoleByTag("portcullis") :
+        for portcullis in game.findRolesByTag("portcullis") :
             portcullis.getReady(self.player)
             
         self.macroRecorder = MacroRecorder()
@@ -181,7 +181,7 @@ class Level(PlainSceneDirector) :
     def wakeNextPlayer(self) :
         
         previous = None
-        for player in game.findRoleByTag("player") :
+        for player in game.findRolesByTag("player") :
                 
             if player is self.player and previous is not None :
                 self.wakePlayer( previous )
@@ -219,7 +219,7 @@ class Level(PlainSceneDirector) :
 
     def runTests(self) :
     
-        for autoPilot in Itchy.getGame().findRoleByTag("autoPilot") :
+        for autoPilot in Itchy.getGame().findRolesByTag("autoPilot") :
             autoPilot.run()
             return
             
@@ -238,7 +238,7 @@ class Level(PlainSceneDirector) :
         self.collectablesRemaining -= amount
         if self.collectablesRemaining <= 0 :
 
-            for gate in game.findRoleByTag( "gate" ) :
+            for gate in game.findRolesByTag( "gate" ) :
                 gate.onMessage("open")
 
 

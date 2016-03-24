@@ -16,15 +16,13 @@ import uk.co.nickthecoder.itchy.ZOrderStage;
 import uk.co.nickthecoder.itchy.animation.Eases;
 import uk.co.nickthecoder.itchy.animation.ScaleAnimation;
 import uk.co.nickthecoder.itchy.extras.Fragments;
-import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.role.ExplosionBuilder;
 import uk.co.nickthecoder.itchy.role.TalkBuilder;
-import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.itchy.util.Util;
 
-@Tag(names = { "deadly", "shootable" })
 public class Alien extends Bouncy implements Shootable
 {
     protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
@@ -54,6 +52,8 @@ public class Alien extends Bouncy implements Shootable
     {
         super.onBirth();
         DrunkInvaders.director.addAliens(1);
+        addTag("deadly");
+        addTag("shootable");
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Alien extends Bouncy implements Shootable
         super.tick();
 
         // This isn't neat - can we have a "killable" tag, which Ship and Shield will both have?
-        for (Role otherRole : getCollisionStrategy().collisions(this.getActor(), SHOOTABLE_LIST)) {
+        for (Role otherRole : collisions(SHOOTABLE_LIST)) {
             Actor other = otherRole.getActor();
             if ((getActor() != other) && (!otherRole.hasTag("bouncy"))) {
                 ((Shootable) other.getRole()).shot(getActor());

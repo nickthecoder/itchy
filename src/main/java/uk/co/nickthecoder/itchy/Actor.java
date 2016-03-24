@@ -10,7 +10,7 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
-import uk.co.nickthecoder.itchy.collision.PixelCollisionTest;
+import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.editor.SceneDesigner;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
 import uk.co.nickthecoder.itchy.property.IntegerProperty;
@@ -179,7 +179,7 @@ public class Actor implements PropertySubject<Actor>
      * <p>
      * Note. It is up to you to ensure that the IDs are unique. If they aren't the behaviour of
      * {@link Game#findActorById(String)} is undefined. If you want to find a set of game objects (for example, if you
-     * want a key to open many doors), then use {@link Role#addTag(String)} and {@link Game#findRoleByTag(String)}.
+     * want a key to open many doors), then use {@link Role#addTag(String)} and {@link Game#findRolesByTag(String)}.
      * 
      * @return The ID
      * @priority 3
@@ -193,7 +193,7 @@ public class Actor implements PropertySubject<Actor>
      * Sets the Actor's ID. Typically you will use the {@link SceneDesigner} to set the IDs for actors, so this method
      * is rarely used.
      * <p>
-     * Find an Actor with a given ID using {@link Game#findRoleByTag(String)}.
+     * Find an Actor with a given ID using {@link Game#findRolesByTag(String)}.
      * 
      * @param id
      * @priority 3
@@ -249,7 +249,7 @@ public class Actor implements PropertySubject<Actor>
     /**
      * Sets the heading that the actor is travelling in, when used in conjunction with {@link #moveForwards(double)}.
      * It does NOT affect the rotation of the Actor's {@link Pose}. To rotate, use
-     * {@link Appearance#setDirection(Actor)}.
+     * {@link Appearance#setDirectionTowards(Actor)}.
      * To change both the angle of the Pose, and the Actor's heading, use {@link #setDirection(double)}.
      * 
      * @param degrees
@@ -340,6 +340,18 @@ public class Actor implements PropertySubject<Actor>
     public double getDirection()
     {
         return this.getAppearance().getDirection();
+    }
+
+    /**
+     * Adjusts both the heading, and the appearance's direction.
+     * 
+     * @param delta
+     * @priority 2
+     */
+    public void adjustDirection(double delta)
+    {
+        this.setHeading(this.heading + delta);
+        this.appearance.adjustDirection(delta);
     }
 
     /**
@@ -606,6 +618,22 @@ public class Actor implements PropertySubject<Actor>
     }
 
     /**
+     * Initiate an event, which can change the Actor's {@link Pose}, begin an {@link Animation}, and/or cause a Sound to
+     * play.
+     * 
+     * @param eventName
+     *            The name of the event (as defined in the Costume tab of the {@link Editor}
+     * @param message
+     *            The message sent to the {@link Role} when the event's {@link Animation} finishes. If the event has no
+     *            animation, then the message is sent straight away.
+     * @priority 3
+     */
+    public void event(String eventName, String message)
+    {
+        this.event(eventName, message, AnimationEvent.REPLACE);
+    }
+
+    /**
      * Take full control over initiating an event. Event can change the Actor's {@link Pose}, begin an {@link Animation}
      * , and/or cause a Sound to play.
      * 
@@ -661,6 +689,22 @@ public class Actor implements PropertySubject<Actor>
     public void deathEvent(String eventName)
     {
         deathEvent(eventName, null, AnimationEvent.REPLACE);
+    }
+
+    /**
+     * Does the same as {@link #event(String, String)}, but also kills the actor when the event finishes.
+     * If the event has no Animation, then the Actor is killed straight away.
+     * 
+     * @param eventName
+     *            The name of the event (as defined in the Costume tab of the {@link Editor}
+     * @param message
+     *            The message sent to the Actor's {@link Role} when the event's {@link Animation} finishes. If the event
+     *            has no animation, then the message is sent straight away.
+     * @priority 3
+     */
+    public void deathEvent(String eventName, String message)
+    {
+        deathEvent(eventName, message, AnimationEvent.REPLACE);
     }
 
     /**
@@ -780,11 +824,11 @@ public class Actor implements PropertySubject<Actor>
         }
 
         if (this.role != null) {
-            this.role.detatched();
+            this.role.detach();
         }
 
         this.role = role == null ? new PlainRole() : role;
-        this.role.attached(this);
+        this.role.attach(this);
 
         if (this.stage != null) {
             this.stage.changedRole(this);
@@ -1078,7 +1122,7 @@ public class Actor implements PropertySubject<Actor>
         Role closestRole = null;
         double closestDistance = Double.MAX_VALUE;
 
-        for (Role otherRole : AbstractRole.allByTag(tag)) {
+        for (Role otherRole : AbstractRole.findRolesByTag(tag)) {
             Actor other = otherRole.getActor();
             double distance = other.distanceTo(x, y);
             if (distance < closestDistance) {
@@ -1102,7 +1146,7 @@ public class Actor implements PropertySubject<Actor>
         Role closestRole = null;
         double closestDistance = Double.MAX_VALUE;
 
-        for (Role otherRole : AbstractRole.allByTag(tag)) {
+        for (Role otherRole : AbstractRole.findRolesByTag(tag)) {
             Actor other = otherRole.getActor();
             if (other != this) {
                 double distance = other.distanceTo(this);
@@ -1236,6 +1280,11 @@ public class Actor implements PropertySubject<Actor>
     }
 
     /**
+     * The threshold value when using {@link #pixelOverlap(int,int)}.
+     */
+    public static final int DEFAULT_ALPHA_THRESHOLD = 10;
+
+    /**
      * Checks if a given world coordinate is a visible part of this Actor.
      * <p>
      * If you want to use this in conjunction with mouse position, then you need to convert the screen coordinates to
@@ -1250,7 +1299,7 @@ public class Actor implements PropertySubject<Actor>
      */
     public boolean pixelOverlap(int worldX, int worldY)
     {
-        return this.pixelOverlap(worldX, worldY, PixelCollisionTest.DEFAULT_THRESHOLD);
+        return this.pixelOverlap(worldX, worldY, DEFAULT_ALPHA_THRESHOLD);
     }
 
     /**

@@ -71,7 +71,7 @@ class Play(PlainSceneDirector) :
                 game.startScene("completed")   
     
     
-    def getCollisionStrategy(self,actor) :
+    def chooseCollisionStrategy(self,actor) :
         return self.collisionStrategy
     
     

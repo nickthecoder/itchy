@@ -76,13 +76,13 @@ class Level(PlainSceneDirector) :
     def onActivate( self ) :
             
         print "level.onActivate"
-        for player in game.findRoleByTag("player") :
+        for player in game.findRolesByTag("player") :
             self.player = player
         print "Player", self.player
 
         print "Looking for spawn sites"
         self.spawnLocations = []
-        for spawn in game.findRoleByTag("spawn") :
+        for spawn in game.findRolesByTag("spawn") :
             self.spawnLocations.append((spawn.actor.x, spawn.actor.y))
             spawn.deathEvent("remove")
             

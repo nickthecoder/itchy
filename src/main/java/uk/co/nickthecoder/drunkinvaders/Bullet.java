@@ -64,7 +64,7 @@ public class Bullet extends AbstractRole implements Shootable
 
         getCollisionStrategy().update();
 
-        for (Role otherRole : getCollisionStrategy().collisions(getActor(), new String[] {this.targetTagName})) {
+        for (Role otherRole : collisions(this.targetTagName)) {
             ((Shootable) otherRole).shot(getActor());
             getActor().kill();
 

@@ -36,7 +36,7 @@ class AutoPilot(GridRole) :
         game.sceneDirector.collected(-1) 
 
         self.testing = True
-        for player in game.findRoleByTag("player") :
+        for player in game.findRolesByTag("player") :
             self.runPlayer( player )
 
     def runPlayer(self,player) :
@@ -84,7 +84,7 @@ class AutoPilot(GridRole) :
         print "Running tests"
         count = 0
         fails = 0
-        for test in game.findRoleByTag("test") :
+        for test in game.findRolesByTag("test") :
             count += 1
             if not test.run() :
                 fails += 1

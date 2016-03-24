@@ -175,11 +175,6 @@ public abstract class AbstractTextPose implements Pose
         changedImage();
     }
 
-    public void adjustFontSize(double delta)
-    {
-        this.setFontSize(this.fontSize + delta);
-    }
-
     /**
      * The X alignment (0 = left aligned, 0.5 = centered, 1 = right aligned).
      * 

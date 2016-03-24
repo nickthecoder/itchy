@@ -242,7 +242,7 @@ public class Costume implements NamedSubject<Costume>, Cloneable
         actor.setZOrder(this.defaultZOrder);
         Role role;
         try {
-            role = AbstractRole.createRole(Itchy.getGame().resources, roleClassName);
+            role = (Role) roleClassName.createInstance(Itchy.getGame().resources);
 
         } catch (Exception e) {
             role = new PlainRole();
@@ -289,7 +289,7 @@ public class Costume implements NamedSubject<Costume>, Cloneable
         if (costumeFeatures == null) {
             try {
                 roleClassNameForCostumeFeatures = roleClassName.name;
-                Role dummyRole = AbstractRole.createRole(Itchy.getGame().resources, roleClassName);
+                Role dummyRole = (Role) roleClassName.createInstance(Itchy.getGame().resources);
                 costumeFeatures = dummyRole.createCostumeFeatures(this);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -888,64 +888,6 @@ public class Costume implements NamedSubject<Costume>, Cloneable
     public List<AnimationResource> getAnimationChoices(String name)
     {
         return animationChoices.get(name);
-    }
-
-    /**
-     * Copies the Costume. I think this is no longer needed!
-     * 
-     * @param resource
-     * @return
-     * @priority 5
-     */
-    public Costume copy(Resources resource)
-    {
-        try {
-            Costume result = (Costume) super.clone();
-
-            result.roleClassName = new ClassName(roleClassName.baseClass, roleClassName.name);
-
-            // result.costumeProperties = this.costumeProperties.copy();
-
-            result.animationChoices = new HashMap<String, List<AnimationResource>>();
-            for (String eventName : animationChoices.keySet()) {
-                List<AnimationResource> list = new ArrayList<AnimationResource>();
-                list.addAll(animationChoices.get(eventName));
-                result.animationChoices.put(eventName, list);
-            }
-
-            result.stringChoices = new HashMap<String, List<String>>();
-            for (String eventName : stringChoices.keySet()) {
-                List<String> list = new ArrayList<String>();
-                list.addAll(stringChoices.get(eventName));
-                result.stringChoices.put(eventName, list);
-            }
-
-            result.soundChoices = new HashMap<String, List<ManagedSound>>();
-            for (String eventName : soundChoices.keySet()) {
-                List<ManagedSound> list = new ArrayList<ManagedSound>();
-                list.addAll(soundChoices.get(eventName));
-                result.soundChoices.put(eventName, list);
-            }
-
-            result.poseChoices = new HashMap<String, List<PoseResource>>();
-            for (String eventName : poseChoices.keySet()) {
-                List<PoseResource> list = new ArrayList<PoseResource>();
-                list.addAll(poseChoices.get(eventName));
-                result.poseChoices.put(eventName, list);
-            }
-
-            result.textStyleChoices = new HashMap<String, List<TextStyle>>();
-            for (String eventName : textStyleChoices.keySet()) {
-                List<TextStyle> list = new ArrayList<TextStyle>();
-                list.addAll(textStyleChoices.get(eventName));
-                result.textStyleChoices.put(eventName, list);
-            }
-
-            return result;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     /**

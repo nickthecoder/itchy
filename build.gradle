@@ -38,7 +38,8 @@ javadoc {
     options.addStringOption( "title", "Itchy" )
     options.addStringOption( "link", "http://docs.oracle.com/javase/7/docs/api/")
     options.addStringOption( "diagram", "src/docs/classDiagram.xml" )
-
+    options.addStringOption( "diagram", "src/docs/collisionStrategyDiagram.xml" )
+    
     options.docletpath = configurations.compile.files.asType(List)
     verbose = true
 }

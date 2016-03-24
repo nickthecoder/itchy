@@ -40,7 +40,7 @@ class Rock(Moving) :
         
     def tick(self):
         Moving.tick(self)
-        self.getActor().getAppearance().adjustDirection(self.rotationSpeed)
+        self.actor.appearance.direction += self.rotationSpeed
 
     
     
@@ -49,13 +49,13 @@ class Rock(Moving) :
         strength = bullet.actor.costume.costumeFeatures.strength
 
         if strength < self.actor.costume.costumeFeatures.strength :
-            self.getActor().event("ricochet")
+            self.event("ricochet")
             return
     
         self.hits += strength
         # Have we hit the rock enough times?
         if self.hits < self.actor.costume.costumeFeatures.hitsRequired :
-            self.getActor().event("hit")
+            self.event("hit")
             return
     
         self.getActor().event("explode")

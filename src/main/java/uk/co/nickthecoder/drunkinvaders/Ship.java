@@ -11,14 +11,12 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.extras.Fragments;
-import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.role.ExplosionBuilder;
 import uk.co.nickthecoder.itchy.role.OnionSkinBuilder;
 import uk.co.nickthecoder.itchy.role.TalkBuilder;
-import uk.co.nickthecoder.itchy.util.Tag;
 
-@Tag(names = { "killable" })
 public class Ship extends Bouncy implements Shootable
 {
 
@@ -87,6 +85,7 @@ public class Ship extends Bouncy implements Shootable
     {
         super.onBirth();
 
+        addTag("killable");
         new OnionSkinBuilder(getActor()).alpha(128).create();
         this.mass = 100000000000.0;
 
@@ -167,7 +166,7 @@ public class Ship extends Bouncy implements Shootable
 
             getCollisionStrategy().update();
 
-            for (Role role : getCollisionStrategy().collisions(getActor(), DEADLY_LIST)) {
+            for (Role role : collisions(DEADLY_LIST)) {
                 Actor other = role.getActor();
                 this.shot(other);
                 if (other.getRole() instanceof Shootable) {

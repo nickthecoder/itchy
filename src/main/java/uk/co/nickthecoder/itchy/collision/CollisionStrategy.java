@@ -6,43 +6,89 @@ package uk.co.nickthecoder.itchy.collision;
 
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.util.AcceptFilter;
 import uk.co.nickthecoder.itchy.util.Filter;
 
 /**
- * A CollisionStrategy holds defines the algorithm which determines if one actor is touching or overlapping another actor. "touching" is
- * defined as one non-transparent pixel of actor A is drawn on top of actor B. "overlapping" just means that the actor's bounding rectangles
- * overlap. This is significantly faster, but generally, not very useful.
+ * Controls which Actors to consider when performing collision detection.
+ * <a style="align:right;" href="{@docRoot} /collisionStrategy.html" alt="class diagram"><img src="{@docRoot}
+ * /collisionStrategyThumb.png"/></a>
+ * The simplest way of testing for collisions is to use {@link AbstractRole#collided(String...)} and
+ * {@link AbstractRole#collisions(String...)}. However, if you have hundreds of potential
+ * collisions, then the default {@link BruteForceCollisionStrategy} may be too slow, and you will need to switch to an
+ * optimised CollisionStrategy, such as {@link uk.co.nickthecoder.itchy.collision.NeighbourhoodCollisionStrategy}.
+ * <p>
+ * To do this, your {@link SceneDirector} must choose a collision strategy for each actor like this :
  * 
- * To test whether one actor touches/overlaps is always done by Actor.overalpping(Actor) and Actor.touching(Actor). However, if we want to
- * know if a bullet has hit any aliens, then a simplistic solution would be to test every single alien. This is the
- * BruteForceCollisionStrategy. For m bullets and n aliens, the complexity is Order( n*m ), which gets very expensive when n and m are
- * large.
+ * <pre>
+ * <code>
+ * private Neighbourhood neighbourhood;
  * 
- * A faster solution can bring the order closer to O( n ), by only testing for aliens that are near to the bullet. We can keep track of
- * which actors are near other ones, by creating an imaginary grid, and keeping track of which actors occupy which squares in the grid.
- * Moving the bullets and aliens becomes slightly more expensive (by updating the square's occupants), but collision detection becomes
- * significantly faster. This is the SinglePointCollisionStrategy and MultipleSquareCollisionStrategy (and the grid is called a
- * Neighbourhood).
+ * public void loading( Scene scene ) {
+ *     this.neighbourhood = new StandardNeighbourhood( 50 );
+ * }
+ * 
+ * public CollisionStrategy chooseCollisionStrategy(Actor actor) {
+ *     return new NeighbourhoodCollisionStrategy( this.neighbourhood );
+ * }
+ * </code>
+ * </pre>
+ * 
+ * Then in each of your Role's tick method something like this :
+ * 
+ * <pre>
+ * <code>
+ * public void tick() {
+ *     // Perform all the movements
+ *     self.getActor().moveBy( 2, 0 );
+ *     
+ *     this.getCollisionStrategy()}.update();
+ *     
+ *     // Now we can check for collisions...
+ *     if ( this.collided("alien") ) {
+ *         self.deathEvent("eaten");
+ *     }
+ *     
+ *     // If we moved the actor again based on the collisions, then uncomment this :
+ *     // this.getCollisionStrategy()}.update();
+ * }
+ * </code>
+ * </pre>
+ * 
+ * <p>
+ * Speed is not the only consideration when choosing a CollisionStrategy. For example, the demo game Destroy-Debris has
+ * a world where the left wraps around to the right, and the top wraps around to the bottom. Therefore it needs a
+ * special CollisionStrategy to handle the cases where an Actor is overlapping an edge. (See
+ * {@link uk.co.nickthecoder.itchy.collision.WrappedCollisionStrategy}).
+ * 
+ * A CollisionStrategy doesn't actually test for Collisions, that is done by {@link CollisionTest}.
  */
 public interface CollisionStrategy
 {
-    public static final int MAX_RESULTS = 100;
 
-    public static final AcceptFilter<Role> acceptFilter = new AcceptFilter<Role>();
-
-    
-    
+    /**
+     * Some CollisionStrategies are stateful, and need updating then the Actor is update. For example,
+     * {@link NeighbourhoodCollisionStrategy} needs to be updated when the Actor moves, and when it is scaled (or even
+     * just rotated).
+     * <p>
+     * Simple CollisionStrategies, such as {@link BruteForceCollisionStrategy} do not need to be updated.
+     * 
+     * @priority 2
+     */
     public void update();
 
+    /**
+     * For CollisionStrategies, such as {@link NeighbourhoodCollisionStrategy}, removes the instance so that it no
+     * longer takes part in collisions. Usually called when an Actor is killed.
+     * <p>
+     * Simple CollisionStrategies, such as {@link BruteForceCollisionStrategy} do not need to be removed.
+     * 
+     * @priority 2
+     */
     public void remove();
 
-    public List<Role> collisions( Actor actor, String[] tags );
-    
-    public List<Role> collisions( Actor actor, String[] tags, int maxResults );
-
-    public List<Role> collisions( Actor actor, String[] tags, int maxResults, Filter<Role> filter );
+    public List<Role> collisions(Actor actor, String[] tags, int maxResults, Filter<Role> filter);
 
 }

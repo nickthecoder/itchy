@@ -24,11 +24,13 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Resources;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.collision.Neighbourhood;
 import uk.co.nickthecoder.itchy.collision.SinglePointCollisionStrategy;
-import uk.co.nickthecoder.itchy.collision.Square;
+import uk.co.nickthecoder.itchy.collision.Block;
 import uk.co.nickthecoder.itchy.collision.StandardNeighbourhood;
 import uk.co.nickthecoder.itchy.role.PlainRole;
+import uk.co.nickthecoder.itchy.util.AcceptFilter;
 import uk.co.nickthecoder.jame.Video;
 
 public class NeighbourhoodTest
@@ -77,13 +79,13 @@ public class NeighbourhoodTest
     {
         Neighbourhood nbh = new StandardNeighbourhood(1);
 
-        Square sq1 = nbh.getSquare(0, 0);
+        Block sq1 = nbh.getBlock(0, 0);
         assertNotNull("Looking for the origin square", sq1);
 
-        Square sq2 = nbh.getSquare(0, 0);
+        Block sq2 = nbh.getBlock(0, 0);
         assertSame("Looking for the origin square again", sq1, sq2);
 
-        Square sq3 = nbh.getSquare(1, 0);
+        Block sq3 = nbh.getBlock(1, 0);
         assertNotSame("Created a second square", sq1, sq3);
 
     }
@@ -125,41 +127,41 @@ public class NeighbourhoodTest
     }
 
     @Test
-    public void actorsInSquares()
+    public void actorsInBlocks()
     {
         Neighbourhood nbh = new StandardNeighbourhood(50);
 
         SinglePointCollisionStrategy a = spcs(nbh, this.c30x30, 0, 0);
-        assertEquals(a.getSquare(), nbh.getSquare(0, 0));
+        assertEquals(a.getBlock(), nbh.getBlock(0, 0));
 
         SinglePointCollisionStrategy b = spcs(nbh, this.c30x30, 10, 0);
-        assertEquals(b.getSquare(), nbh.getSquare(0, 0));
+        assertEquals(b.getBlock(), nbh.getBlock(0, 0));
 
         SinglePointCollisionStrategy c = spcs(nbh, this.c30x30, 50, 0);
-        assertNotSame(a.getSquare(), c.getSquare());
+        assertNotSame(a.getBlock(), c.getBlock());
 
         SinglePointCollisionStrategy d = spcs(nbh, this.c30x30, 0, 50);
-        assertNotSame(a.getSquare(), d.getSquare());
+        assertNotSame(a.getBlock(), d.getBlock());
 
         SinglePointCollisionStrategy e = spcs(nbh, this.c30x30, 0, 49);
-        assertSame(a.getSquare(), e.getSquare());
+        assertSame(a.getBlock(), e.getBlock());
 
         SinglePointCollisionStrategy f = spcs(nbh, this.c30x30, 49, 0);
-        assertSame(a.getSquare(), f.getSquare());
+        assertSame(a.getBlock(), f.getBlock());
 
         SinglePointCollisionStrategy g = spcs(nbh, this.c30x30, -1, 0);
         // assertNotSame( a.getSquare(), g.getSquare() );
 
         SinglePointCollisionStrategy h = spcs(nbh, this.c30x30, -49, 0);
         // assertNotSame( a.getSquare(), h.getSquare() );
-        assertSame(g.getSquare(), h.getSquare());
+        assertSame(g.getBlock(), h.getBlock());
 
         SinglePointCollisionStrategy i = spcs(nbh, this.c30x30, -51, 0);
-        assertNotSame(i.getSquare(), h.getSquare());
-        assertTrue(i.getSquare().getNeighbouringSquares().contains(h.getSquare()));
+        assertNotSame(i.getBlock(), h.getBlock());
+        assertTrue(i.getBlock().getNeighbouringBlocks().contains(h.getBlock()));
 
         SinglePointCollisionStrategy z = spcs(nbh, this.c30x30, 0, 0);
-        assertEquals(z.getSquare(), a.getSquare());
+        assertEquals(z.getBlock(), a.getBlock());
 
     }
 
@@ -167,6 +169,7 @@ public class NeighbourhoodTest
     public void pixelOverlap()
     {
         Neighbourhood nbh = new StandardNeighbourhood(50);
+        AcceptFilter<Role> acceptFilter = new AcceptFilter<Role>();
 
         SinglePointCollisionStrategy a = spcs(nbh, this.c30x30, 0, 0);
         SinglePointCollisionStrategy b = spcs(nbh, this.c30x30, 10, 0);
@@ -175,14 +178,14 @@ public class NeighbourhoodTest
         assertTrue(b.getActor().pixelOverlap(a.getActor()));
         assertFalse(a.getActor().pixelOverlap(c.getActor()));
 
-        assertTrue(a.collisions( new String[] {"all"} ).contains(b.getActor()));
-        assertFalse(a.collisions( new String[] {"all"} ).contains(c.getActor()));
+        assertTrue(a.collisions( a.getActor(), new String[] {"all"}, 100, acceptFilter ).contains(b.getActor()));
+        assertFalse(a.collisions( a.getActor(), new String[] {"all"}, 100, acceptFilter ).contains(c.getActor()));
 
     }
 
     public static void main( String[] argv )
     {
         NeighbourhoodTest test = new NeighbourhoodTest();
-        test.actorsInSquares();
+        test.actorsInBlocks();
     }
 }

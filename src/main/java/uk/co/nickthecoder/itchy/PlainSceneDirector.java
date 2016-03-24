@@ -78,9 +78,9 @@ public class PlainSceneDirector implements SceneDirector
     }
 
     @Override
-    public CollisionStrategy getCollisionStrategy(Actor actor)
+    public CollisionStrategy chooseCollisionStrategy(Actor actor)
     {
-        return BruteForceCollisionStrategy.pixelCollision;
+        return BruteForceCollisionStrategy.instance;
     }
 
     @Override

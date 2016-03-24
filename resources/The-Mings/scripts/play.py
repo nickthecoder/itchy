@@ -131,7 +131,7 @@ class Play(PlainSceneDirector) :
 
         mainView.unadjustMouse( event )
 
-    def getCollisionStrategy( self, actor ) :
+    def chooseCollisionStrategy( self, actor ) :
         #return SinglePointCollisionStrategy( actor, self.neighbourhood )
         return NeighbourhoodCollisionStrategy( actor, self.neighbourhood )
 

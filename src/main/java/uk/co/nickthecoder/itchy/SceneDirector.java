@@ -71,5 +71,5 @@ public interface SceneDirector extends MouseListener, KeyListener, MessageListen
      * @return A collision strategy. Some Strategies require a new instance of each Actor, others, such as
      *         BruteForceCollisionStrategy can reuse a single instance.
      */
-    public CollisionStrategy getCollisionStrategy(Actor actor);
+    public CollisionStrategy chooseCollisionStrategy(Actor actor);
 }

@@ -75,7 +75,7 @@ public class Game
 
     /**
      * Holds the tag information for all of the Actors used within this game. This isn't typically used directly, but
-     * instead used via {@link AbstractRole#allByTag(String)}, {@link AbstractRole#hasTag(String)},
+     * instead used via {@link AbstractRole#findRolesByTag(String)}, {@link AbstractRole#hasTag(String)},
      * {@link AbstractRole#addTag(String)} and {@link AbstractRole#removeTag(String)}.
      * 
      * @priority 5
@@ -509,7 +509,7 @@ public class Game
      * @return A set of Roles meeting the criteria. An empty set if no roles meet the criteria.
      * @see AbstractRole#addTag(String)
      */
-    public Set<Role> findRoleByTag(String tag)
+    public Set<Role> findRolesByTag(String tag)
     {
         return this.roleTags.getTagMembers(tag);
     }
@@ -519,7 +519,7 @@ public class Game
     /**
      * Looks for an Actor with the given ID. Note that there is nothing to enforce Actor's IDs to be unique. Looking for
      * a non-unique ID will return just one Actor (which one is not defined). If you want to find a set of Actors, use
-     * tags and {@link #findRoleByTag(String)}.
+     * tags and {@link #findRolesByTag(String)}.
      * 
      * @param id
      * @return An Actor

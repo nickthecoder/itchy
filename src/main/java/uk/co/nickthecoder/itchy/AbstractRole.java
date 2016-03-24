@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import javax.script.ScriptException;
-
 import uk.co.nickthecoder.itchy.Actor.AnimationEvent;
 import uk.co.nickthecoder.itchy.animation.AbstractAnimation;
 import uk.co.nickthecoder.itchy.animation.Animation;
@@ -18,16 +16,33 @@ import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.collision.SinglePointCollisionStrategy;
 import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.util.AcceptFilter;
 import uk.co.nickthecoder.itchy.util.ClassName;
 import uk.co.nickthecoder.itchy.util.Filter;
-import uk.co.nickthecoder.itchy.util.Tag;
 import uk.co.nickthecoder.itchy.util.TagMembership;
 
 public abstract class AbstractRole implements Role
 {
+    /**
+     * The maximum number of results, when using {@link #collisions(String...)}. For more flexibility, you
+     * can specify your own limit using the alternate method : {@link #collisions(int, Filter, String...)}.
+     * 
+     * @priority 3
+     */
+    public static final int DEFAULT_MAX_COLLISION_RESULTS = 100;
+
+    /**
+     * Accepts all Roles. This is used as the default filter, when using the simple version of
+     * {@link #collisions(String...)}. For more flexibility, use the alternate :
+     * {@link #collisions(int, Filter, String...)}.
+     * 
+     * @priority 3
+     */
+    public static final AcceptFilter<Role> acceptFilter = new AcceptFilter<Role>();
+
     protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 
-    private CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.pixelCollision;
+    private CollisionStrategy collisionStrategy = BruteForceCollisionStrategy.instance;
 
     /**
      * Finds all Roles with the given tag.
@@ -35,55 +50,9 @@ public abstract class AbstractRole implements Role
      * @param tag
      * @return
      */
-    public static Set<Role> allByTag(String tag)
+    public static Set<Role> findRolesByTag(String tag)
     {
-        return Itchy.getGame().findRoleByTag(tag);
-    }
-
-    /**
-     * REMOVE?
-     * 
-     * @param resources
-     * @param className
-     * @return
-     * @priority 5
-     */
-    public static boolean isValidClassName(Resources resources, ClassName className)
-    {
-        if (resources.isValidScript(className)) {
-            return true;
-        }
-        try {
-            Class.forName(className.name).asSubclass(Role.class);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * 
-     * @param resources
-     * @param className
-     * @return
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws ScriptException
-     * @throws ClassNotFoundException
-     * @priority 5
-     */
-    public static Role createRole(Resources resources, ClassName className) throws InstantiationException,
-        IllegalAccessException, ScriptException, ClassNotFoundException
-    {
-        if (resources.isValidScript(className)) {
-            return resources.getGame().getScriptManager().createRole(className);
-        } else {
-            Class<?> klass = Class.forName(className.name);
-            return (Role) klass.newInstance();
-        }
+        return Itchy.getGame().findRolesByTag(tag);
     }
 
     private Actor actor;
@@ -113,7 +82,7 @@ public abstract class AbstractRole implements Role
      * The are different ways to test if two object are touching, the simplest is {@link BruteForceCollisionStrategy},
      * but is very slow if there are many objects. So for speed use {@link NeighbourhoodCollisionStrategy} or
      * {@link SinglePointCollisionStrategy}. The choice of collision strategy is made by the
-     * {@link SceneDirector#getCollisionStrategy(Actor)}.
+     * {@link SceneDirector#chooseCollisionStrategy(Actor)}.
      * <p>
      * Most of the time you don't need to access the CollisionStrategy directly, instead use
      * {@link #collided(String...)} and {@link #collisions(String...)}.
@@ -138,22 +107,7 @@ public abstract class AbstractRole implements Role
      */
     public List<Role> collisions(String... tags)
     {
-        return this.collisionStrategy.collisions(this.getActor(), tags);
-    }
-
-    /**
-     * Does the same as {@link #collided(String...)}, but stops checking when maxResults are found.
-     * 
-     * @param maxResults
-     *            The maximum number of Roles to return
-     * @param tags
-     *            Ignores Role's that do not have any of these tags.
-     * @return
-     * @priority 2
-     */
-    public List<Role> collisions(int maxResults, String... tags)
-    {
-        return this.collisionStrategy.collisions(this.getActor(), tags, maxResults);
+        return this.collisions( DEFAULT_MAX_COLLISION_RESULTS, acceptFilter, tags );
     }
 
     /**
@@ -185,7 +139,7 @@ public abstract class AbstractRole implements Role
      */
     public boolean collided(String... tags)
     {
-        return !this.collisionStrategy.collisions(this.getActor(), tags, 1).isEmpty();
+        return this.collided(acceptFilter, tags);
     }
 
     /**
@@ -376,7 +330,7 @@ public abstract class AbstractRole implements Role
     @Override
     public void born()
     {
-        this.collisionStrategy = Itchy.getGame().getSceneDirector().getCollisionStrategy(this.getActor());
+        this.collisionStrategy = Itchy.getGame().getSceneDirector().chooseCollisionStrategy(this.getActor());
         onBirth();
     }
 
@@ -422,17 +376,11 @@ public abstract class AbstractRole implements Role
      * @priority 5
      */
     @Override
-    public void attached(Actor actor)
+    public void attach(Actor actor)
     {
         assert ((getActor() == null) || (getActor() == actor));
         this.actor = actor;
 
-        Tag tags = this.getClass().getAnnotation(Tag.class);
-        if (tags != null) {
-            for (String name : tags.names()) {
-                addTag(name);
-            }
-        }
         this.onAttach();
     }
 
@@ -444,7 +392,7 @@ public abstract class AbstractRole implements Role
      * @priority 5
      */
     @Override
-    public void detatched()
+    public void detach()
     {
         this.tagMembership.removeAll();
         onDetach();

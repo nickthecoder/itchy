@@ -25,7 +25,7 @@ class MacroRecorder() :
         self.asked = False
         
     def startRecording(self) :
-        for player in game.findRoleByTag("player") :
+        for player in game.findRolesByTag("player") :
             self.interceptRecord( player )
 
     def interceptRecord(self, player) :
@@ -73,7 +73,7 @@ class MacroRecorder() :
         self.asked = False
         
     def endRecording(self) :
-        for player in game.findRoleByTag("player") :
+        for player in game.findRolesByTag("player") :
             self.endIntercept( player )
 
     def getRecording(self) :

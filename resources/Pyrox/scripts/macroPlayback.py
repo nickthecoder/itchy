@@ -16,7 +16,7 @@ class MacroPlayback() :
         self.advanceIndex = True
         self.counter = 0
         
-        for player in game.findRoleByTag("player") :
+        for player in game.findRolesByTag("player") :
             self.interceptPlay( player )
     
     def tick(self) :
@@ -34,7 +34,7 @@ class MacroPlayback() :
 
                 if self.index >= len( self.letters ) :
 
-                    for player in game.findRoleByTag("player") :
+                    for player in game.findRolesByTag("player") :
                         self.endIntercept( player )
                     self.letters = None
                     

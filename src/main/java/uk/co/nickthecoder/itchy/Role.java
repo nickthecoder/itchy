@@ -27,8 +27,8 @@ import uk.co.nickthecoder.itchy.util.ClassName;
  * returning to their home).
  * <p>
  * Roles have tags, each tag is just a String, but used to group sets of actors together. Tags are most often used when
- * checking for collisions. For example, a bullet may check if it is colliding with Roles having a "shootable" tag.
- * See {@link AbstractRole#collisions(String...)}.
+ * checking for collisions. For example, a bullet may check if it is colliding with Roles having a "shootable" tag. See
+ * {@link AbstractRole#collisions(String...)}.
  */
 public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
 {
@@ -63,11 +63,12 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
     public Set<String> getTags();
 
     /**
-     * The collision strategy is usually determined by {@link SceneDirector#getCollisionStrategy(Actor)}, when the Role
+     * The collision strategy is usually determined by {@link SceneDirector#chooseCollisionStrategy(Actor)}, when the
+     * Role
      * is {@link #born}, but individual roles are free to ignore this, and choose
      * their own collision strategy. The default strategy is to compare this
      * role's actor to all other actors using a pixel based collision test (
-     * {@link BruteForceCollisionStrategy#pixelCollision}). Brute force is
+     * {@link BruteForceCollisionStrategy#instance}). Brute force is
      * simple to use, but will be very inefficient if there are large numbers of
      * actors to test against.
      * 
@@ -119,7 +120,7 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
      * 
      * @priority 5
      */
-    void attached(Actor actor);
+    void attach(Actor actor);
 
     /**
      * Called when a difference role is assigned to this Role's Actor. It is not
@@ -129,7 +130,7 @@ public interface Role extends MessageListener, Cloneable, PropertySubject<Role>
      * 
      * @priority 5
      */
-    void detatched();
+    void detach();
 
     /**
      * Called once per frame for all active actors' roles.

@@ -1,6 +1,12 @@
 Current Tasks
 =============
 
+Finish CollisionStrategy javadocs/code review.
+
+Constructor doesn't render the @link correctly :
+    file:///home/nick/projects/itchy/build/docs/javadoc/uk/co/nickthecoder/itchy/collision/BruteForceCollisionStrategy.html
+
+
 Javadoc & code review...
 
 Actor
@@ -49,7 +55,7 @@ StageView
     Why does enableMouseListener take a Game parameter?
     
 Costume
-    method "copy" not used?! Delete it.
+    createActor Needed ?
     
 ZOrderStage
     Look at ZOrderStageInterface. Is it needed, and if so, is it used in the correct places instead of ZOrderStage.
@@ -66,32 +72,20 @@ CostumeFeatures
 ImagePose
     load- not used.
  
-AbstractRole
-    rename allByTag to findRolesByTag
-    isValidClassName use ClassName
-    createRole use ClassName
-    rename attached to attach?
-    attached, remove crap about annotations. Delete the Tag annotation class.
+AbstractRole    
     detached removes all tags, so how do collisions work after Pause???
         If we allow Roles to keep their tags when detached,
             then tags must use weak references, otherwise they will not be gc'd.
             Collision Strategies must take care to check for detached Roles
             Should probably set Role's actor to null
              
-    Rename detached to detach
-
-SceneDirector
-    Rename getCollisionStrategy? (It often CREATES one).
 
 
-AbstractTextPose
-    remove adjustFontSize
-    
-Director (and QuitListener)
-    Why does onQuit take a QuitEvent parameter?
+Priority Doc
+    Turn the generalise arrows the right way.
 
 
-Turn the generalise arrows the right way.
+
 
 
      
@@ -108,5 +102,8 @@ Destroy-Debris
 
 BUGS
 ====
+
+Destroy-Debris
+    Next level "hyperspace" is not displayed at all.
  
 Cannot start a new animation from a finish event of an old animation (Dodge 'Em Player wanted to do it)

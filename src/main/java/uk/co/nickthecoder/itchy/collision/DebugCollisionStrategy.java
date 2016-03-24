@@ -10,45 +10,37 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.util.Filter;
 
-public class DebugCollisionStrategy extends ActorCollisionStrategy
+/**
+ * Performs the collision tests using two different CollisionStrategies.
+ * Reports any differences to stderr.
+ * <p>
+ * This is useful when debugging a complex CollisionStrategy. You can compare it to BruteForceCollisionStrategy, which
+ * is simple, (but slow).
+ * 
+ * @priority 5
+ */
+public class DebugCollisionStrategy implements CollisionStrategy
 {
 
-    private SinglePointCollisionStrategy strategy1;
-    private ActorCollisionStrategy strategy2;
+    private CollisionStrategy strategy1;
+    private CollisionStrategy strategy2;
 
-    public DebugCollisionStrategy( SinglePointCollisionStrategy a, ActorCollisionStrategy b )
+    public DebugCollisionStrategy(CollisionStrategy a, CollisionStrategy b)
     {
-        super(a.getActor());
-
         this.strategy1 = a;
         this.strategy2 = b;
     }
 
-    
     @Override
-    public List<Role> collisions( Actor actor, String[] includeTags )
+    public List<Role> collisions(Actor actor, String[] includeTags, int maxResults, Filter<Role> filter)
     {
-        return collisions(actor, includeTags, MAX_RESULTS, acceptFilter );
-    }
-    @Override
-    public List<Role> collisions( Actor actor, String[] includeTags, int maxResults )
-    {
-        return collisions(actor, includeTags, maxResults, acceptFilter );
-    }
-    
-    @Override
-    public List<Role> collisions( Actor actor, String[] includeTags, int maxResults, Filter<Role>filter )
-    {
-        List<Role> results1 = this.strategy1.collisions(includeTags, maxResults, filter);
-        List<Role> results2 = this.strategy2.collisions(includeTags, maxResults, filter);
+        List<Role> results1 = this.strategy1.collisions(actor, includeTags, maxResults, filter);
+        List<Role> results2 = this.strategy2.collisions(actor, includeTags, maxResults, filter);
 
         if (!results1.equals(results2)) {
-            System.err.println("Pixel Collision failed for " + getActor());
+            System.err.println("Pixel Collision failed for " + actor);
             System.err.println("Results1 : " + results1);
             System.err.println("Results2 : " + results2);
-
-            System.err.println("Source actor's square : " + this.strategy1.getSquare());
-            this.strategy1.getSquare().debug();
 
             System.exit(1);
         }
