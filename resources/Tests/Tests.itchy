@@ -356,6 +356,7 @@
     <scene name="menu"/>
     <scene name="passed"/>
     <scene name="playground"/>
+    <scene name="point-001"/>
     <scene name="profiles"/>
     <scene name="projectiles"/>
   </scenes>

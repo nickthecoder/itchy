@@ -100,7 +100,7 @@ public class SurfaceGraphicsContext extends GraphicsContext
     @Override
     public void render(Actor actor, int alpha)
     {
-        Surface actorSurface = actor.getSurface();
+        Surface actorSurface = actor.getAppearance().getSurface();
         Appearance appearance = actor.getAppearance();
         
         int x = (int) actor.getX() - appearance.getOffsetX();

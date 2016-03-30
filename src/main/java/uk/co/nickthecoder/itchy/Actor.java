@@ -41,7 +41,7 @@ import uk.co.nickthecoder.jame.Surface;
  * scene is loaded.
  * 
  */
-public class Actor implements PropertySubject<Actor>
+final public class Actor implements PropertySubject<Actor>
 {
     /**
      * @priority 5
@@ -97,8 +97,8 @@ public class Actor implements PropertySubject<Actor>
 
     private Stage stage;
 
-    private double x;
-    private double y;
+    private Point position;
+
     private boolean active = false;
     private boolean dead = false;
     private boolean dying = false;
@@ -156,8 +156,7 @@ public class Actor implements PropertySubject<Actor>
 
         this.role = null;
 
-        this.x = 0;
-        this.y = 0;
+        this.position = new Point(0, 0);
         this.setDirection(pose.getDirection());
     }
 
@@ -813,7 +812,7 @@ public class Actor implements PropertySubject<Actor>
      *            of null.
      * @priority 3
      */
-    public final void setRole(Role role)
+    public void setRole(Role role)
     {
         if ((this.role != null) && (this.role.getClass() == DelayedActivation.class)) {
             this.event(this.startEvent);
@@ -919,14 +918,9 @@ public class Actor implements PropertySubject<Actor>
         }
     }
 
-    /**
-     * 
-     * @return
-     * @priority 5
-     */
-    public Surface getSurface()
+    public Point getPosition()
     {
-        return this.appearance.getSurface();
+        return this.position;
     }
 
     /**
@@ -934,7 +928,7 @@ public class Actor implements PropertySubject<Actor>
      */
     public double getX()
     {
-        return this.x;
+        return this.position.getX();
     }
 
     /**
@@ -942,7 +936,7 @@ public class Actor implements PropertySubject<Actor>
      */
     public double getY()
     {
-        return this.y;
+        return this.position.getY();
     }
 
     /**
@@ -952,7 +946,7 @@ public class Actor implements PropertySubject<Actor>
      */
     public void setX(double x)
     {
-        this.x = x;
+        this.position = new Point(x, this.position.getY());
         this.appearance.invalidatePosition();
     }
 
@@ -963,18 +957,20 @@ public class Actor implements PropertySubject<Actor>
      */
     public void setY(double y)
     {
-        this.y = y;
+        this.position = new Point(this.position.getX(), y);
         this.appearance.invalidatePosition();
     }
 
     /**
+     * Moves the 'other' Actor to the same position as this Actor.
      * 
+     * @deprecated Use moveTo( other.getPosition() )
      * @param other
      * @priority 3
      */
     public void moveTo(Actor other)
     {
-        this.moveTo(other.getX(), other.getY());
+        this.moveTo(other.getPosition());
     }
 
     /**
@@ -986,8 +982,13 @@ public class Actor implements PropertySubject<Actor>
      */
     public void moveTo(double x, double y)
     {
-        this.x = x;
-        this.y = y;
+        this.position = new Point(x, y);
+        this.appearance.invalidatePosition();
+    }
+
+    public void moveTo(Point position)
+    {
+        this.position = position;
         this.appearance.invalidatePosition();
     }
 
@@ -1000,8 +1001,7 @@ public class Actor implements PropertySubject<Actor>
      */
     public void moveBy(double x, double y)
     {
-        this.x += x;
-        this.y += y;
+        this.position = this.position.translate(x, y);
         this.appearance.invalidatePosition();
     }
 
@@ -1014,20 +1014,22 @@ public class Actor implements PropertySubject<Actor>
      */
     public void moveForwards(double amount)
     {
-        double theta = this.getHeadingRadians();
-        double cosa = Math.cos(theta);
-        double sina = Math.sin(theta);
+        this.moveTo(this.position.translateRadians(this.getHeadingRadians(), amount));
+        // double theta = this.getHeadingRadians();
+        // double cosa = Math.cos(theta);
+        // double sina = Math.sin(theta);
 
-        this.moveBy((cosa * amount), (sina * amount));
+        // this.moveBy((cosa * amount), (sina * amount));
     }
 
     /**
-     * Uses the Actor's {@link #getHeading()}, and moves the Actor forwards.
+     * Uses the Actor's heading and moves the Actor forwards.
      * 
      * @param amount
      *            The amount of pixels to move forwards.
      * @param sideways
      *            The amount of pixels to move sideways (+ve numbers are to the Actor's left).
+     * @deprecated
      */
     public void moveForwards(double forward, double sideways)
     {
@@ -1037,16 +1039,19 @@ public class Actor implements PropertySubject<Actor>
     /**
      * 
      * @param degrees
-     * @param amount
+     * @param distance
      * @priority 3
+     * @deprecated
      */
-    public void moveAngle(double degrees, double amount)
+    public void moveAngle(double degrees, double distance)
     {
-        double theta = degrees / 180 * Math.PI;
-        double cosa = Math.cos(theta);
-        double sina = Math.sin(theta);
+        this.moveTo(this.position.translateDegrees(degrees, distance));
 
-        this.moveBy((cosa * amount), (sina * amount));
+        // double theta = degrees / 180 * Math.PI;
+        // double cosa = Math.cos(theta);
+        // double sina = Math.sin(theta);
+
+        // this.moveBy((cosa * distance), (sina * distance));
     }
 
     /**
@@ -1055,32 +1060,40 @@ public class Actor implements PropertySubject<Actor>
      * @param forward
      * @param sideways
      * @priority 3
+     * @deprecated
      */
     public void moveAngle(double degrees, double forward, double sideways)
     {
-        double theta = degrees / 180 * Math.PI;
-        double cosa = Math.cos(theta);
-        double sina = Math.sin(theta);
+        this.moveTo(this.position.translateDegrees(degrees, forward, sideways));
+        //double theta = degrees / 180 * Math.PI;
+        //double cosa = Math.cos(theta);
+        //double sina = Math.sin(theta);
 
-        this.moveBy((cosa * forward) - (sina * sideways), (sina * forward) + (cosa * sideways));
+        //this.moveBy((cosa * forward) - (sina * sideways), (sina * forward) + (cosa * sideways));
     }
 
     /**
+     * Moves this Actor towards the <code>other</code> Actor, by <code>distance</code> pixels.
+     * If the distance between the Actors is less than the distance to be moved, then do NOT overshoot, and
+     * instead move to the other Actor's position.
      * 
-     * @param actor
-     * @param amount
+     * @param other
+     *            The Actor in whose direction we will move towards.
+     * @param displacement
+     *            The distance to move
      * @priority 3
+     * @deprecated
      */
-    public void moveTowards(Actor actor, double amount)
+    public void moveTowards(Actor other, double displacement)
     {
-        double dx = actor.x - this.x;
-        double dy = actor.y - this.y;
+        this.moveTo(this.position.towards(other.position, displacement));
+        // double dx = other.getX() - this.getX();
+        // double dy = other.getY() - this.getY();
 
-        double scale = Math.sqrt(dx * dx + dy * dy);
-        if (scale == 0) {
-            return;
-        }
-        this.moveBy(dx * amount / scale, dy * amount / scale);
+        // double distance = Math.sqrt(dx * dx + dy * dy);
+        // double scale = distance < displacement ? 1 : displacement / distance;
+
+        // this.moveBy(dx * scale, dy * scale);
     }
 
     /**
@@ -1088,13 +1101,70 @@ public class Actor implements PropertySubject<Actor>
      * @param other
      * @return
      * @priority 3
+     * @deprecated Same as distanceTo, which is also deprecated
      */
     public double distance(Actor other)
     {
-        double dx = this.x - other.x;
-        double dy = this.y - other.y;
+        return this.position.distance(other.position);
+        // double dx = this.getX() - other.getX();
+        // double dy = this.getY() - other.getY();
 
-        return Math.sqrt(dx * dx + dy * dy);
+        // return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    /**
+     * 
+     * @param x
+     * @param y
+     * @return
+     * @priority 3
+     * @deprecated
+     */
+    public double distanceTo(double x, double y)
+    {
+        return this.position.distance(new Point(x, y));
+        // return Math.sqrt((this.getX() - x) * (this.getX() - x) + (this.getY() - y) * (this.getY() - y));
+    }
+
+    /**
+     * 
+     * @param other
+     * @return
+     * @priority 3
+     * @deprecated
+     */
+    public double distanceTo(Actor other)
+    {
+        return this.position.distance(other.getPosition());
+        // return Math.sqrt((this.getX() - other.getX()) * (this.getX() - other.getX()) + (this.getY() - other.getY()) *
+        // (this.getY() - other.getY()));
+    }
+
+    /**
+     * 
+     * @param x
+     * @param y
+     * @return
+     * @priority 3
+     * @deprecated
+     */
+    public double directionOf(double x, double y)
+    {
+        return this.position.directionDegrees(new Point(x, y));
+        // return Math.atan2(y - this.getY(), x - this.getX()) * 180.0 / Math.PI;
+    }
+
+    /**
+     * 
+     * @param other
+     * @return
+     * @priority 3
+     * @deprecated
+     */
+    public double directionOf(Actor other)
+    {
+        return this.position.directionDegrees(other.getPosition());
+        // return Math.atan2(other.getY() - this.getY(), other.getX() - this.getX()) * 180.0 / Math.PI;
     }
 
     /**
@@ -1157,53 +1227,6 @@ public class Actor implements PropertySubject<Actor>
             }
         }
         return closestRole;
-    }
-
-    /**
-     * 
-     * @param x
-     * @param y
-     * @return
-     * @priority 3
-     */
-    public double distanceTo(double x, double y)
-    {
-        return Math.sqrt((this.x - x) * (this.x - x) + (this.y - y) * (this.y - y));
-    }
-
-    /**
-     * 
-     * @param other
-     * @return
-     * @priority 3
-     */
-    public double distanceTo(Actor other)
-    {
-        return Math.sqrt((this.x - other.x) * (this.x - other.x) + (this.y - other.y) *
-            (this.y - other.y));
-    }
-
-    /**
-     * 
-     * @param x
-     * @param y
-     * @return
-     * @priority 3
-     */
-    public double directionOf(double x, double y)
-    {
-        return Math.atan2(y - this.y, x - this.x) * 180.0 / Math.PI;
-    }
-
-    /**
-     * 
-     * @param other
-     * @return
-     * @priority 3
-     */
-    public double directionOf(Actor other)
-    {
-        return Math.atan2(other.y - this.y, other.x - this.x) * 180.0 / Math.PI;
     }
 
     /**
