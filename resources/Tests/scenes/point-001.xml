@@ -1,0 +1,9 @@
+<scene name="point-001" layout="default" sceneDirector="point001.py" showMouse="true">
+  <layer name="background"/>
+  <layer name="main">
+    <actor costume="alien" x="100.0" y="100.0" heading="-90.0" id="one" direction="-90.0"/>
+    <actor costume="alien" x="165.0" y="145.0" heading="-90.0" id="two" direction="-90.0"/>
+    <actor costume="alien" x="236.0" y="149.0" heading="-90.0" id="three" direction="-90.0"/>
+    <actor costume="alien" x="381.0" y="440.0" heading="-90.0" direction="-90.0"/>
+  </layer>
+</scene>
