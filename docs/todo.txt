@@ -1,9 +1,9 @@
 Current Tasks
 =============
 
-Implement Point, and use it for maths stuff that was in Actor.
-    Create unit tests for each function.
-
+Do something about Actor's depricated methods.
+    stop using them and add logs when used.
+    remove them later
 
 Javadoc & code review...
 
@@ -13,20 +13,9 @@ Actor
     Actor isActive - what is this? Document it or remove.
     Does isDying still return true after an actor dies?
 
-    Actor.moveForwards(forwards,sideways) sideways is to the left? A little non-mathematical.
-        Create a unit test for this.
-
     Actor.contains - needed?
     Actor.nearest - needed? If so why return a Role from Actor class?
     Actor.adjustZOrder needed?
-    
-    Create a ActorMath class, which has static methods like distance(Actor a, Actor b)
-        distanceTo, directionOf, moveAngle, moveTowards
-        OR use a Point class to get/set the position, and have the maths in there.
-
-Layout, Layer
-    Layer has public name, and public get/setName.
-    
     
 Game
     getFrameRate - Not used. There is no corresponding setter, and just ask for Itchy's frameRate. Remove? No move it TO Game from Itchy (see below)
@@ -72,6 +61,8 @@ ImagePose
  
 AbstractRole    
     detached removes all tags, so how do collisions work after Pause???
+        By saving them, and putting them back!
+            Create methods saveTags and restoreTags???
         If we allow Roles to keep their tags when detached,
             then tags must use weak references, otherwise they will not be gc'd.
             Collision Strategies must take care to check for detached Roles

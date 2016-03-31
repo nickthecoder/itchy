@@ -51,7 +51,7 @@ public class SceneWriter extends XMLWriter
         for (Layer layer : scene.layout.getLayersByZOrder()) {
 
             this.beginTag("layer");
-            this.attribute("name", layer.name);
+            this.attribute("name", layer.getName());
 
             this.writeLayerProperties(layer);
 
@@ -69,11 +69,11 @@ public class SceneWriter extends XMLWriter
     private void writeLayerProperties(Layer actualLayer)
         throws XMLException
     {
-        Layout templateLayout = this.resources.getLayout(this.scene.layout.name);
+        Layout templateLayout = this.resources.getLayout(this.scene.layout.getName());
         if (templateLayout == null) {
             return;
         }
-        Layer templateLayer = templateLayout.findLayer(actualLayer.name);
+        Layer templateLayer = templateLayout.findLayer(actualLayer.getName());
 
         if ((actualLayer == null) || (templateLayer == null)) {
             return;

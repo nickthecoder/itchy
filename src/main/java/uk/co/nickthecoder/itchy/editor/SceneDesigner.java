@@ -205,7 +205,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         editor.root.hide();
 
         background = new RGBAView();
-        background.color = new RGBA( 40,0,0,0 ); // TODO Change to black or remove?
+        background.color = new RGBA(40, 0, 0, 0); // TODO Change to black or remove?
         backgroundLayer = new Layer(background);
         backgroundLayer.zOrder = -100;
         backgroundLayer.position = wholeRect;
@@ -227,7 +227,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         overlayLayer = new Layer(overlayView);
         overlayLayer.zOrder = Integer.MAX_VALUE;
         overlayLayer.position = wholeRect;
-        overlayLayer.name = "sd_overlay";
+        overlayLayer.setName("sd_overlay");
         editor.getLayout().addLayer(overlayLayer);
 
         editor.addMouseListener(this);
@@ -253,7 +253,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         for (Layer layer : layout.getLayersByZOrder()) {
             View view = layer.getView();
-            
+
             StageView stageView = layer.getStageView();
             if (stageView != null) {
                 Stage stage = stageView.getStage();
@@ -263,8 +263,8 @@ public class SceneDesigner implements MouseListener, KeyListener
                 view.setPosition(editRect);
             }
             Layer designLayer = new Layer(view);
-            designLayer.position = new Rect( layer.position );
-            designLayer.name = layer.name;
+            designLayer.position = new Rect(layer.position);
+            designLayer.setName(layer.getName());
             designLayer.zOrder = layer.zOrder;
 
             this.designLayers.add(designLayer);
@@ -280,7 +280,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             if (stage != null) {
                 editor.getStages().remove(stage);
             }
-            editor.getLayout().removeLayer(editor.getLayout().findLayer(layer.name));
+            editor.getLayout().removeLayer(editor.getLayout().findLayer(layer.getName()));
         }
         this.designLayers.clear();
     }
@@ -292,7 +292,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         for (Layer layer : oldLayout.getLayers()) {
             Stage stage = layer.getStage();
             if (stage != null) {
-                Stage newStage = scene.layout.findSafeStage(layer.name);
+                Stage newStage = scene.layout.findSafeStage(layer.getName());
                 if (newStage == null) {
                     continue;
                 }
@@ -311,11 +311,11 @@ public class SceneDesigner implements MouseListener, KeyListener
         oldLayout = scene.layout;
         addDesignLayers(scene.layout);
         createLayersTable();
-        
+
         overlayView.scrollTo(0, 0);
-        resize( Itchy.getDisplaySurface().getWidth(), Itchy.getDisplaySurface().getHeight());
+        resize(Itchy.getDisplaySurface().getWidth(), Itchy.getDisplaySurface().getHeight());
         onCenter();
-        
+
         editor.layout.dump();
     }
 
@@ -388,9 +388,9 @@ public class SceneDesigner implements MouseListener, KeyListener
             if ((view instanceof ScrollableView) && (view instanceof StageView)) {
                 view.setPosition(editRect);
             } else {
-                Rect rect =  new Rect( layer.position );
+                Rect rect = new Rect(layer.position);
                 rect.y += toolbar.getHeight();
-                view.setPosition( rect );
+                view.setPosition(rect);
             }
         }
 
@@ -507,7 +507,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         Itchy.getGame().show(view);
 
         toolboxLayer = new Layer(view);
-        toolboxLayer.name = "sd_toolbox";
+        toolboxLayer.setName("sd_toolbox");
         toolboxLayer.zOrder = 90;
         editor.getLayout().addLayer(toolboxLayer);
     }
@@ -529,7 +529,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         toolbar.setPosition(0, 0, editor.getWidth(), toolbar.getRequiredHeight());
 
         toolbarLayer = new Layer(toolbar.getView());
-        toolbarLayer.name = "sd_toolbar";
+        toolbarLayer.setName("sd_toolbar");
         toolbarLayer.zOrder = 90;
         editor.layout.addLayer(toolbarLayer);
     }
@@ -1052,7 +1052,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             SimpleTableModelRow row = new SimpleTableModelRow();
             row.add(layer);
-            row.add(layer.name);
+            row.add(layer.getName());
             row.add(minimumAlpha);
             layersTableModel.addRow(row);
         }

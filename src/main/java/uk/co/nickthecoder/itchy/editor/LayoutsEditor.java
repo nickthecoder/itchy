@@ -230,7 +230,7 @@ public class LayoutsEditor extends SubEditor<Layout>
 
         for (Layer layer : this.currentResource.getLayersByZOrder()) {
             SimpleTableModelRow row = new SimpleTableModelRow();
-            row.add(layer.name);
+            row.add(layer.getName());
             row.add(layer.zOrder);
             row.add(layer.position.x);
             row.add(layer.position.y);

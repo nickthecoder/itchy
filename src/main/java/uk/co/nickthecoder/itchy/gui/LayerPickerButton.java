@@ -20,7 +20,7 @@ public class LayerPickerButton extends PickerButton<Layer>
         HashMap<String, Layer> result = new HashMap<String, Layer>();
 
         for (Layer layer : layout.getLayersByZOrder()) {
-            result.put(layer.name, layer);
+            result.put(layer.getName(), layer);
         }
         return result;
     }

@@ -33,7 +33,7 @@ public class Layer implements Comparable<Layer>, NamedSubject<Layer>, Cloneable
      * The name of the Layer.
      * Used by {@link Layout#findLayer(String)}.
      */
-    public String name;
+    private String name;
 
     /**
      * The position of the Layer on the screen. These are screen coodinates, with (0,0) at the top left, and the

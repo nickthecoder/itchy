@@ -55,7 +55,7 @@ public class EditLayer extends EditNamedSubject<Layer>
             // if (layer == subject) {
             // continue;
             // }
-            if (layer.name.equals(name)) {
+            if (layer.getName().equals(name)) {
                 return layer;
             }
         }
@@ -73,7 +73,7 @@ public class EditLayer extends EditNamedSubject<Layer>
     {
         super.createForm();
 
-        this.oldName = this.subject.name;
+        this.oldName = this.subject.getName();
         notebook = new Notebook();
 
         stagePropertiesContainer = new PlainContainer();
@@ -203,7 +203,7 @@ public class EditLayer extends EditNamedSubject<Layer>
     protected void rename()
     {
         this.layout.renameLayer(this.subject, this.oldName );
-        this.oldName = this.subject.name;
+        this.oldName = this.subject.getName();
     }
 
     @Override

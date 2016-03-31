@@ -33,7 +33,7 @@ public class ResourcesReader
      * true if the resources being read are included from another file.
      */
     public boolean included;
-    
+
     public ResourcesReader(Resources resources)
     {
         this.resources = resources;
@@ -63,11 +63,12 @@ public class ResourcesReader
                 this.readGame(gameTag);
             }
         }
-        
+
         GameInfo gameInfo = this.resources.getGameInfo();
         if (gameInfo == null) {
             gameInfo = new GameInfo();
-            resources.setGameInfo( gameInfo );;
+            resources.setGameInfo(gameInfo);
+            ;
         }
         Director director = this.resources.game.getDirector();
         if (director == null) {
@@ -83,7 +84,7 @@ public class ResourcesReader
             }
             director.onMessage(Director.INPUTS_LOADED);
         }
-        
+
         for (Iterator<XMLTag> i = resourcesTag.getTags("fonts"); i.hasNext();) {
             XMLTag fontsTag = i.next();
             this.readFonts(fontsTag);
@@ -119,13 +120,13 @@ public class ResourcesReader
             this.readAnimations(animationsTag);
         }
         director.onMessage(Director.ANIMIATIONS_LOADED);
-        
+
         for (Iterator<XMLTag> i = resourcesTag.getTags("costumes"); i.hasNext();) {
             XMLTag costumesTag = i.next();
             this.readCostumes(costumesTag);
         }
         director.onMessage(Director.COSTUMES_LOADED);
-    
+
         if (!resources.client) {
 
             for (Iterator<XMLTag> i = resourcesTag.getTags("layouts"); i.hasNext();) {
@@ -137,9 +138,9 @@ public class ResourcesReader
              */
             if (this.resources.layoutNames().size() == 0) {
                 Layout layout = new Layout();
-                layout.name = "default";
+                layout.setName("default");
                 Layer layer = new Layer();
-                layer.name = "main";
+                layer.setName("main");
                 layer.position = new Rect(0, 0, gameInfo.width, gameInfo.height);
                 layout.addLayer(layer);
                 resources.addLayout(layout);
@@ -208,7 +209,7 @@ public class ResourcesReader
             XMLTag poseTag = i.next();
 
             String name = poseTag.getAttribute("name");
-            File file = new File( poseTag.getAttribute("filename") );
+            File file = new File(poseTag.getAttribute("filename"));
 
             PoseResource resource = new FilePoseResource(name, file);
             ImagePose pose = resource.pose;
@@ -232,11 +233,11 @@ public class ResourcesReader
 
             SoundResource soundResource = new SoundResource();
             // Don't actually LOAD the sounds on a server, as they are only needed on the clients.
-            if ( resources.server ) {
+            if (resources.server) {
                 String name = soundTag.getAttribute("name");
                 soundResource.setName(name);
             } else {
-                this.readProperties(soundTag,  soundResource);
+                this.readProperties(soundTag, soundResource);
             }
             this.resources.addSound(soundResource);
 
@@ -289,17 +290,18 @@ public class ResourcesReader
             }
 
             // Don't set the role, because we don't want arbitrary scripts running on the client.
-            if ( ! resources.client ) {
+            if (!resources.client) {
                 String roleName = costumeTag.getOptionalAttribute("role", PlainRole.class.getName());
                 ClassName roleClassName = new ClassName(Role.class, roleName);
-    
+
                 if (roleClassName.isValid(resources.scriptManager)) {
                     costume.roleClassName = roleClassName;
                 } else {
-                    throw new XMLException("Costume " + costumeName + ". Expected a subclass of Role : '" + roleClassName + "'");
+                    throw new XMLException("Costume " + costumeName + ". Expected a subclass of Role : '"
+                        + roleClassName + "'");
                 }
             }
-            
+
             for (Iterator<XMLTag> j = costumeTag.getTags("pose"); j.hasNext();) {
                 XMLTag poseTag = j.next();
 
@@ -344,7 +346,7 @@ public class ResourcesReader
                 String fontName = fontTag.getAttribute("font");
 
                 Font font = this.resources.getFont(fontName);
-                if (font== null) {
+                if (font == null) {
                     throw new XMLException("Font : " + fontName + " not found for costume : " + costumeName);
                 }
                 TextStyle textStyle = new TextStyle(font, 14);
@@ -534,12 +536,12 @@ public class ResourcesReader
                 }
 
                 Stage stage = layer.getStage();
-                if ( stage != null) {
+                if (stage != null) {
                     XMLTag stageTag = layerTag.getTag("stage", false);
                     if (stageTag != null) {
                         this.readProperties(stageTag, stage);
                     }
-    
+
                     XMLTag stageConstraintTag = layerTag.getTag("stageConstraint", false);
                     if (stageConstraintTag != null) {
                         this.readProperties(stageConstraintTag, stage.getStageConstraint());
@@ -571,7 +573,7 @@ public class ResourcesReader
 
             Input input = new Input();
             this.readProperties(inputTag, input);
-            
+
             this.resources.addInput(input);
         }
     }

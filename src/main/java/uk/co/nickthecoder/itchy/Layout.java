@@ -70,12 +70,7 @@ public class Layout implements NamedSubject<Layout>, Cloneable
         return customProperties;
     }
 
-    /**
-     * The name of this Layout.
-     * 
-     * @priority 5
-     */
-    public String name = "";
+    private String name = "";
 
     private List<Layer> layers;
 
@@ -179,7 +174,7 @@ public class Layout implements NamedSubject<Layout>, Cloneable
     public Layer findLayer(String name)
     {
         for (Layer layer : layers) {
-            if (layer.name.equals(name)) {
+            if (layer.getName().equals(name)) {
                 return layer;
             }
         }
@@ -393,7 +388,7 @@ public class Layout implements NamedSubject<Layout>, Cloneable
         }
 
         if (result.defaultLayer != null) {
-            result.defaultLayer = result.findLayer(result.defaultLayer.name);
+            result.defaultLayer = result.findLayer(result.defaultLayer.getName());
         }
         return result;
     }
@@ -408,7 +403,7 @@ public class Layout implements NamedSubject<Layout>, Cloneable
     {
         Resources.dump("Layout");
         for (Layer layer : this.layers) {
-            Resources.dump("   ", layer.name, layer.getView(), layer.getStage(), layer.getStage() == null ? "" : (layer
+            Resources.dump("   ", layer.getName(), layer.getView(), layer.getStage(), layer.getStage() == null ? "" : (layer
                 .getStage().getActors().size() + " actors"));
         }
         Resources.dump("");
