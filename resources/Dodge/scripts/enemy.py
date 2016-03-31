@@ -44,7 +44,6 @@ class Enemy(AbstractRole) :
 class EnemyFeatures(CostumeFeatures) :
 
     def __init__(self, costume) :
-        super(EnemyFeatures,self).__init__(costume)
         self.clan = "none"
 
     # Boiler plate code - no need to change this

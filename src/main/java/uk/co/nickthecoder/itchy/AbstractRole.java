@@ -365,7 +365,7 @@ public abstract class AbstractRole implements Role
     @Override
     public CostumeFeatures createCostumeFeatures(Costume costume)
     {
-        return new CostumeFeatures(costume);
+        return new PlainCostumeFeatures();
     }
 
     /**
@@ -415,6 +415,16 @@ public abstract class AbstractRole implements Role
         getActor().event(eventName);
     }
 
+    /**
+     * A convenience method for {@link Actor#event(String, String, AnimationEvent)}.
+     * 
+     * @priority 3
+     */
+    public void event(String eventName, String message)
+    {
+        getActor().event(eventName, message, AnimationEvent.REPLACE);
+    }
+    
     /**
      * A convenience method for {@link Actor#event(String, String, AnimationEvent)}.
      * 

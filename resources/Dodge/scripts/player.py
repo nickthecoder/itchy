@@ -111,7 +111,6 @@ class ClanFilter( Filter ) :
 class PlayerFeatures(CostumeFeatures) :
 
     def __init__(self, costume) :
-        super(PlayerFeatures,self).__init__(costume)
         self.fragments = Fragments().pieces(20).create(costume)
         self.clan = "none"
 

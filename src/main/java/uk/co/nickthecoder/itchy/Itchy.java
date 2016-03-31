@@ -147,7 +147,7 @@ public final class Itchy
         registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.SceneButton.class));
         registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.SliderRole.class));
 
-        registry.add(new ClassName(CostumeFeatures.class, CostumeFeatures.class));
+        registry.add(new ClassName(CostumeFeatures.class, PlainCostumeFeatures.class));
 
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.NullMakeup.class));
         registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Shadow.class));

@@ -115,7 +115,6 @@ class Rock(Moving) :
 class RockFeatures(CostumeFeatures) :
 
     def __init__(self, costume) :
-        super(RockFeatures,self).__init__(costume)
         self.pieces = 0
         self.points = 1    
         self.strength = 1    

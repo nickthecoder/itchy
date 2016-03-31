@@ -191,11 +191,9 @@ class Ming(AbstractRole) :
     def getClassName(self):
         return ClassName( Role, self.__module__ + ".py" )
 
-class MingFeatures(CostumeFeatures) :
+class MingFeatures(PlainCostumeFeatures) :
 
-    def __init__(self, costume) :
-        super(MingFeatures,self).__init__(costume)
-        
+    def __init__(self, costume) :        
         self.fragments = Fragments().pieces(20).create(costume)
 
 

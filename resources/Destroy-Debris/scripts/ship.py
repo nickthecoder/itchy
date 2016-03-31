@@ -171,7 +171,6 @@ class Ship(Moving) :
 class ShipFeatures(CostumeFeatures) :
 
     def __init__(self,costume) :
-        super(ShipFeatures,self).__init__(costume)
         self.rotationSpeed = 2
         self.thrust = 1   
         pose = costume.getPose("default")

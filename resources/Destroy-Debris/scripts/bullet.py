@@ -50,10 +50,10 @@ class Bullet(Moving) :
         return ClassName(Role, self.__module__ + ".py")
 
 
-class BulletFeatures(CostumeFeatures) :
+class BulletFeatures(PlainCostumeFeatures) :
 
     def __init__(self, costume) :
-        super(BulletFeatures, self).__init__(costume)
+        super(BulletFeatures, self).__init__()
         self.impulse = 1
         self.strength = 1
         self.firePeriod = 1

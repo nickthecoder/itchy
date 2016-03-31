@@ -254,10 +254,10 @@ class GridRole(AbstractRole) :
         return ClassName( Role, self.__module__ + ".py" )
 
     
-class GridRoleFeatures(CostumeFeatures) :
+class GridRoleFeatures(PlainCostumeFeatures) :
 
     def __init__(self,costume) :
-        super(GridRoleFeatures,self).__init__(costume)
+        super(GridRoleFeatures,self).__init__()
 
         pose = costume.getPose("default")
         if pose is not None :

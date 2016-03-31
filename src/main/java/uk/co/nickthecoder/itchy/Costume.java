@@ -293,7 +293,7 @@ public class Costume implements NamedSubject<Costume>, Cloneable
                 costumeFeatures = dummyRole.createCostumeFeatures(this);
             } catch (Exception e) {
                 e.printStackTrace();
-                costumeFeatures = new CostumeFeatures(this);
+                costumeFeatures = new PlainCostumeFeatures();
             }
         }
         return costumeFeatures;

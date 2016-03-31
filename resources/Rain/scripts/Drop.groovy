@@ -58,7 +58,7 @@ class Drop extends AbstractRole
 
     public CostumeFeatures createCostumeFeatures(Costume costume)
     {
-        return new DropFeatures(costume)
+        return new DropFeatures()
     }
 
     // Boiler plate code - no need to change this
@@ -74,7 +74,7 @@ class Drop extends AbstractRole
     }
 }
 
-public class DropFeatures extends CostumeFeatures
+public class DropFeatures implements CostumeFeatures
 {
     protected static properties = new ArrayList()
     
@@ -83,12 +83,6 @@ public class DropFeatures extends CostumeFeatures
     }
     
     def speedFactor = 1
-
-
-    DropFeatures( costume )
-    {
-        super(costume)
-    }
 
     // Boiler plate code - no need to change this
     public ArrayList getProperties()

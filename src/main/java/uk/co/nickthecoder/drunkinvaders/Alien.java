@@ -9,8 +9,8 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.CostumeFeatures;
 import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.PlainCostumeFeatures;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.ZOrderStage;
 import uk.co.nickthecoder.itchy.animation.Eases;
@@ -137,12 +137,11 @@ public class Alien extends Bouncy implements Shootable
             return;
         }
 
-
         Actor yell = new TalkBuilder(getActor())
             .eventName("death").style("yell")
             .offset(0, 40).direction(0)
             .create().getActor();
-        
+
         yell.setCostume(getActor().getCostume());
 
         this.deathEvent("death");
@@ -161,13 +160,13 @@ public class Alien extends Bouncy implements Shootable
         return (AlienCostumeProperties) this.getActor().getCostume().getCostumeFeatures();
     }
 
-    public static class AlienCostumeProperties extends CostumeFeatures
+    public static class AlienCostumeProperties extends PlainCostumeFeatures
     {
         public Fragments fragments;
 
         public AlienCostumeProperties(Costume costume)
         {
-            super(costume);
+            super();
             this.fragments = new Fragments().create(costume.getPose("default"));
         }
     }

@@ -8,6 +8,7 @@ import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.CostumeFeatures;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.MouseListenerView;
+import uk.co.nickthecoder.itchy.PlainCostumeFeatures;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.ViewMouseListener;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
@@ -40,57 +41,57 @@ public class SliderRole extends AbstractRole implements ViewMouseListener
     protected static final List<Property<Role, ?>> properties = new ArrayList<Property<Role, ?>>();
 
     static {
-        properties.add( new DoubleProperty<Role>("minimum"));
-        properties.add( new DoubleProperty<Role>("maximum"));
-        properties.add( new DoubleProperty<Role>("value"));
-        properties.add( new StringProperty<Role>("access"));
+        properties.add(new DoubleProperty<Role>("minimum"));
+        properties.add(new DoubleProperty<Role>("maximum"));
+        properties.add(new DoubleProperty<Role>("value"));
+        properties.add(new StringProperty<Role>("access"));
     }
-    
+
     protected static final List<Property<CostumeFeatures, ?>> costumeProperties = new ArrayList<Property<CostumeFeatures, ?>>();
 
     static {
-        costumeProperties.add( new IntegerProperty<CostumeFeatures>("extent"));
+        costumeProperties.add(new IntegerProperty<CostumeFeatures>("extent"));
     }
-    
+
     @Override
     public List<Property<Role, ?>> getProperties()
     {
         return properties;
     }
-    
+
     private SliderButton sliderButton;
-    
+
     public double minimum = 0;
 
     public double maximum = 10;
-    
+
     private double value = 0;
-    
+
     public String access;
-    
+
     private double extent;
-    
+
     private BeanHelper beanHelper;
-    
+
     @Override
     public void onBirth()
     {
         this.sliderButton = new SliderButton();
-        getActor().createCompanion("button").setRole( this.sliderButton );
+        getActor().createCompanion("button").setRole(this.sliderButton);
         this.sliderButton.getActor().setDirection(getActor().getDirection());
         this.extent = ((SliderFeatures) getCostumeFeatures()).extent;
-        
+
         if ((this.access == null) || (this.access.isEmpty())) {
             this.beanHelper = null;
             // Update the button's position
-            this.setValue(this.value);        
+            this.setValue(this.value);
         } else {
-            this.beanHelper = new BeanHelper(Itchy.getGame(), this.access);            
+            this.beanHelper = new BeanHelper(Itchy.getGame(), this.access);
             try {
-                this.setValue( (double) this.beanHelper.get() );
+                this.setValue((double) this.beanHelper.get());
             } catch (Exception e) {
                 e.printStackTrace();
-            }            
+            }
         }
     }
 
@@ -98,10 +99,10 @@ public class SliderRole extends AbstractRole implements ViewMouseListener
     {
         return this.value;
     }
-    
-    public void setValue( double value )
+
+    public void setValue(double value)
     {
-        this.value = constrainValue( value );
+        this.value = constrainValue(value);
         if (this.beanHelper != null) {
             try {
                 this.beanHelper.set(this.value);
@@ -109,15 +110,15 @@ public class SliderRole extends AbstractRole implements ViewMouseListener
                 e.printStackTrace();
             }
         }
-        
+
         double distance = (this.value - minimum) / (maximum - minimum) * this.extent;
-        if ( this.sliderButton != null ) {
+        if (this.sliderButton != null) {
             this.sliderButton.getActor().moveTo(getActor());
             this.sliderButton.getActor().moveForwards(distance);
         }
     }
-    
-    public double constrainValue( double value )
+
+    public double constrainValue(double value)
     {
         if (value < this.minimum) {
             return this.minimum;
@@ -127,23 +128,23 @@ public class SliderRole extends AbstractRole implements ViewMouseListener
         }
         return value;
     }
-    
+
     @Override
     public void onMouseDown(MouseListenerView view, MouseButtonEvent event)
     {
-        this.sliderButton.onMouseDown( view, event );
+        this.sliderButton.onMouseDown(view, event);
     }
 
     @Override
     public void onMouseUp(MouseListenerView view, MouseButtonEvent event)
     {
-        this.sliderButton.onMouseUp( view, event );
+        this.sliderButton.onMouseUp(view, event);
     }
 
     @Override
     public void onMouseMove(MouseListenerView view, MouseMotionEvent event)
     {
-        this.sliderButton.onMouseMove( view, event );
+        this.sliderButton.onMouseMove(view, event);
     }
 
     @Override
@@ -152,35 +153,29 @@ public class SliderRole extends AbstractRole implements ViewMouseListener
         return true;
     }
 
-    
     @Override
-    public CostumeFeatures createCostumeFeatures( Costume costume )
+    public CostumeFeatures createCostumeFeatures(Costume costume)
     {
-        return new SliderFeatures( costume );
+        return new SliderFeatures();
     }
 
-    
-    public class SliderFeatures extends CostumeFeatures
+    public class SliderFeatures extends PlainCostumeFeatures
     {
         @Override
         public List<Property<CostumeFeatures, ?>> getProperties()
         {
             return costumeProperties;
         }
-        
+
         // The amount of travel of the slider. We cannot deduce it from the pose, because it will have margins.
         public int extent = 100;
-        
-        public SliderFeatures(Costume costume)
-        {
-            super(costume);
-        }
+
     }
-    
+
     public class SliderButton extends AbstractRole
     {
         private boolean dragging = false;
-        
+
         public void onMouseDown(MouseListenerView view, MouseButtonEvent event)
         {
             if (getActor().hitting(event.x, event.y)) {
@@ -196,16 +191,16 @@ public class SliderRole extends AbstractRole implements ViewMouseListener
 
         public void onMouseMove(MouseListenerView view, MouseMotionEvent event)
         {
-            if ( dragging ) {
-                
+            if (dragging) {
+
                 double dx = event.x - SliderRole.this.getActor().getX();
                 double dy = event.y - SliderRole.this.getActor().getY();
-                
-                double angle = Math.atan2(dy,  dx) - SliderRole.this.getActor().getDirection();
-                
-                double distance = Math.sqrt( dx * dx + dy * dy ) * Math.cos(angle);
-                
-                SliderRole.this.setValue( minimum + distance/extent * ( maximum - minimum ) );
+
+                double angle = Math.atan2(dy, dx) - SliderRole.this.getActor().getDirection();
+
+                double distance = Math.sqrt(dx * dx + dy * dy) * Math.cos(angle);
+
+                SliderRole.this.setValue(minimum + distance / extent * (maximum - minimum));
                 event.stopPropagation();
             }
         }

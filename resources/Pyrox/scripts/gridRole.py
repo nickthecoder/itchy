@@ -4,6 +4,8 @@ from grid import Grid
 
 properties = ArrayList()
 
+costumeProperties = ArrayList()
+
 class GridRole(AbstractRole) :
 
     def __init__(self) :
@@ -298,9 +300,13 @@ class GridRole(AbstractRole) :
 class GridRoleFeatures(CostumeFeatures) :
 
     def __init__(self,costume) :
-        super(GridRoleFeatures,self).__init__(costume)
 
         pose = costume.getPose("default")
         if pose is not None :
             self.fragments = Fragments().pieces(20).create(pose)
+
+
+    # Boiler plate code - no need to change this
+    def getProperties(self):
+        return costumeProperties
 
