@@ -22,15 +22,14 @@ Game
     stages, getStages are these used? Should do everything via Layout and Layers.
         Except a Layer is not 1:1 with stage, a stage can be for several layers.
         Stages cannot be public and getStages cannot return a mutable list.
-    layout and getLayout are both public.
     Should Director.loadScene exist?
     Does Editor need to be a subclass of Game? Eeek! Can't Editor be a Director, which is more in keeping with the Itchy philosophy.
         Game could then be a final class.
-    Rename findRoleByTag to findRolesByTag
+
+Director
+    onAttach not documented.
 
 Itchy
-    Why have loadGame and currentGame? That's ok, need to document it correctly.
-        Make getLoadingGame()? Return currentGame when not loading, and output a log message.
     Replace baseDirectory with ItchyResourcesPath, which defaults to "./resources", but can be a set of directories.
     Numerous things, if changed, can affect other games. Shouldn't they be on Game instead? e.g. keyboard repeat, FrameRate.
 
@@ -51,10 +50,6 @@ ZOrderStage
 Appearance
     is adjustAlpha needed?
     superimpose - need to reset scale, direction, colorize ??? Use fixAppearance first.
-
-CostumeFeatures
-    Does it NEED to have a costume attribute? Most times it won't be used. Leave as an option for the sub-class.
-        In fact, make CostumeFeatures an empty interface.
 
 ImagePose
     load- not used.

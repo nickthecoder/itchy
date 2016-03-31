@@ -249,6 +249,12 @@ public final class Itchy
     }
 
     /**
+     * Itchy has a stack of games, game A can start another game, (game B). While game B is loading, and while game B
+     * is active, then getGame will return game B. Once game B ends, then game A will become the active game again,
+     * and getGame will return game A.
+     * <p>
+     * Note that while a game is loading, then getGame will return it, even though it isn't yet active.
+     * 
      * @return The currently active game.
      */
     public static Game getGame()
@@ -350,12 +356,12 @@ public final class Itchy
     }
 
     /**
-     * Used internally by Icthy.
+     * Used internally by Itchy.
      * 
      * @param game
      * @priority 5
      */
-    public static void loadingGame(Game game)
+    static void loadingGame(Game game)
     {
         loadingGame = game;
     }

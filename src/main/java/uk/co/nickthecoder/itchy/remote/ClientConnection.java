@@ -87,7 +87,7 @@ public class ClientConnection
         try {
             Game game = Itchy.getGame();
             RemoteGraphicsContext gc = new RemoteGraphicsContext( this, new Rect( 0,0,game.getWidth(), game.getHeight() ));
-            for (Layer layer : game.layout.getLayers()) {
+            for (Layer layer : game.getLayout().getLayers()) {
                 View view = layer.getView();
                 view.render(view.adjustGraphicsContext(gc));
             }

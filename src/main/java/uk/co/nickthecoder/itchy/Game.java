@@ -68,10 +68,11 @@ public class Game
      */
     public final Resources resources;
 
+    // NOTE, this can be private if/when Editor is no longer a subclass of Game.
     /**
      * The Layout for the current Scene. Set each time a Scene is loaded.
      */
-    public Layout layout;
+    protected Layout layout;
 
     /**
      * Holds the tag information for all of the Actors used within this game. This isn't typically used directly, but
@@ -110,11 +111,6 @@ public class Game
      * store high scores.
      */
     private AutoFlushPreferences preferences;
-
-    /**
-     * A list of all the stages used by this game.
-     */
-    private List<Stage> stages;
 
     /**
      * A special stage which is at the front of the z-order (i.e. always visible).
@@ -235,8 +231,6 @@ public class Game
     {
         Rect displayRect = new Rect(0, 0, getWidth(), getHeight());
 
-        this.stages = new LinkedList<Stage>();
-
         this.windows = new ArrayList<GuiView>();
 
         this.glassStage = new ZOrderStage();
@@ -288,7 +282,19 @@ public class Game
      */
     public List<Stage> getStages()
     {
-        return this.stages;
+        List<Stage> result = new ArrayList<Stage>();
+        if (this.layout != null) {
+            for (Layer layer : this.layout.getLayersByZOrder()) {
+                Stage stage = layer.getStage();
+                if (stage != null) {
+                    if (!result.contains(stage)) {
+                        result.add(stage);
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 
     /**
@@ -348,10 +354,9 @@ public class Game
      */
     public void clear()
     {
-        for (Stage stage : this.stages) {
+        for (Stage stage : this.getStages()) {
             stage.clear();
         }
-        this.stages.clear();
 
         this.glassStage.clear();
     }
@@ -410,13 +415,7 @@ public class Game
      */
     public void startEditor()
     {
-        // If the editor has been started without the game being started (i.e. directly from the
-        // launcher) then we need to start the game, so that it creates its layers and views.
-        // For the scene designer to copy.
-        if ((this.stages == null) || (this.stages.size() == 0)) {
-            this.director.onStarted();
-        }
-
+        // TODO, check if director.onStarted has been called?
         try {
             Editor editor = new Editor(this);
             editor.start();
@@ -433,13 +432,7 @@ public class Game
      */
     public void startEditor(String designSceneName)
     {
-        // If the editor has been started without the game being started (i.e. directly from the
-        // launcher) then we need to start the game, so that it creates its layers and views.
-        // For the scene designer to copy.
-        if ((this.stages == null) || (this.stages.size() == 0)) {
-            this.director.onStarted();
-        }
-
+        // TODO, check if director.onStarted has been called?
         try {
             Editor editor = new Editor(this);
             editor.start(designSceneName);
@@ -1059,7 +1052,6 @@ public class Game
             Stage stage = layer.getStage();
             if (stage != null) {
                 stage.clear();
-                this.stages.remove(stage);
             }
         }
     }
@@ -1178,14 +1170,6 @@ public class Game
                     e.printStackTrace();
                 }
                 return null;
-            }
-
-            for (Layer layer : scene.layout.getLayersByZOrder()) {
-
-                Stage stage = layer.getStage();
-                if (stage != null) {
-                    this.stages.add(stage);
-                }
             }
 
             return scene;
@@ -1339,7 +1323,7 @@ public class Game
 
         public AllActorsIterator()
         {
-            this.stageIterator = Game.this.stages.iterator();
+            this.stageIterator = Game.this.getStages().iterator();
             if (this.stageIterator.hasNext()) {
                 Stage stage = this.stageIterator.next();
                 this.actorIterator = stage.iterator();

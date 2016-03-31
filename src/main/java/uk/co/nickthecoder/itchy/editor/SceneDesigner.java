@@ -316,7 +316,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         resize(Itchy.getDisplaySurface().getWidth(), Itchy.getDisplaySurface().getHeight());
         onCenter();
 
-        editor.layout.dump();
+        // editor.getLayout().dump();
     }
 
     private void onDone()
@@ -531,7 +531,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         toolbarLayer = new Layer(toolbar.getView());
         toolbarLayer.setName("sd_toolbar");
         toolbarLayer.zOrder = 90;
-        editor.layout.addLayer(toolbarLayer);
+        editor.getLayout().addLayer(toolbarLayer);
     }
 
     public Button createButton(String name, String text)

@@ -96,15 +96,17 @@ public interface Director extends InputListener, QuitListener, MessageListener, 
      */
     public static final String LOADED = "Loaded";
 
+    /**
+     * Called when the director is attached to its Game.
+     * 
+     * @param game
+     *            The game it is responsible for.
+     */
     public void attach(Game game);
 
     /**
      * Called after the resources are loaded, and the game is ready to begin.
      * Perform one-time initialisation here.
-     * <p>
-     * Note, The constructor do all but the most trivial of initialisation, because the resources have not yet been
-     * fully loaded at that point.
-     * 
      */
     public void onStarted();
 
@@ -153,20 +155,20 @@ public interface Director extends InputListener, QuitListener, MessageListener, 
     public void onQuit(QuitEvent e);
 
     @Override
-    public void onKeyDown( KeyboardEvent ke );
+    public void onKeyDown(KeyboardEvent ke);
 
     @Override
-    public void onKeyUp( KeyboardEvent ke );
+    public void onKeyUp(KeyboardEvent ke);
 
     @Override
-    public void onMouseDown( MouseButtonEvent event );
+    public void onMouseDown(MouseButtonEvent event);
 
     @Override
-    public void onMouseUp( MouseButtonEvent event );
+    public void onMouseUp(MouseButtonEvent event);
 
     @Override
-    public void onMouseMove( MouseMotionEvent event );
-    
+    public void onMouseMove(MouseMotionEvent event);
+
     /**
      * Called when the game's window is resized. Most games cannot be resized, and therefore this isn't used.
      * 
