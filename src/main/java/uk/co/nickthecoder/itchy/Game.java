@@ -415,7 +415,6 @@ public class Game
      */
     public void startEditor()
     {
-        // TODO, check if director.onStarted has been called?
         try {
             Editor editor = new Editor(this);
             editor.start();
@@ -432,7 +431,6 @@ public class Game
      */
     public void startEditor(String designSceneName)
     {
-        // TODO, check if director.onStarted has been called?
         try {
             Editor editor = new Editor(this);
             editor.start(designSceneName);

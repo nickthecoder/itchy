@@ -221,7 +221,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         addDesignLayers(scene.layout);
 
         overlayStage = new ZOrderStage();
-        editor.getStages().add(overlayStage);
 
         overlayView = new StageView(new Rect(editRect), overlayStage);
         overlayLayer = new Layer(overlayView);
@@ -276,10 +275,6 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         for (Iterator<Layer> i = layout.getLayers().iterator(); i.hasNext();) {
             Layer layer = i.next();
-            Stage stage = layer.getStage();
-            if (stage != null) {
-                editor.getStages().remove(stage);
-            }
             editor.getLayout().removeLayer(editor.getLayout().findLayer(layer.getName()));
         }
         this.designLayers.clear();
@@ -353,7 +348,6 @@ public class SceneDesigner implements MouseListener, KeyListener
         removeDesignLayers(scene.layout);
         editor.clear();
         editor.sceneDesigner = null;
-        editor.getStages().clear();
         overlayStage.clear();
 
         Layout layout = editor.getLayout();
