@@ -17,34 +17,34 @@ public class ForwardsAnimation extends NumericAnimation
     protected static final List<Property<Animation, ?>> properties = new ArrayList<Property<Animation, ?>>();
 
     static {
-        properties.add( new DoubleProperty<Animation>( "forwards" ) );
-        properties.add( new DoubleProperty<Animation>( "sidewards" ).aliases( "sideways") );
-        properties.add( new EnumProperty<Animation,Using>( "using", Using.class ) );
-        properties.add( new DoubleProperty<Animation>( "customAngle" ).hint( "degrees" ) );
-        properties.addAll( NumericAnimation.properties );
+        properties.add(new DoubleProperty<Animation>("forwards"));
+        properties.add(new DoubleProperty<Animation>("sidewards").aliases("sideways"));
+        properties.add(new EnumProperty<Animation, Using>("using", Using.class));
+        properties.add(new DoubleProperty<Animation>("customAngle").hint("degrees"));
+        properties.addAll(NumericAnimation.properties);
     }
-    
+
     public double forwards;
 
     public double sidewards;
 
     public static enum Using
     {
-    	HEADING,
-    	DIRECTION,
-    	CUSTOM_ANGLE
+        HEADING,
+        DIRECTION,
+        CUSTOM_ANGLE
     }
-    
+
     public Using using = Using.HEADING;
-    
+
     public double customAngle = 0;
-    
+
     public ForwardsAnimation()
     {
         this(200, Eases.linear, 0, 0);
     }
 
-    public ForwardsAnimation( int ticks, Ease ease, double forwards, double sidewards )
+    public ForwardsAnimation(int ticks, Ease ease, double forwards, double sidewards)
     {
         super(ticks, ease);
         this.forwards = forwards;
@@ -64,16 +64,16 @@ public class ForwardsAnimation extends NumericAnimation
     }
 
     @Override
-    public void tick( Actor actor, double amount, double delta )
+    public void tick(Actor actor, double amount, double delta)
     {
-    	double degrees = this.customAngle;
-    	if (this.using == Using.HEADING) {
-    		degrees += actor.getHeading();
-    	} else if ( this.using == Using.DIRECTION) {
-    		degrees += actor.getDirection();
-    	}
-    	
-        actor.moveAngle(degrees, this.forwards * delta, this.sidewards * delta);
+        double degrees = this.customAngle;
+        if (this.using == Using.HEADING) {
+            degrees += actor.getHeading();
+        } else if (this.using == Using.DIRECTION) {
+            degrees += actor.getDirection();
+        }
+
+        actor.moveTo(actor.getPosition().translateDegrees(degrees, this.forwards * delta, this.sidewards * delta));
     }
 
 }

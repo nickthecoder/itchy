@@ -72,7 +72,7 @@ public class NearestCollisionStrategy implements CollisionStrategy
 
             private double distance(Actor other)
             {
-                return other.distance(actor);
+                return other.getPosition().distance(actor.getPosition());
             }
         };
 

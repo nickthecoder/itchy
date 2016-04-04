@@ -234,7 +234,7 @@ public class Costume implements NamedSubject<Costume>, Cloneable
      * The new Actor will not be placed on a Stage at this point, and therefore will not have its onBirth method called.
      * 
      * @param startEvent
-     * @return
+     * @return A new Actor, with this Costume, and a Role defined by this Costume.
      */
     public Actor createActor(String startEvent)
     {

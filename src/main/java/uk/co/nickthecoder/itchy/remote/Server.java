@@ -39,7 +39,7 @@ public class Server implements Runnable
         thread.start();
         System.out.println("Server connection thread started");
 
-        Itchy.setFrameRate(new ServerFrameRate());
+        Itchy.getGame().setFrameRate(new ServerFrameRate());
 
         Resources resources = new Resources();
         resources.server = true;
@@ -66,7 +66,7 @@ public class Server implements Runnable
 
     public void stopServer() throws IOException
     {
-        Itchy.setFrameRate( new SimpleFrameRate() );
+        Itchy.getGame().setFrameRate( new SimpleFrameRate() );
 
         Itchy.soundManager = new StandardSoundManager();
 

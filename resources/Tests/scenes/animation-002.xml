@@ -1,5 +1,5 @@
 <scene name="animation-002" layout="default" sceneDirector="animation002.py" showMouse="true">
-  <sceneDirector nextScene="loadEvents"/>
+  <sceneDirector nextScene="point-001"/>
   <layer name="background"/>
   <layer name="main">
     <actor costume="alien1a" x="50.0" y="300.0" heading="-90.0" id="0" direction="-90.0"/>

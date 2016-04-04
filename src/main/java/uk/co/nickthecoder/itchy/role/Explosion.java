@@ -120,7 +120,7 @@ public class Explosion extends Companion
     {
         super(actor);
         this.direction = actor.getAppearance().getDirection();
-        this.lifeTicks = (int) (DEFAULT_LIFE_SECONDS * Itchy.getFrameRate().getFrameRate());
+        this.lifeTicks = (int) (DEFAULT_LIFE_SECONDS * Itchy.getGame().getFrameRate().getFrameRate());
         this.zOrder = actor.getZOrder();
     }
 
@@ -200,7 +200,7 @@ public class Explosion extends Companion
                 // double tmpHeading = actor.getHeading();
                 actor.setDirection(this.source.getDirection());
                 this.fragments.useFragment(actor);
-                actualHeading = 180 + actor.directionOf(this.source);
+                actualHeading = 180 + actor.getPosition().directionDegrees(this.source.getPosition());
             }
 
             actor.setHeading(actualHeading);
@@ -615,8 +615,8 @@ public class Explosion extends Companion
          */
         public B life( double from, double to )
         {
-            this.companion.lifeTicks = (int) (Itchy.getFrameRate().getFrameRate() * from);
-            this.companion.randomLifeTicks = (int) (Itchy.getFrameRate().getFrameRate() * (to - from));
+            this.companion.lifeTicks = (int) (Itchy.getGame().getFrameRate().getFrameRate() * from);
+            this.companion.randomLifeTicks = (int) (Itchy.getGame().getFrameRate().getFrameRate() * (to - from));
             return getThis();
         }
 

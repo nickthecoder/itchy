@@ -9,7 +9,6 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
-import uk.co.nickthecoder.itchy.collision.CollisionStrategy;
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.editor.SceneDesigner;
 import uk.co.nickthecoder.itchy.property.DoubleProperty;
@@ -97,9 +96,8 @@ final public class Actor implements PropertySubject<Actor>
 
     private Stage stage;
 
-    private Point position;
+    private ActorPoint position;
 
-    private boolean active = false;
     private boolean dead = false;
     private boolean dying = false;
     private int zOrder = 0;
@@ -156,7 +154,7 @@ final public class Actor implements PropertySubject<Actor>
 
         this.role = null;
 
-        this.position = new Point(0, 0);
+        this.position = new ActorPoint(0, 0);
         this.setDirection(pose.getDirection());
     }
 
@@ -416,26 +414,6 @@ final public class Actor implements PropertySubject<Actor>
         getStage().add(actor);
 
         return actor;
-    }
-
-    /**
-     * 
-     * @return
-     * @priority 5
-     */
-    public double getCornerY()
-    {
-        return this.getY() - this.getAppearance().getSurface().getHeight() + this.getAppearance().getOffsetY();
-    }
-
-    /**
-     * 
-     * @return
-     * @priority 5
-     */
-    public double getCornerX()
-    {
-        return this.getX() - this.getAppearance().getOffsetX();
     }
 
     /**
@@ -766,8 +744,7 @@ final public class Actor implements PropertySubject<Actor>
     }
 
     /**
-     * 
-     * @return true if a {@link #deathEvent(String)} has been called.
+     * @return true if a {@link #deathEvent(String)} has been called, but the Actor is not dead yet.
      * @priority 2
      */
     public boolean isDying()
@@ -865,16 +842,6 @@ final public class Actor implements PropertySubject<Actor>
     }
 
     /**
-     * 
-     * @return
-     * @priority 5
-     */
-    public boolean isActive()
-    {
-        return this.active;
-    }
-
-    /**
      * Used internally by Itchy when editing a scene, and when loading a scene.
      * 
      * @param value
@@ -906,6 +873,7 @@ final public class Actor implements PropertySubject<Actor>
     public void kill()
     {
         if (!this.dead) {
+            this.dying = false;
             this.dead = true;
             if (this.role != null) {
                 this.role.killed();
@@ -946,8 +914,7 @@ final public class Actor implements PropertySubject<Actor>
      */
     public void setX(double x)
     {
-        this.position = new Point(x, this.position.getY());
-        this.appearance.invalidatePosition();
+        this.position.setX(x);
     }
 
     /**
@@ -957,20 +924,18 @@ final public class Actor implements PropertySubject<Actor>
      */
     public void setY(double y)
     {
-        this.position = new Point(this.position.getX(), y);
-        this.appearance.invalidatePosition();
+        this.position.setY(y);
     }
 
     /**
      * Moves the 'other' Actor to the same position as this Actor.
      * 
-     * @deprecated Use moveTo( other.getPosition() )
      * @param other
      * @priority 3
      */
     public void moveTo(Actor other)
     {
-        this.moveTo(other.getPosition());
+        this.position.moveTo(other.getPosition());
     }
 
     /**
@@ -982,14 +947,12 @@ final public class Actor implements PropertySubject<Actor>
      */
     public void moveTo(double x, double y)
     {
-        this.position = new Point(x, y);
-        this.appearance.invalidatePosition();
+        this.position.moveTo(x, y);
     }
 
     public void moveTo(Point position)
     {
-        this.position = position;
-        this.appearance.invalidatePosition();
+        this.position.moveTo(position);
     }
 
     /**
@@ -1001,8 +964,7 @@ final public class Actor implements PropertySubject<Actor>
      */
     public void moveBy(double x, double y)
     {
-        this.position = this.position.translate(x, y);
-        this.appearance.invalidatePosition();
+        this.position.moveBy(x, y);
     }
 
     /**
@@ -1014,219 +976,20 @@ final public class Actor implements PropertySubject<Actor>
      */
     public void moveForwards(double amount)
     {
-        this.moveTo(this.position.translateRadians(this.getHeadingRadians(), amount));
-        // double theta = this.getHeadingRadians();
-        // double cosa = Math.cos(theta);
-        // double sina = Math.sin(theta);
-
-        // this.moveBy((cosa * amount), (sina * amount));
+        this.position.moveRadians(this.getHeadingRadians(), amount);
     }
 
     /**
-     * Uses the Actor's heading and moves the Actor forwards.
+     * Uses the Actor's heading and moves the Actor forwards and sideways
      * 
      * @param amount
      *            The amount of pixels to move forwards.
      * @param sideways
      *            The amount of pixels to move sideways (+ve numbers are to the Actor's left).
-     * @deprecated
      */
-    public void moveForwards(double forward, double sideways)
+    public void moveForwards(double forwards, double sideways)
     {
-        this.moveAngle(this.getHeading(), forward, sideways);
-    }
-
-    /**
-     * 
-     * @param degrees
-     * @param distance
-     * @priority 3
-     * @deprecated
-     */
-    public void moveAngle(double degrees, double distance)
-    {
-        this.moveTo(this.position.translateDegrees(degrees, distance));
-
-        // double theta = degrees / 180 * Math.PI;
-        // double cosa = Math.cos(theta);
-        // double sina = Math.sin(theta);
-
-        // this.moveBy((cosa * distance), (sina * distance));
-    }
-
-    /**
-     * 
-     * @param degrees
-     * @param forward
-     * @param sideways
-     * @priority 3
-     * @deprecated
-     */
-    public void moveAngle(double degrees, double forward, double sideways)
-    {
-        this.moveTo(this.position.translateDegrees(degrees, forward, sideways));
-        //double theta = degrees / 180 * Math.PI;
-        //double cosa = Math.cos(theta);
-        //double sina = Math.sin(theta);
-
-        //this.moveBy((cosa * forward) - (sina * sideways), (sina * forward) + (cosa * sideways));
-    }
-
-    /**
-     * Moves this Actor towards the <code>other</code> Actor, by <code>distance</code> pixels.
-     * If the distance between the Actors is less than the distance to be moved, then do NOT overshoot, and
-     * instead move to the other Actor's position.
-     * 
-     * @param other
-     *            The Actor in whose direction we will move towards.
-     * @param displacement
-     *            The distance to move
-     * @priority 3
-     * @deprecated
-     */
-    public void moveTowards(Actor other, double displacement)
-    {
-        this.moveTo(this.position.towards(other.position, displacement));
-        // double dx = other.getX() - this.getX();
-        // double dy = other.getY() - this.getY();
-
-        // double distance = Math.sqrt(dx * dx + dy * dy);
-        // double scale = distance < displacement ? 1 : displacement / distance;
-
-        // this.moveBy(dx * scale, dy * scale);
-    }
-
-    /**
-     * 
-     * @param other
-     * @return
-     * @priority 3
-     * @deprecated Same as distanceTo, which is also deprecated
-     */
-    public double distance(Actor other)
-    {
-        return this.position.distance(other.position);
-        // double dx = this.getX() - other.getX();
-        // double dy = this.getY() - other.getY();
-
-        // return Math.sqrt(dx * dx + dy * dy);
-    }
-
-    /**
-     * 
-     * @param x
-     * @param y
-     * @return
-     * @priority 3
-     * @deprecated
-     */
-    public double distanceTo(double x, double y)
-    {
-        return this.position.distance(new Point(x, y));
-        // return Math.sqrt((this.getX() - x) * (this.getX() - x) + (this.getY() - y) * (this.getY() - y));
-    }
-
-    /**
-     * 
-     * @param other
-     * @return
-     * @priority 3
-     * @deprecated
-     */
-    public double distanceTo(Actor other)
-    {
-        return this.position.distance(other.getPosition());
-        // return Math.sqrt((this.getX() - other.getX()) * (this.getX() - other.getX()) + (this.getY() - other.getY()) *
-        // (this.getY() - other.getY()));
-    }
-
-    /**
-     * 
-     * @param x
-     * @param y
-     * @return
-     * @priority 3
-     * @deprecated
-     */
-    public double directionOf(double x, double y)
-    {
-        return this.position.directionDegrees(new Point(x, y));
-        // return Math.atan2(y - this.getY(), x - this.getX()) * 180.0 / Math.PI;
-    }
-
-    /**
-     * 
-     * @param other
-     * @return
-     * @priority 3
-     * @deprecated
-     */
-    public double directionOf(Actor other)
-    {
-        return this.position.directionDegrees(other.getPosition());
-        // return Math.atan2(other.getY() - this.getY(), other.getX() - this.getX()) * 180.0 / Math.PI;
-    }
-
-    /**
-     * 
-     * @param x
-     * @param y
-     * @return
-     * @priority 3
-     */
-    public boolean contains(int x, int y)
-    {
-        return this.getAppearance().getWorldRectangle().contains(x, y);
-    }
-
-    /**
-     * 
-     * @param x
-     * @param y
-     * @param tag
-     * @return
-     * @priority 3
-     */
-    public static Role nearest(double x, double y, String tag)
-    {
-        Role closestRole = null;
-        double closestDistance = Double.MAX_VALUE;
-
-        for (Role otherRole : AbstractRole.findRolesByTag(tag)) {
-            Actor other = otherRole.getActor();
-            double distance = other.distanceTo(x, y);
-            if (distance < closestDistance) {
-                closestDistance = distance;
-                closestRole = otherRole;
-            }
-        }
-        return closestRole;
-    }
-
-    /**
-     * If there are a large number of Actors with this tag, then this will be slow, because unlike overlapping and
-     * touching, there is no optimisation based on {@link CollisionStrategy}.
-     * 
-     * @param tag
-     * @return
-     * @priority 3
-     */
-    public Role nearest(String tag)
-    {
-        Role closestRole = null;
-        double closestDistance = Double.MAX_VALUE;
-
-        for (Role otherRole : AbstractRole.findRolesByTag(tag)) {
-            Actor other = otherRole.getActor();
-            if (other != this) {
-                double distance = other.distanceTo(this);
-                if (distance < closestDistance) {
-                    closestDistance = distance;
-                    closestRole = otherRole;
-                }
-            }
-        }
-        return closestRole;
+        this.position.moveRadians(this.getHeadingRadians(), forwards, sideways);
     }
 
     /**
@@ -1296,7 +1059,7 @@ final public class Actor implements PropertySubject<Actor>
     public boolean hitting(int worldX, int worldY)
     {
         if (isText()) {
-            return this.contains(worldX, worldY);
+            return this.getAppearance().getWorldRectangle().contains(worldX, worldY);
         } else {
             return this.pixelOverlap(worldX, worldY);
         }
@@ -1304,6 +1067,8 @@ final public class Actor implements PropertySubject<Actor>
 
     /**
      * The threshold value when using {@link #pixelOverlap(int,int)}.
+     * 
+     * @priority 3
      */
     public static final int DEFAULT_ALPHA_THRESHOLD = 10;
 
@@ -1496,4 +1261,20 @@ final public class Actor implements PropertySubject<Actor>
         return properties;
     }
 
+    /**
+     * Does the same as a regular {@link Point}, but also calls {@link Appearance#invalidatePosition()} whenever the
+     * point is changed.
+     */
+    class ActorPoint extends Point
+    {
+        ActorPoint(double x, double y)
+        {
+            super(x, y);
+        }
+
+        protected void update()
+        {
+            Actor.this.appearance.invalidatePosition();
+        }
+    }
 }

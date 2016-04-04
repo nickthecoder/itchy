@@ -37,11 +37,10 @@ javadoc {
     options.addStringOption( "usecookies" )
     options.addStringOption( "title", "Itchy" )
     options.addStringOption( "link", "http://docs.oracle.com/javase/7/docs/api/")
-    options.addStringOption( "diagram", "src/docs/classDiagram.xml" )
-    options.addStringOption( "diagram", "src/docs/collisionStrategyDiagram.xml" )
+    options.addStringOption( "diagrams", "src/docs/collisionStrategyDiagram.xml;src/docs/classDiagram.xml" )
     
     options.docletpath = configurations.compile.files.asType(List)
-    verbose = true
+    verbose = false
 }
 
 // A horrible chunk of code which extracts the contents of the "native" jar files

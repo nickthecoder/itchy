@@ -74,15 +74,6 @@ public final class Itchy
     private static int MOUSE_STATE_SIZE = MouseButton.values().length + 1;
 
     /**
-     * The FrameRate is in charge of ensuring that the game runs at the correct speed, redrawing the screen at regular
-     * intervals and decides what to do when the required frame rate cannot be maintained.
-     * 
-     * Most games can leave this alone, but advanced programmers may want to create a new implementation of FrameRate,
-     * and therefore having more control over the frame rate.
-     */
-    private static FrameRate frameRate = new SimpleFrameRate();
-
-    /**
      * Holds a boolean for each key indicating if it is currently up (false) or down (true). On key pressed events sets
      * the appropriate boolean, and key released events reset
      * the boolean. Uses {@link Keys} values to index the array.
@@ -312,30 +303,6 @@ public final class Itchy
         }
     }
 
-    /**
-     * 
-     * @param newFrameRate
-     */
-    public static void setFrameRate(FrameRate newFrameRate)
-    {
-        if (running) {
-            frameRate.end();
-        }
-        frameRate = newFrameRate;
-        if (running) {
-            frameRate.loop();
-        }
-    }
-
-    /**
-     * Get details about the frame rate that Itchy is running at.
-     * 
-     * @return
-     */
-    public static FrameRate getFrameRate()
-    {
-        return frameRate;
-    }
 
     /**
      * Used internally by Icthy.
@@ -378,7 +345,7 @@ public final class Itchy
             if (!running) {
                 running = true;
                 while (running) {
-                    frameRate.loop();
+                    getGame().getFrameRate().loop();
                 }
             }
         } catch (Exception e) {
@@ -446,7 +413,7 @@ public final class Itchy
     public static void terminate()
     {
         System.out.println("Terminating itchy");
-        frameRate.end();
+        getGame().getFrameRate().end();
         running = false;
     }
 

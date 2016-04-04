@@ -177,8 +177,6 @@ public interface Director extends InputListener, QuitListener, MessageListener, 
      */
     public void onResize(ResizeEvent e);
 
-    public Scene loadScene(String sceneName);
-
     /**
      * Called once per frame (60 times per second).
      */

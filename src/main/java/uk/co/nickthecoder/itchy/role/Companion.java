@@ -87,8 +87,7 @@ public abstract class Companion extends AbstractRole
         actor.setHeading(this.heading);
 
         actor.moveTo(this.source);
-        actor.moveForwards(this.offsetForwards * this.scale,
-            this.offsetSidewards * this.scale);
+        actor.moveForwards(this.offsetForwards * this.scale, this.offsetSidewards * this.scale);
         actor.moveBy(this.offsetX * this.scale, this.offsetY * this.scale);
 
         if (this.rotate) {

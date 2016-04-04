@@ -192,6 +192,15 @@ public class Game
     public final ScriptManager scriptManager;
 
     /**
+     * The FrameRate is in charge of ensuring that the game runs at the correct speed, redrawing the screen at regular
+     * intervals and decides what to do when the required frame rate cannot be maintained.
+     * 
+     * Most games can leave this alone, but advanced programmers may want to create a new implementation of FrameRate,
+     * and therefore having more control over the frame rate.
+     */
+    private FrameRate frameRate = new SimpleFrameRate();
+
+    /**
      * Game constructor called when the resources are being loaded. Note that not much initialisation can take place
      * yet, as vital
      * information is missing. For example, the games width and height are unknown. The {@link #init()} method will be
@@ -240,12 +249,27 @@ public class Game
 
     /**
      * 
+     * @param newFrameRate
+     */
+    public void setFrameRate(FrameRate newFrameRate)
+    {
+        if (frameRate != null) {
+            frameRate.end();
+        }
+        frameRate = newFrameRate;
+        if (Itchy.isRunning()) {
+            frameRate.loop();
+        }
+    }
+
+    /**
+     * Get details about the frame rate that Itchy is running at.
+     * 
      * @return
-     * @priority 3
      */
     public FrameRate getFrameRate()
     {
-        return Itchy.getFrameRate();
+        return frameRate;
     }
 
     /**
@@ -503,6 +527,27 @@ public class Game
     public Set<Role> findRolesByTag(String tag)
     {
         return this.roleTags.getTagMembers(tag);
+    }
+
+    public Role findNearestRole(String tag, Point point)
+    {
+        return this.findNearestRole(tag, point.getX(), point.getY());
+    }
+
+    public Role findNearestRole(String tag, double x, double y)
+    {
+        Role closestRole = null;
+        double closestDistance = Double.MAX_VALUE;
+
+        for (Role otherRole : AbstractRole.findRolesByTag(tag)) {
+            Actor other = otherRole.getActor();
+            double distance = other.getPosition().distance(x, y);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestRole = otherRole;
+            }
+        }
+        return closestRole;
     }
 
     Map<String, Actor> actorsById = new WeakHashMap<String, Actor>();
@@ -1069,7 +1114,6 @@ public class Game
      * Many events are fired when loading the scene, and the order is very important.
      * <ul>
      * <li>{@link Director#onStartingScene(String)}</li>
-     * <li>{@link Director#loadScene(String)}</li>
      * <li>{@link SceneDirector#onDeactivate()}
      * <li>the actors are created</li>
      * <li>new SceneDirector is created</li>
@@ -1096,7 +1140,7 @@ public class Game
         this.sceneDirector.onDeactivate();
 
         this.clear();
-        Scene scene = this.director.loadScene(sceneName);
+        Scene scene = this.loadScene(sceneName);
         if (scene == null) {
             return false;
         }
@@ -1137,7 +1181,7 @@ public class Game
         // Fire sceneDirector's onActivate
         this.sceneDirector.onActivate();
 
-        Itchy.getFrameRate().reset();
+        frameRate.reset();
 
         this.director.onStartedScene();
         return true;

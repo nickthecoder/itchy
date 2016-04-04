@@ -1,0 +1,68 @@
+Current Tasks
+=============
+
+Javadoc & code review...
+
+Point to be interface, including lots of setter methods, 
+    Concrete classes UnmodifiablePoint and ModifiablePoint (which has an protected update method, which does nothing)
+    ActorPoint extends ModifiablePoint and uses the update to 
+OR, Point is a base class, with an empty update method, and ActorPoint extends it.
+   
+
+Game
+    Does Editor need to be a subclass of Game?
+        Can't Editor be a Director, which is more in keeping with the Itchy philosophy.
+        Game could then be a final class.
+
+Itchy
+    Numerous things, if changed, can affect other games. Shouldn't they be on Game instead? e.g. keyboard repeat
+
+View
+    getRelativeRect - is this used/needed?
+    isVisible - is this used/needed?
+    
+StageView
+    Why does enableMouseListener take a Game parameter? Maybe ok.
+
+Appearance
+    superimpose - need to reset scale, direction, colorize ??? Use fixAppearance first.
+
+
+     
+Make some gates need balloons 2, rocks 2, instead of 3, 3?
+    Or make a new balloons3?
+
+Look over all TODOs
+
+
+Destroy-Debris
+    Do the offsets for all rocks (most are done).
+    Adjust the speed and rotation for both ships to make good game play.
+ 
+ 
+Client/Server needs to use UDP:
+    https://docs.oracle.com/javase/tutorial/networking/datagrams/clientServer.html 
+
+Replace Itchy's baseDirectory with ItchyResourcesPath, which defaults to "./resources", but can be a set of directories.
+
+BUGS
+====
+
+l & k dodge scenes are duplicates
+
+Close button in editor does nothing.
+
+The-Mings
+    Basher and digger no longer remove anything.
+
+Destroy-Debris
+    Next level "hyperspace" effect is not displayed at all.
+ 
+Cannot start a new animation from a finish event of an old animation (Dodge 'Em Player wanted to do it)
+
+Cavern Quest
+    Sometimes you do not die when caught by a nasty.
+    
+Test
+    Projectiles, Forwards, Sidewards, Rotate, Speed don't do what I expect.
+ 

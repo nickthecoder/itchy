@@ -1,4 +1,5 @@
-<scene name="passed" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+<scene name="passed" layout="default" sceneDirector="test.py" showMouse="true">
+  <sceneDirector nextScene="passed"/>
   <layer name="background"/>
   <layer name="main">
     <text x="408.0" y="341.0" font="vera" fontSize="22.0" text="Test Passed :-)" color="#2bd320ff"/>

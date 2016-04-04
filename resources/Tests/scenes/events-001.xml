@@ -1,4 +1,4 @@
-<scene name="loadEvents" layout="default" sceneDirector="loadEvents.py" showMouse="true">
+<scene name="events-001" layout="default" sceneDirector="loadEvents.py" showMouse="true">
   <layer name="background"/>
   <layer name="main">
     <actor costume="alien1a" x="334.0" y="326.0" heading="-90.0" direction="-90.0" role="loadEventsRole.py"/>

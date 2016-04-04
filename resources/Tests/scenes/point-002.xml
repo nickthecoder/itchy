@@ -1,5 +1,5 @@
-<scene name="point-001" layout="default" sceneDirector="point001.py" showMouse="true">
-  <sceneDirector nextScene="point-002"/>
+<scene name="point-002" layout="default" sceneDirector="point002.py" showMouse="true">
+  <sceneDirector nextScene="events-001"/>
   <layer name="background"/>
   <layer name="main">
     <actor costume="alien" x="100.0" y="100.0" heading="-90.0" id="one" direction="-90.0"/>

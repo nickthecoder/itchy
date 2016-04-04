@@ -26,9 +26,9 @@ class Player(AbstractRole) :
         mouseX = self.view.getWorldX( Itchy.getMouseX() )
         mouseY = self.view.getWorldY( Itchy.getMouseY() )
 
-        distance = self.actor.distanceTo( mouseX, mouseY )
+        distance = self.actor.position.distance( mouseX, mouseY )
         if distance > 10 :
-            self.actor.direction = self.actor.directionOf( mouseX, mouseY )
+            self.actor.direction = self.actor.position.directionDegrees( mouseX, mouseY )
             self.actor.moveForwards( self.speed if distance > 100 else self.speed * distance / 100 )
 
             if self.inputClick.pressed() :

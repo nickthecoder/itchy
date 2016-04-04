@@ -1,5 +1,5 @@
 <resources>
-  <game title="Tests" width="800" height="600" resizable="false" initialScene="menu" testScene="playground" directorClassName="uk.co.nickthecoder.itchy.PlainDirector"/>
+  <game title="Tests" width="800" height="600" resizable="false" initialScene="menu" testScene="menu" directorClassName="uk.co.nickthecoder.itchy.PlainDirector"/>
   <spriteSheets/>
   <poses>
     <pose name="alien1a" filename="images/alien1a.png" direction="-90.0"/>
@@ -350,17 +350,20 @@
   <scenes>
     <scene name="animation-001"/>
     <scene name="animation-002"/>
+    <scene name="events-001"/>
     <scene name="explosions"/>
     <scene name="failed"/>
-    <scene name="loadEvents"/>
     <scene name="menu"/>
     <scene name="passed"/>
     <scene name="playground"/>
     <scene name="point-001"/>
+    <scene name="point-002"/>
     <scene name="profiles"/>
     <scene name="projectiles"/>
   </scenes>
-  <inputs/>
+  <inputs>
+    <input name="exit" keys="ESCAPE,BACKSPACE"/>
+  </inputs>
   <layouts>
     <layout name="default" defaultLayer="main">
       <layer name="background" zOrder="0" x="0" y="0" width="800" height="600" viewClassName="uk.co.nickthecoder.itchy.RGBAView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">

@@ -34,7 +34,7 @@ import uk.co.nickthecoder.itchy.StageView;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.View;
 import uk.co.nickthecoder.itchy.ZOrderStage;
-import uk.co.nickthecoder.itchy.ZOrderStageInterface;
+import uk.co.nickthecoder.itchy.OrderedStage;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
@@ -1836,8 +1836,8 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         if ((mode == MODE_SELECT) && (currentActor != null)) {
             Stage stage = currentActor.getStage();
-            if (stage instanceof ZOrderStageInterface) {
-                ((ZOrderStageInterface) (stage)).zOrderUp(currentActor);
+            if (stage instanceof OrderedStage) {
+                ((OrderedStage) (stage)).zOrderUp(currentActor);
             }
         }
     }
@@ -1846,8 +1846,8 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         if ((mode == MODE_SELECT) && (currentActor != null)) {
             Stage stage = currentActor.getStage();
-            if (stage instanceof ZOrderStageInterface) {
-                ((ZOrderStageInterface) (stage)).zOrderDown(currentActor);
+            if (stage instanceof OrderedStage) {
+                ((OrderedStage) (stage)).zOrderDown(currentActor);
             }
             updateProperties();
         }
@@ -1857,8 +1857,8 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         if ((mode == MODE_SELECT) && (currentActor != null)) {
             Stage stage = currentActor.getStage();
-            if (stage instanceof ZOrderStageInterface) {
-                ((ZOrderStageInterface) (stage)).addTop(currentActor);
+            if (stage instanceof OrderedStage) {
+                ((OrderedStage) (stage)).addTop(currentActor);
             }
             updateProperties();
         }
@@ -1868,8 +1868,8 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         if ((mode == MODE_SELECT) && (currentActor != null)) {
             Stage stage = currentActor.getStage();
-            if (stage instanceof ZOrderStageInterface) {
-                ((ZOrderStageInterface) (stage)).addBottom(currentActor);
+            if (stage instanceof OrderedStage) {
+                ((OrderedStage) (stage)).addBottom(currentActor);
             }
             updateProperties();
         }
@@ -2258,8 +2258,9 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
 
             if (target != null) {
-                double x = target.getCornerX();
-                double y = target.getCornerY();
+                double x = target.getX() - target.getAppearance().getOffsetX();
+                double y = target.getY() - target.getAppearance().getSurface().getHeight() + target.getAppearance().getOffsetY();
+
                 if (cornerX > 0) {
                     x += target.getAppearance().getWidth();
                 }

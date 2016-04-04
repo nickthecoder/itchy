@@ -21,7 +21,7 @@ class Portcullis(GridRole) :
         self.addTag("portcullis")
 
     def getReady(self, player) :
-        delay = player.actor.distanceTo( self.actor ) / 200
+        delay = player.actor.position.distance( self.actor.position ) / 200
         if self.isOpen() :
             self.timer = Timer.createTimerSeconds( delay )
             

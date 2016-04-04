@@ -80,7 +80,7 @@ public class Client
         }
 
         System.out.println("Using ClientFrameRate");
-        Itchy.setFrameRate( new ClientFrameRate() );
+        Itchy.getGame().setFrameRate( new ClientFrameRate() );
         
         System.out.println("Using RemoteEventProcessor");
         Itchy.eventProcessor = new RemoteEventProcessor(this);
@@ -92,7 +92,7 @@ public class Client
 
     public void stopClient()
     {
-        Itchy.setFrameRate( new SimpleFrameRate() );
+        Itchy.getGame().setFrameRate( new SimpleFrameRate() );
 
         try {
             out.close();

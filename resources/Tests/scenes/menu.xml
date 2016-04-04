@@ -12,8 +12,14 @@
     <text x="30.0" y="460.0" zOrder="4" font="vera" fontSize="22.0" text="3) Explosions" xAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton">
       <role sceneName="explosions"/>
     </text>
-    <text x="453.0" y="518.0" zOrder="4" font="vera" fontSize="22.0" text="animation-001" xAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton">
+    <text x="453.0" y="517.0" zOrder="4" font="vera" fontSize="22.0" text="animation-001" xAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton">
       <role sceneName="animation-001"/>
+    </text>
+    <text x="453.0" y="492.0" zOrder="4" font="vera" fontSize="22.0" text="point-001" xAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton">
+      <role sceneName="point-001"/>
+    </text>
+    <text x="454.0" y="468.0" zOrder="4" font="vera" fontSize="22.0" text="events-001" xAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton">
+      <role sceneName="events-001"/>
     </text>
     <text x="30.0" y="550.0" zOrder="5" font="vera" fontSize="22.0" text="0) Playground" xAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton">
       <role sceneName="playground"/>

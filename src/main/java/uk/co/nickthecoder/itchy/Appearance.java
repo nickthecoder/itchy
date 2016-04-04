@@ -315,6 +315,17 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
         }
     }
 
+    /**
+     * Adds an amount to the alpha. See {@link #setAlpha(double)}.
+     * A convenience method, does the same as <code>foo.setAlpha( foo.getAlpha() + amount )</code>
+     * <p>
+     * Scripting languages such as Python and Groovy have no need for this, because they can adjust the alpha like so :
+     * <p>
+     * <code>foo.alpha += amount</code>
+     * 
+     * @param amount
+     * @priority 3
+     */
     public void adjustAlpha(double amount)
     {
         this.setAlpha(this.alpha + amount);
@@ -394,9 +405,15 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
     /**
      * Adds delta to the direction.
+     * A convenience method, does the same as <code>foo.setDirection( foo.getDirection() + delta )</code>
+     * <p>
+     * Scripting languages such as Python and Groovy have no need for this, because they can adjust the direction like
+     * so :
+     * <p>
+     * <code>foo.direction += delta</code>
      * 
      * @param delta
-     * @priority 2
+     * @priority 3
      */
     public void adjustDirection(double delta)
     {
@@ -411,7 +428,7 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
      */
     public void setDirectionTowards(Actor other)
     {
-        this.setDirection(this.actor.directionOf(other));
+        this.setDirection(this.actor.getPosition().directionDegrees(other.getPosition()));
     }
 
     /**
@@ -441,9 +458,14 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
 
     /**
      * Adds delta to the scale.
+     * A convenience method, does the same as <code>foo.setScale( foo.getScale() + delta )</code>
+     * <p>
+     * Scripting languages such as Python and Groovy have no need for this, because they can adjust the scale like so :
+     * <p>
+     * <code>foo.scale += delta</code>
      * 
      * @param delta
-     * @priority 2
+     * @priority 3
      */
     public void adjustScale(double delta)
     {

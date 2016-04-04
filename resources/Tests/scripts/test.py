@@ -9,7 +9,12 @@ class Test(PlainSceneDirector) :
     def __init__(self) :
         self.nextScene = "passed"
         self.ok = True
+        self.inputExit = Input.find( "exit" )
 
+    def onKeyDown(self, ke) :
+        if self.inputExit.matches( ke ) :
+            game.startScene( "menu" )
+    
     def compare( self, description, expected, value ) :
         same = expected == value
         # If they are numbers, then allow them to be a little off, because rounding errors are to be expected.

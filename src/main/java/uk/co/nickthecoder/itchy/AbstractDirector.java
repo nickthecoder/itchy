@@ -180,9 +180,4 @@ public class AbstractDirector implements Director
         // Do nothing.
     }
 
-    @Override
-    public Scene loadScene(String sceneName)
-    {
-        return this.game.loadScene(sceneName);
-    }
 }

@@ -120,11 +120,8 @@ class Play(PlainSceneDirector) :
         mainView = game.layout.findView("main")
         mainView.adjustMouse( event )
         if event.button == MouseButtonEvent.BUTTON_LEFT :
-            x = event.x
-            y = event.y # + 20 # Near their middles, not their feet
-            ming = Actor.nearest( x, y, "ming" )
-            if ming is not None and ming.getActor().contains( x, y ) :
-            #if ming.getActor().pixelOverlap( x, y ) :
+            ming = game.findNearestRole( "ming",event.x ,event.y-20 ) #Nearest to their middle, not their feet.
+            if ming is not None and ming.getActor().hitting( event.x, event.y ) :
                 self.selectMing( ming )
             else :
                 self.selectMing( None )

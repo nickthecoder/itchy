@@ -46,10 +46,10 @@ class Player(AbstractRole) :
         # Move to the mouse, but don't let the player move too quickly
         mx = self.view.mouseX
         my = self.view.mouseY
-        if self.actor.distanceTo( mx, my ) < self.maxSpeed :
+        if self.actor.position.distance( mx, my ) < self.maxSpeed :
             self.actor.moveTo( mx, my )
         else :
-            self.actor.setHeading( self.actor.directionOf( mx, my ) )
+            self.actor.setHeading( self.actor.position.directionDegrees( mx, my ) )
             self.actor.moveForwards( self.maxSpeed )
 
         if not game.sceneDirector.playing :
