@@ -40,8 +40,8 @@ public class MacroRecord implements EventProcessor
 
     public void begin()
     {
-        this.oldEventProcessor = Itchy.eventProcessor;
-        Itchy.eventProcessor = this;
+        this.oldEventProcessor = Itchy.getGame().eventProcessor;
+        Itchy.getGame().eventProcessor = this;
         this.tick = 0;
     }
 
@@ -96,7 +96,7 @@ public class MacroRecord implements EventProcessor
                 // Do nothing
             }
 
-            Itchy.eventProcessor = oldEventProcessor;
+            Itchy.getGame().eventProcessor = oldEventProcessor;
         }
     }
 

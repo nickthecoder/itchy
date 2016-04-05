@@ -56,7 +56,7 @@ public class Server implements Runnable
         }
 
         System.out.println("Using RemoteSoundManager");
-        Itchy.soundManager = new RemoteSoundManager(this);
+        Itchy.getGame().soundManager = new RemoteSoundManager(this);
 
         System.out.println("Server starting game");
         resources.getGame().start();
@@ -68,7 +68,7 @@ public class Server implements Runnable
     {
         Itchy.getGame().setFrameRate( new SimpleFrameRate() );
 
-        Itchy.soundManager = new StandardSoundManager();
+        Itchy.getGame().soundManager = new StandardSoundManager();
 
         for (ClientConnection cc : this.clientConnections) {
             if (cc != null) {

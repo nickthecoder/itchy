@@ -446,7 +446,7 @@ public class ResourcesReader
         if (tagName == "compound") {
             return new CompoundAnimation(true);
         }
-        Animation animation = Itchy.registry.getAnimationByTagName(tagName);
+        Animation animation = Itchy.getGame().resources.registry.getAnimationByTagName(tagName);
         if (animation == null) {
             throw new XMLException("Unknown animation : " + tagName);
         }

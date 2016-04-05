@@ -24,6 +24,7 @@ import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.itchy.util.TagCollection;
+import uk.co.nickthecoder.jame.Events;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.Event;
@@ -201,6 +202,41 @@ public class Game
     private FrameRate frameRate = new SimpleFrameRate();
 
     /**
+     * How long a key is held down for (in milliseconds) before additional fake onKeyDown events are generated.
+     * <p>
+     * The default value is fine for most games.
+     */
+    private int keyboardRepeatDelay = Events.DEFAULT_REPEAT_DELAY;
+
+    /**
+     * The time (in milliseconds) between fake onKeyDown events when a key is held down.
+     * <p>
+     * The default value is fine for most games.
+     * 
+     */
+    private int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
+
+    /**
+     * SoundManager is a thin layer over Jame's sound system adding some extra features; the option to end sounds when
+     * its Actor is killed, as well as choosing what to do when a single sound is asked to play more than once
+     * simultaneously.
+     * <p>
+     * Most games can leave this alone.
+     * 
+     * @priority 4
+     */
+    public SoundManager soundManager;
+
+    /**
+     * Normally events are polled from Jame and then dispatched to Game, and its dependencies.
+     * However, this behaviour can be changed to allow events to be recorded and played back, or just simulated.
+     * Use to record macros for testing, and to show solutions to puzzle games. Also used to take events from a client
+     * machine and feed them to a server (although this feature isn't finished at time of writing this).
+     */
+    public EventProcessor eventProcessor = new NormalEventProcessor();
+
+
+    /**
      * Game constructor called when the resources are being loaded. Note that not much initialisation can take place
      * yet, as vital
      * information is missing. For example, the games width and height are unknown. The {@link #init()} method will be
@@ -225,6 +261,8 @@ public class Game
         // Sensible defaults, which can be replaced in the init() method.
         this.sceneDirector = new PlainSceneDirector();
         this.pause = new SimplePause();
+        this.soundManager = new StandardSoundManager();
+
     }
 
     /**
@@ -343,6 +381,14 @@ public class Game
     {
         this.mouse.onActivate();
         this.director.onActivate();
+        Events.keyboardRepeat(keyboardRepeatDelay, keyboardRepeatInterval);
+    }
+
+    public void setKeyboardRepeat(int repeatDelay, int repeatInterval)
+    {
+        this.keyboardRepeatDelay = repeatDelay;
+        this.keyboardRepeatInterval = repeatInterval;
+        Events.keyboardRepeat(keyboardRepeatDelay, keyboardRepeatInterval);
     }
 
     /**
@@ -352,6 +398,7 @@ public class Game
      */
     public void onDeactivate()
     {
+        this.soundManager.stopAll();
         this.director.onDeactivate();
     }
 
@@ -598,6 +645,20 @@ public class Game
     public List<GuiView> getGUIViews()
     {
         return this.windows;
+    }
+
+    /**
+     * Processes events (such as key strokes and mouse), called once per frame from {@link FrameRate}'s loop.
+     * 
+     * @priority 3
+     */
+    public void processEvents()
+    {
+        try {
+            eventProcessor.run();
+        } catch (Exception e) {
+            Itchy.handleException(e);
+        }
     }
 
     /**
@@ -982,27 +1043,33 @@ public class Game
      */
     public void tick()
     {
-        this.abortTicks = false;
-        this.director.tick();
-
-        if (this.abortTicks) {
-            return;
-        }
-
-        this.getSceneDirector().tick();
-
-        if (this.abortTicks) {
-            return;
-        }
-
-        for (Stage stage : this.getStages()) {
-            stage.tick();
+        try {
+            this.soundManager.tick();
+    
+            this.abortTicks = false;
+            this.director.tick();
+    
             if (this.abortTicks) {
                 return;
             }
+    
+            this.getSceneDirector().tick();
+    
+            if (this.abortTicks) {
+                return;
+            }
+    
+            for (Stage stage : this.getStages()) {
+                stage.tick();
+                if (this.abortTicks) {
+                    return;
+                }
+            }
+    
+            this.glassStage.tick();
+        } catch (Exception e) {
+            Itchy.handleException(e);
         }
-
-        this.glassStage.tick();
     }
 
     /**

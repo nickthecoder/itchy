@@ -98,6 +98,9 @@ public class Resources extends Loadable
     
     public ErrorLog errorLog;
 
+    /**
+     * Holds a set of know classes, such as Role, Director, SceneDirector etc.
+     */
     public final Registry registry = new Registry(Itchy.registry);
 
     /**

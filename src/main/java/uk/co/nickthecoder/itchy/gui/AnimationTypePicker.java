@@ -20,7 +20,7 @@ public abstract class AnimationTypePicker extends Window
         container.setYSpacing(10);
         GridLayout grid = new GridLayout(container, 5);
 
-        for (Animation animation : Itchy.registry.getAnimations()) {
+        for (Animation animation : Itchy.getGame().resources.registry.getAnimations()) {
 
             AbstractComponent component = this.createButton(animation);
 

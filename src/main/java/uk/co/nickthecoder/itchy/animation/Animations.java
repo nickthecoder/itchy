@@ -4,26 +4,26 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
-import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.Registry;
 
 public class Animations
 {
-    public static void registerAnimations()
+    public static void registerAnimations(Registry registry)
     {
-        Itchy.registry.add(new AlphaAnimation());
-        Itchy.registry.add(new ClipAnimation());
-        Itchy.registry.add(new ColorAnimation());
-        Itchy.registry.add(new CompoundAnimation(true));
-        Itchy.registry.add(new CompoundAnimation(false));
-        Itchy.registry.add(new DelayAnimation());
-        Itchy.registry.add(new ForwardsAnimation());
-        Itchy.registry.add(new FramedAnimation());
-        Itchy.registry.add(new HeadAnimation());
-        Itchy.registry.add(new MoveAnimation());
-        Itchy.registry.add(new TurnAnimation());
-        Itchy.registry.add(new TurnToAnimation());
-        Itchy.registry.add(new ScaleAnimation());
-        Itchy.registry.add(new BeanAnimation());
+        registry.add(new AlphaAnimation());
+        registry.add(new ClipAnimation());
+        registry.add(new ColorAnimation());
+        registry.add(new CompoundAnimation(true));
+        registry.add(new CompoundAnimation(false));
+        registry.add(new DelayAnimation());
+        registry.add(new ForwardsAnimation());
+        registry.add(new FramedAnimation());
+        registry.add(new HeadAnimation());
+        registry.add(new MoveAnimation());
+        registry.add(new TurnAnimation());
+        registry.add(new TurnToAnimation());
+        registry.add(new ScaleAnimation());
+        registry.add(new BeanAnimation());
     };
 
 }

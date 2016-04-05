@@ -59,7 +59,7 @@ public class EaseProperty<S> extends Property<S, Ease>
     @Override
     public Ease parse( String value )
     {
-        Ease ease = Itchy.registry.getEase(value);
+        Ease ease = Itchy.getGame().resources.registry.getEase(value);
         if (ease == null) {
             throw new RuntimeException("Named Ease not found : " + value);
         }

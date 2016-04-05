@@ -123,8 +123,8 @@ public class MacroPlayback implements EventProcessor
 
     public void begin()
     {
-        this.oldEventProcessor = Itchy.eventProcessor;
-        Itchy.eventProcessor = this;
+        this.oldEventProcessor = Itchy.getGame().eventProcessor;
+        Itchy.getGame().eventProcessor = this;
     }
 
     /**
@@ -171,7 +171,7 @@ public class MacroPlayback implements EventProcessor
                 // Do nothing
             }
         }
-        Itchy.eventProcessor = oldEventProcessor;
+        Itchy.getGame().eventProcessor = oldEventProcessor;
     }
 
     private class TickNumberedEvent

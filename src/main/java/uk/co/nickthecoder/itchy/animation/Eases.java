@@ -4,7 +4,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.animation;
 
-import uk.co.nickthecoder.itchy.Itchy;
+import uk.co.nickthecoder.itchy.Registry;
 
 public class Eases
 {
@@ -53,35 +53,35 @@ public class Eases
         .addEase(easeOutQuad, 0.05, 0.99)
         .addEase(easeInQuad, 0.05, 1);
 
-    public static void registerEases()
+    public static void registerEases( Registry registry )
     {
-        Itchy.registry.add("linear", linear);
-        Itchy.registry.add("default", defaultEase);
+        registry.add("linear", linear);
+        registry.add("default", defaultEase);
 
-        Itchy.registry.add("easeIn", easeIn);
-        Itchy.registry.add("easeInQuad", easeInQuad);
-        Itchy.registry.add("easeInCubic", easeInCubic);
-        Itchy.registry.add("easeInExpo", easeInExpo);
-        Itchy.registry.add("easeInCirc", easeInCirc);
-        Itchy.registry.add("easeInBack", easeInBack);
+        registry.add("easeIn", easeIn);
+        registry.add("easeInQuad", easeInQuad);
+        registry.add("easeInCubic", easeInCubic);
+        registry.add("easeInExpo", easeInExpo);
+        registry.add("easeInCirc", easeInCirc);
+        registry.add("easeInBack", easeInBack);
 
-        Itchy.registry.add("easeOut", easeOut);
-        Itchy.registry.add("easeOutQuad", easeOutQuad);
-        Itchy.registry.add("easeOutCubic", easeOutCubic);
-        Itchy.registry.add("easeOutExpo", easeOutExpo);
-        Itchy.registry.add("easeOutCirc", easeOutCirc);
-        Itchy.registry.add("easeOutBack", easeOutBack);
+        registry.add("easeOut", easeOut);
+        registry.add("easeOutQuad", easeOutQuad);
+        registry.add("easeOutCubic", easeOutCubic);
+        registry.add("easeOutExpo", easeOutExpo);
+        registry.add("easeOutCirc", easeOutCirc);
+        registry.add("easeOutBack", easeOutBack);
 
-        Itchy.registry.add("easeInOut", easeInOut);
-        Itchy.registry.add("easeInOutQuad", easeInOutQuad);
-        Itchy.registry.add("easeInOutCubic", easeInOutCubic);
-        Itchy.registry.add("easeInOutExpo", easeInOutExpo);
-        Itchy.registry.add("easeInOutCirc", easeInOutCirc);
-        Itchy.registry.add("easeInOutBack", easeInOutBack);
+        registry.add("easeInOut", easeInOut);
+        registry.add("easeInOutQuad", easeInOutQuad);
+        registry.add("easeInOutCubic", easeInOutCubic);
+        registry.add("easeInOutExpo", easeInOutExpo);
+        registry.add("easeInOutCirc", easeInOutCirc);
+        registry.add("easeInOutBack", easeInOutBack);
 
-        Itchy.registry.add("bounce", bounce);
-        Itchy.registry.add("bounce2", bounce2);
-        Itchy.registry.add("bounce3", bounce3);
+        registry.add("bounce", bounce);
+        registry.add("bounce2", bounce2);
+        registry.add("bounce3", bounce3);
 
     }
 }

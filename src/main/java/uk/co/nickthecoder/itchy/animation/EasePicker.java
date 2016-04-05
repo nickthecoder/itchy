@@ -75,7 +75,7 @@ public abstract class EasePicker extends Window
         container.setLayout(gridLayout);
         container.addStyle("pickGrid");
 
-        Map<String, Ease> map = Itchy.registry.getEases();
+        Map<String, Ease> map = Itchy.getGame().resources.registry.getEases();
         List<String> orderedNames = Resources.sortNames(map.keySet());
 
         for (String name : orderedNames) {

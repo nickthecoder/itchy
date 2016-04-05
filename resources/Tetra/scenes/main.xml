@@ -1,6 +1,6 @@
 <scene name="main" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
   <layer name="main">
-    <actor costume="background" x="320.0" y="241.0"/>
+    <actor costume="background" x="320.0" y="240.0"/>
     <text x="515.0" y="250.0" font="Boycott" fontSize="40.0" text="Level" makeup="uk.co.nickthecoder.itchy.makeup.Shadow">
       <makeup dx="4" dy="-4"/>
     </text>

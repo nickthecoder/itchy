@@ -12,10 +12,13 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import uk.co.nickthecoder.itchy.animation.Animation;
+import uk.co.nickthecoder.itchy.animation.Animations;
 import uk.co.nickthecoder.itchy.animation.Ease;
+import uk.co.nickthecoder.itchy.animation.Eases;
+import uk.co.nickthecoder.itchy.makeup.Makeup;
 import uk.co.nickthecoder.itchy.util.ClassName;
 
-public class Registry
+public final class Registry
 {
     private Registry parent;
 
@@ -34,9 +37,46 @@ public class Registry
     public Registry()
     {
         this(null);
+
+        this.add(new ClassName(Director.class, PlainDirector.class.getName()));
+
+        this.add(new ClassName(SceneDirector.class, PlainSceneDirector.class.getName()));
+
+        this.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.PlainRole.class));
+        this.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.LinkButton.class));
+        this.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.MessageButton.class));
+        this.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.NumberValue.class));
+        this.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.TextValue.class));
+        this.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.QuitButton.class));
+        this.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.ProgressBar.class));
+        this.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.SceneButton.class));
+        this.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.SliderRole.class));
+
+        this.add(new ClassName(CostumeFeatures.class, PlainCostumeFeatures.class));
+
+        this.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.NullMakeup.class));
+        this.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Shadow.class));
+        this.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Scale.class));
+        this.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Textured.class));
+        this.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.PictureFrame.class));
+        this.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.SimpleFrame.class));
+        this.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.ScaledBackground.class));
+
+        this.add(new ClassName(View.class, uk.co.nickthecoder.itchy.RGBAView.class));
+        this.add(new ClassName(View.class, uk.co.nickthecoder.itchy.StageView.class));
+        this.add(new ClassName(View.class, uk.co.nickthecoder.itchy.WrappedStageView.class));
+
+        this.add(new ClassName(Stage.class, uk.co.nickthecoder.itchy.ZOrderStage.class));
+
+        this.add(new ClassName(StageConstraint.class, uk.co.nickthecoder.itchy.NullStageConstraint.class));
+        this.add(new ClassName(StageConstraint.class, uk.co.nickthecoder.itchy.GridStageConstraint.class));
+
+        Eases.registerEases(this);
+
+        Animations.registerAnimations(this);
     }
 
-    public Registry( Registry parent )
+    public Registry(Registry parent)
     {
         this.parent = parent;
         this.classNames = new HashMap<Class<?>, Set<String>>();
@@ -45,13 +85,13 @@ public class Registry
         this.animationsByTagName = new HashMap<String, Animation>();
     }
 
-    public boolean contains( ClassName className )
+    public boolean contains(ClassName className)
     {
         Class<?> baseClass = className.getClass();
         return this.containsClassName(baseClass, className.name);
     }
 
-    private boolean containsClassName( Class<?> baseClass, String name )
+    private boolean containsClassName(Class<?> baseClass, String name)
     {
         Set<String> set = this.classNames.get(baseClass);
         if ((set != null) && set.contains(name)) {
@@ -61,7 +101,7 @@ public class Registry
         }
     }
 
-    public void add( ClassName className )
+    public final void add(ClassName className)
     {
         if (this.contains(className)) {
             return;
@@ -74,9 +114,8 @@ public class Registry
         set.add(className.name);
     }
 
-    public Set<String> getClassNames( Class<?> baseClass )
+    public Set<String> getClassNames(Class<?> baseClass)
     {
-
         Set<String> set = this.classNames.get(baseClass);
         if (set == null) {
             if (this.parent == null) {
@@ -116,25 +155,31 @@ public class Registry
         return getClassNames(Director.class);
     }
 
-    public void add( Animation animation )
+    public void add(Animation animation)
     {
         this.animationsByName.put(animation.getName(), animation);
         this.animationsByTagName.put(animation.getTagName(), animation);
     }
 
-    public Animation getAnimationByName( String name )
+    public Animation getAnimationByName(String name)
     {
         Animation result = this.animationsByName.get(name);
         if (result == null) {
+            if (parent != null) {
+                return parent.getAnimationByName(name);
+            }
             return null;
         }
         return result.copy();
     }
 
-    public Animation getAnimationByTagName( String name )
+    public Animation getAnimationByTagName(String name)
     {
         Animation result = this.animationsByTagName.get(name);
         if (result == null) {
+            if (parent != null) {
+                return parent.getAnimationByTagName(name);
+            }
             return null;
         }
         return result.copy();
@@ -152,41 +197,60 @@ public class Registry
 
     public Set<Animation> getAnimations()
     {
-        TreeSet<Animation> result = new TreeSet<Animation>( new Comparator<Animation>()
+        TreeSet<Animation> result = new TreeSet<Animation>(new Comparator<Animation>()
         {
             @Override
             public int compare(Animation o1, Animation o2)
             {
-                return o1.getName().compareTo( o2.getName() );
+                return o1.getName().compareTo(o2.getName());
             }
         });
         result.addAll(this.animationsByName.values());
+        if (parent != null) {
+            result.addAll(parent.getAnimations());
+        }
         return result;
     }
 
-    public void add( String name, Ease ease )
+    public void add(String name, Ease ease)
     {
         this.eases.put(name, ease);
     }
 
-    public Ease getEase( String name )
+    public Ease getEase(String name)
     {
-        return this.eases.get(name);
+        Ease result = this.eases.get(name);
+        if ((result == null) && (parent != null)) {
+            return parent.getEase(name);
+        }
+        return result;
     }
 
-    public String getEaseName( Ease ease )
+    public String getEaseName(Ease ease)
     {
         for (String name : this.eases.keySet()) {
             if (this.eases.get(name) == ease) {
                 return name;
             }
         }
+        if (this.parent != null) {
+            return parent.getEaseName(ease);
+        }
         return null;
     }
 
     public Map<String, Ease> getEases()
     {
-        return Collections.unmodifiableMap(this.eases);
+        Map<String, Ease> result = Collections.unmodifiableMap(this.eases);
+
+        if (this.parent == null) {
+            return result;
+        }
+
+        Map<String, Ease> combined = new HashMap<String, Ease>();
+        combined.putAll(result);
+        combined.putAll(parent.getEases());
+        return combined;
     }
 
 }

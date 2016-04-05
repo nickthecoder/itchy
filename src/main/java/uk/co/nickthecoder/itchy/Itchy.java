@@ -8,10 +8,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.Stack;
 
-import uk.co.nickthecoder.itchy.animation.Animations;
-import uk.co.nickthecoder.itchy.animation.Eases;
-import uk.co.nickthecoder.itchy.makeup.Makeup;
-import uk.co.nickthecoder.itchy.util.ClassName;
+import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.jame.Audio;
 import uk.co.nickthecoder.jame.Events;
 import uk.co.nickthecoder.jame.Surface;
@@ -19,8 +16,8 @@ import uk.co.nickthecoder.jame.Video;
 import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
-import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseButton;
+import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.ResizeEvent;
@@ -30,37 +27,6 @@ import uk.co.nickthecoder.jame.event.ResizeEvent;
  */
 public final class Itchy
 {
-    /**
-     * How long a key is held down for (in milliseconds) before additional fake onKeyDown events are generated.
-     */
-    public static int keyboardRepeatDelay = Events.DEFAULT_REPEAT_DELAY;
-
-    /**
-     * The time (in milliseconds) between fake onKeyDown events when a key is held down.
-     */
-    public static int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
-
-    /**
-     * SoundManager is a thin layer over Jame's sound system adding some extra features; the option to end sounds when
-     * its Actor is killed, as well as choosing what to do when a single sound is asked to play more than once
-     * simultaneously.
-     * 
-     * Most games can leave this alone.
-     */
-    public static SoundManager soundManager;
-
-    /**
-     * A registry of known classes/scripts (Roles, SceneDirectors, Directors) as well as Animations, Makeup and Eases.
-     */
-    public static final Registry registry = new Registry();
-
-    /**
-     * Normally events are polled from Jame and then dispatched to Game, and its dependencies.
-     * However, this behaviour can be changed to allow events to be recorded and played back, or just simulated.
-     * Use to record macros for testing, and to show solutions to puzzle games. Also used to take events from a client
-     * machine and feed them to a server (although this feature isn't finished at time of writing this).
-     */
-    public static EventProcessor eventProcessor = new NormalEventProcessor();
 
     /**
      * This is the highest SDL key sym which can be checked using isKeyDown(). The highest key sym is currently 321, and
@@ -123,44 +89,14 @@ public final class Itchy
      */
     private static long lastWindowResizeTime = 0;
 
-    static {
-        registry.add(new ClassName(Director.class, PlainDirector.class.getName()));
-
-        registry.add(new ClassName(SceneDirector.class, PlainSceneDirector.class.getName()));
-
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.PlainRole.class));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.LinkButton.class));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.MessageButton.class));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.NumberValue.class));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.TextValue.class));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.QuitButton.class));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.ProgressBar.class));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.SceneButton.class));
-        registry.add(new ClassName(Role.class, uk.co.nickthecoder.itchy.role.SliderRole.class));
-
-        registry.add(new ClassName(CostumeFeatures.class, PlainCostumeFeatures.class));
-
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.NullMakeup.class));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Shadow.class));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Scale.class));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.Textured.class));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.PictureFrame.class));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.SimpleFrame.class));
-        registry.add(new ClassName(Makeup.class, uk.co.nickthecoder.itchy.makeup.ScaledBackground.class));
-
-        registry.add(new ClassName(View.class, uk.co.nickthecoder.itchy.RGBAView.class));
-        registry.add(new ClassName(View.class, uk.co.nickthecoder.itchy.StageView.class));
-        registry.add(new ClassName(View.class, uk.co.nickthecoder.itchy.WrappedStageView.class));
-
-        registry.add(new ClassName(Stage.class, uk.co.nickthecoder.itchy.ZOrderStage.class));
-
-        registry.add(new ClassName(StageConstraint.class, uk.co.nickthecoder.itchy.NullStageConstraint.class));
-        registry.add(new ClassName(StageConstraint.class, uk.co.nickthecoder.itchy.GridStageConstraint.class));
-
-        Eases.registerEases();
-
-        Animations.registerAnimations();
-    }
+    /**
+     * A registry of standard classes/scripts (Roles, SceneDirectors, Directors) as well as Animations, Makeup and
+     * Eases.
+     * Used by the {@link Editor}
+     * 
+     * @priority 4
+     */
+    static final Registry registry = new Registry();
 
     /**
      * This is called automatically when the game's ".itchy" file is being loaded (because it gets the game's width and
@@ -186,7 +122,6 @@ public final class Itchy
 
         keyboardState = new boolean[KEYBOARD_STATE_SIZE];
         mouseState = new boolean[MOUSE_STATE_SIZE];
-        soundManager = new StandardSoundManager();
         setScreenMode(resources);
         initialised = true;
     }
@@ -303,7 +238,6 @@ public final class Itchy
         }
     }
 
-
     /**
      * Used internally by Icthy.
      * 
@@ -388,7 +322,6 @@ public final class Itchy
     public static void endGame()
     {
         currentGame.onDeactivate();
-        soundManager.stopAll();
 
         if (gameStack.isEmpty()) {
             terminate();
@@ -415,36 +348,6 @@ public final class Itchy
         System.out.println("Terminating itchy");
         getGame().getFrameRate().end();
         running = false;
-    }
-
-    /**
-     * Processes events (such as key strokes and mouse), called once per frame from {@link FrameRate}'s loop.
-     * 
-     * @priority 3
-     */
-    public static void processEvents()
-    {
-        try {
-            eventProcessor.run();
-        } catch (Exception e) {
-            handleException(e);
-        }
-    }
-
-    /**
-     * Called once per frame from {@link FrameRate}'s loop. Calls tick on the soundManager, and the current game. (This
-     * will in turn call the tick of the Director, the SceneDirector and all Actor's roles.
-     * 
-     * @priority 3
-     */
-    public static void tick()
-    {
-        try {
-            soundManager.tick();
-            currentGame.tick();
-        } catch (Exception e) {
-            handleException(e);
-        }
     }
 
     /**
@@ -481,20 +384,6 @@ public final class Itchy
     public static boolean isRunning()
     {
         return running;
-    }
-
-    /**
-     * Should holding down a key cause repeated events, or just a single one?
-     * 
-     * @priority 2
-     */
-    public static void enableKeyboardRepeat(boolean value)
-    {
-        if (value) {
-            Events.keyboardRepeat(keyboardRepeatDelay, keyboardRepeatInterval);
-        } else {
-            Events.keyboardRepeat(0, 0);
-        }
     }
 
     /**

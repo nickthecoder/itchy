@@ -83,7 +83,7 @@ public class Client
         Itchy.getGame().setFrameRate( new ClientFrameRate() );
         
         System.out.println("Using RemoteEventProcessor");
-        Itchy.eventProcessor = new RemoteEventProcessor(this);
+        Itchy.getGame().eventProcessor = new RemoteEventProcessor(this);
         
         System.out.println("Starting client game");
         resources.game.start();
@@ -224,7 +224,7 @@ public class Client
             } else {
 
                 System.out.println("Playing the sound " + ms.soundResource.getName());
-                Itchy.soundManager.play(actor, eventName, ms);
+                Itchy.getGame().soundManager.play(actor, eventName, ms);
 
             }
         }
@@ -232,12 +232,12 @@ public class Client
 
     private void stopSound(String eventName)
     {
-        Itchy.soundManager.end(actor, eventName);
+        Itchy.getGame().soundManager.end(actor, eventName);
     }
 
     private void stopSounds()
     {
-        Itchy.soundManager.stopAll();
+        Itchy.getGame().soundManager.stopAll();
     }
 
     private void renderText(int x, int y, String text, String fontName, RGBA color, int fontSize, int direction,

@@ -3,12 +3,6 @@ Current Tasks
 
 Javadoc & code review...
 
-Point to be interface, including lots of setter methods, 
-    Concrete classes UnmodifiablePoint and ModifiablePoint (which has an protected update method, which does nothing)
-    ActorPoint extends ModifiablePoint and uses the update to 
-OR, Point is a base class, with an empty update method, and ActorPoint extends it.
-   
-
 Game
     Does Editor need to be a subclass of Game?
         Can't Editor be a Director, which is more in keeping with the Itchy philosophy.
@@ -20,6 +14,7 @@ Itchy
 View
     getRelativeRect - is this used/needed?
     isVisible - is this used/needed?
+    Send mouseEvents with the correct x,y values, don't adjust the event structure.
     
 StageView
     Why does enableMouseListener take a Game parameter? Maybe ok.

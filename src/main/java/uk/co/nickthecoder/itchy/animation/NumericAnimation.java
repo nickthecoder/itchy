@@ -40,7 +40,7 @@ public abstract class NumericAnimation extends AbstractAnimation
 
     public String getEaseName()
     {
-        return Itchy.registry.getEaseName(this.ease);
+        return Itchy.getGame().resources.registry.getEaseName(this.ease);
     }
 
     @Override

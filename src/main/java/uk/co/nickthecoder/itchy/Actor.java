@@ -651,7 +651,7 @@ final public class Actor implements PropertySubject<Actor>
 
         ManagedSound cs = this.costume.getCostumeSound(eventName);
         if (cs != null) {
-            Itchy.soundManager.play(this, eventName, cs);
+            Itchy.getGame().soundManager.play(this, eventName, cs);
         }
     }
 
@@ -716,7 +716,7 @@ final public class Actor implements PropertySubject<Actor>
      */
     public void endEvent(String eventName)
     {
-        Itchy.soundManager.end(this, eventName);
+        Itchy.getGame().soundManager.end(this, eventName);
     }
 
     /**

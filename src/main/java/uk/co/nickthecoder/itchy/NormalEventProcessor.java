@@ -8,7 +8,7 @@ public class NormalEventProcessor implements EventProcessor
 {
     public void begin()
     {
-        Itchy.eventProcessor = this;
+        Itchy.getGame().eventProcessor = this;
     }
     
     /**

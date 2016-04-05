@@ -46,8 +46,6 @@ public class Launcher extends AbstractDirector
     {
         super.onStarted();
 
-        Itchy.enableKeyboardRepeat(true);
-
         try {
             this.game.setStylesheet(new Stylesheet(new File(Itchy.getBaseDirectory(), RULES)));
         } catch (Exception e) {

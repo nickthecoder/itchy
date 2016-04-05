@@ -31,7 +31,7 @@ public abstract class AbstractEase implements Ease
     @Override
     public String getName()
     {
-        return Itchy.registry.getEaseName(this);
+        return Itchy.getGame().resources.registry.getEaseName(this);
     }
 
     /**

@@ -170,7 +170,6 @@ public final class Editor extends Game implements KeyListener
     public void start()
     {
         Itchy.startGame(this);
-        Itchy.enableKeyboardRepeat(true);
 
         this.root = new RootContainer();
         this.root.setLayout(new VerticalLayout());
