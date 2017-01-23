@@ -4,10 +4,9 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy.gui;
 
-import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
+import uk.co.nickthecoder.jame.event.Symbol;
 
 public class IntegerBox extends EntryBox
 {
@@ -107,16 +106,16 @@ public class IntegerBox extends EntryBox
     @Override
     public void onKeyDown(KeyboardEvent ke)
     {
-        if (ke.symbol == Keys.UP) {
+        if (ke.symbol == Symbol.UP) {
             this.adjust(1);
             ke.stopPropagation();
-        } else if (ke.symbol == Keys.DOWN) {
+        } else if (ke.symbol == Symbol.DOWN) {
             this.adjust(-1);
             ke.stopPropagation();
-        } else if (ke.symbol == Keys.PAGEUP) {
+        } else if (ke.symbol == Symbol.PAGEUP) {
             this.adjust(10);
             ke.stopPropagation();
-        } else if (ke.symbol == Keys.PAGEDOWN) {
+        } else if (ke.symbol == Symbol.PAGEDOWN) {
             this.adjust(-10);
             ke.stopPropagation();
         }
@@ -127,6 +126,7 @@ public class IntegerBox extends EntryBox
     public void onMouseDown(MouseButtonEvent event)
     {
         if (this.hasFocus) {
+            /* TODO Use wheel event
             if (event.button == MouseButtonEvent.BUTTON_WHEEL_UP) {
                 this.adjust(Itchy.isKeyDown(Keys.LSHIFT) ||
                     Itchy.isKeyDown(Keys.RSHIFT) ? 10 : 1);
@@ -137,6 +137,7 @@ public class IntegerBox extends EntryBox
                     Itchy.isKeyDown(Keys.RSHIFT) ? -10 : -1);
                 event.stopPropagation();
             }
+            */
         }
 
         super.onMouseDown(event);

@@ -169,6 +169,8 @@ public interface Director extends InputListener, QuitListener, MessageListener, 
     @Override
     public void onMouseMove(MouseMotionEvent event);
 
+    public boolean isResizable();
+    
     /**
      * Called when the game's window is resized. Most games cannot be resized, and therefore this isn't used.
      * 

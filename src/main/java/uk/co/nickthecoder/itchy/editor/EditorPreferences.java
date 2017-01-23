@@ -6,10 +6,12 @@ package uk.co.nickthecoder.itchy.editor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.PropertySubject;
 import uk.co.nickthecoder.itchy.property.StringProperty;
+import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
 
 public class EditorPreferences implements PropertySubject<EditorPreferences>
 {
@@ -23,14 +25,18 @@ public class EditorPreferences implements PropertySubject<EditorPreferences>
 
     public EditorPreferences()
     {
-        Editor.instance.getPreferences().node("editorPreferences")
-            .load(this, this.getProperties());
+        Preferences p1 = Preferences.userNodeForPackage(Editor.class);
+        AutoFlushPreferences preferences = new AutoFlushPreferences(p1);
+        
+        preferences.node("editorPreferences").load(this, this.getProperties());
     }
 
     public void save()
     {
-        Editor.instance.getPreferences().node("editorPreferences")
-            .save(this, this.getProperties());
+        Preferences p1 = Preferences.userNodeForPackage(Editor.class);
+        AutoFlushPreferences preferences = new AutoFlushPreferences(p1);
+        
+        preferences.node("editorPreferences").save(this, this.getProperties());
     }
 
     @Override

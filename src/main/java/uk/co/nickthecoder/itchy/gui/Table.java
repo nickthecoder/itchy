@@ -10,7 +10,7 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.util.ReverseComparator;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
+import uk.co.nickthecoder.jame.event.Symbol;
 
 public class Table extends PlainContainer
 {
@@ -269,21 +269,21 @@ public class Table extends PlainContainer
     public void onKeyDown( KeyboardEvent ke )
     {
         if (this.currentRow != null) {
-            if (ke.symbol == Keys.UP) {
+            if (ke.symbol == Symbol.UP) {
                 if (this.currentRow.getRowIndex() > 0) {
                     this.selectRow((TableRow) this.rows.getChildren().get(
                         this.currentRow.getRowIndex() - 1));
                 }
                 ke.stopPropagation();
             }
-            if (ke.symbol == Keys.DOWN) {
+            if (ke.symbol == Symbol.DOWN) {
                 if (this.currentRow.getRowIndex() < this.rows.getChildren().size() - 1) {
                     this.selectRow((TableRow) this.rows.getChildren().get(
                         this.currentRow.getRowIndex() + 1));
                 }
                 ke.stopPropagation();
             }
-            if (ke.symbol == Keys.RETURN) {
+            if (ke.symbol == Symbol.RETURN) {
                 this.pickRow(this.currentRow);
                 ke.stopPropagation();
             }

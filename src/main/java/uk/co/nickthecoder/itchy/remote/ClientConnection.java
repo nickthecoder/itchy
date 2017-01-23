@@ -179,12 +179,14 @@ public class ClientConnection
     
     private void keyboard( char c, int modifiers, int scanCode, int state, int symbol )
     {
+        // TODO Can't create new KeyboardEvents
         KeyboardEvent ke = new KeyboardEvent();
-        ke.c = (char) c;
+        ke.symbolValue = (char) c;
+        
         ke.modifiers = modifiers;
-        ke.scanCode = scanCode;
-        ke.state = state;
-        ke.symbol = symbol;
+        ke.scanCodeValue = scanCode;
+        ke.pressed = true; // TODO change "state" to a boolean
+        ke.symbolValue = symbol;
         
         processEvent( ke );
     }
@@ -194,7 +196,7 @@ public class ClientConnection
         MouseButtonEvent mbe = new MouseButtonEvent();
         mbe.x = x;
         mbe.y = y;
-        mbe.state = state;
+        mbe.pressed = true; // TODO change state to a boolean
         mbe.button = button;
             
         processEvent(mbe);

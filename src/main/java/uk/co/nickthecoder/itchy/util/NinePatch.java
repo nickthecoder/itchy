@@ -193,7 +193,8 @@ public class NinePatch extends ImageRenderable implements NamedSubject<NinePatch
         int midY = (this.marginTop + result.getHeight() - this.marginBottom) / 2;
         int midX = (this.marginLeft + result.getWidth() - this.marginRight) / 2;
 
-        this.surface.setAlphaEnabled(false);
+        // TODO setAlphaEnabled 
+        //this.surface.setAlphaEnabled(false);
 
         if (this.middle == Middle.fill) {
             // flat fill the middle
@@ -304,7 +305,8 @@ public class NinePatch extends ImageRenderable implements NamedSubject<NinePatch
             this.marginBottom, this.marginRight, this.marginBottom);
         this.surface.blit(srcRect, result, destRect);
 
-        this.surface.setAlphaEnabled(true);
+        // TODO setAlphaEnabled
+        //this.surface.setAlphaEnabled(true);
 
     }
 

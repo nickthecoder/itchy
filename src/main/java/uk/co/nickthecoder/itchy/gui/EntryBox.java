@@ -18,8 +18,8 @@ import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.TrueTypeFont;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
+import uk.co.nickthecoder.jame.event.Symbol;
 
 public class EntryBox extends PlainContainer implements ContainerLayout, KeyListener
 {
@@ -167,19 +167,19 @@ public class EntryBox extends PlainContainer implements ContainerLayout, KeyList
     @Override
     public void onKeyDown(KeyboardEvent ke)
     {
-        if (ke.symbol == Keys.HOME) {
+        if (ke.symbol == Symbol.HOME) {
             this.caretIndex = 0;
             this.update();
             ke.stopPropagation();
         }
 
-        if (ke.symbol == Keys.END) {
+        if (ke.symbol == Symbol.END) {
             this.caretIndex = this.label.getText().length();
             this.update();
             ke.stopPropagation();
         }
 
-        if (ke.symbol == Keys.LEFT) {
+        if (ke.symbol == Symbol.LEFT) {
             if (this.caretIndex > 0) {
                 this.caretIndex--;
                 this.update();
@@ -187,7 +187,7 @@ public class EntryBox extends PlainContainer implements ContainerLayout, KeyList
             ke.stopPropagation();
         }
 
-        if (ke.symbol == Keys.RIGHT) {
+        if (ke.symbol == Symbol.RIGHT) {
             if (this.caretIndex < this.label.getText().length()) {
                 this.caretIndex++;
                 this.update();
@@ -197,7 +197,7 @@ public class EntryBox extends PlainContainer implements ContainerLayout, KeyList
 
         if (!readOnly) {
 
-            if (ke.symbol == Keys.BACKSPACE) {
+            if (ke.symbol == Symbol.BACKSPACE) {
                 if (this.caretIndex > 0) {
                     // setText will change the caretIndex if at the end - don't want to do it twice!
                     int pos = this.caretIndex;
@@ -208,7 +208,7 @@ public class EntryBox extends PlainContainer implements ContainerLayout, KeyList
                 ke.stopPropagation();
             }
 
-            if (ke.symbol == Keys.DELETE) {
+            if (ke.symbol == Symbol.DELETE) {
                 if (this.caretIndex < this.label.getText().length()) {
                     this.setEntryText(this.label.getText().substring(0, this.caretIndex) +
                         this.label.getText().substring(this.caretIndex + 1));
@@ -216,7 +216,7 @@ public class EntryBox extends PlainContainer implements ContainerLayout, KeyList
                 ke.stopPropagation();
             }
 
-            if ((ke.symbol == Keys.v) && (Itchy.isCtrlDown())) {
+            if ((ke.symbol == Symbol.v) && (Itchy.isCtrlDown())) {
 
                 try {
                     Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -232,8 +232,9 @@ public class EntryBox extends PlainContainer implements ContainerLayout, KeyList
                 ke.stopPropagation();
             }
 
-            if ((ke.c >= 32)) {
-                insert(ke.c);
+            /* TODO Change to using TextInputEvent */
+            if ((ke.symbolValue >= 32)) {
+                insert((char) ke.symbolValue);
                 ke.stopPropagation();
             }
 

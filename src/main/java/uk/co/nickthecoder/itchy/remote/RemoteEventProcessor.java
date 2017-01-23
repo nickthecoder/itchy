@@ -39,7 +39,8 @@ public class RemoteEventProcessor implements EventProcessor
             if (event instanceof KeyboardEvent) {
                 System.out.println( "Sending key event ");
                 KeyboardEvent ke = (KeyboardEvent) event;
-                client.send("keyboard", ke.c, ke.modifiers, ke.scanCode, ke.state, ke.symbol);
+                // TODO Sending symbol twice
+                client.send("keyboard", ke.symbolValue, ke.modifiers, ke.scanCodeValue, ke.pressed, ke.symbolValue);
                 
             } else if (event instanceof MouseMotionEvent) {
                 MouseMotionEvent mme = (MouseMotionEvent) event;
@@ -48,7 +49,7 @@ public class RemoteEventProcessor implements EventProcessor
             } else if (event instanceof MouseButtonEvent) {
                 System.out.println( "Sending mouse button event ");
                 MouseButtonEvent mbe = (MouseButtonEvent) event;
-                client.send("mouseButton", mbe.x, mbe.y, mbe.state, mbe.button );
+                client.send("mouseButton", mbe.x, mbe.y, mbe.pressed, mbe.button );
 
             } else if (event instanceof QuitEvent) {
                 client.stopClient();

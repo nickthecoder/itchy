@@ -8,12 +8,13 @@ import uk.co.nickthecoder.itchy.AbstractInput;
 import uk.co.nickthecoder.itchy.InputInterface;
 import uk.co.nickthecoder.itchy.KeyInput;
 import uk.co.nickthecoder.itchy.MouseInput;
-import uk.co.nickthecoder.jame.event.Key;
+import uk.co.nickthecoder.jame.event.ScanCode;
 import uk.co.nickthecoder.jame.event.MouseButton;
 
 public abstract class InputPicker extends Window
 {
-    public Key key;
+    // TODO Should we use scancodes or symbols (or both)
+    public ScanCode key;
 
     public MouseButton mouseButton;
 
@@ -53,7 +54,6 @@ public abstract class InputPicker extends Window
                 input.ctrlModifier = InputPicker.this.ctrl.getValue();
                 input.shiftModifier = InputPicker.this.shift.getValue();
                 input.altModifier = InputPicker.this.alt.getValue();
-                input.metaModifier = InputPicker.this.meta.getValue();
 
                 InputPicker.this.pick(input);
             }
@@ -79,160 +79,160 @@ public abstract class InputPicker extends Window
 
     }
 
-    Key[][] main = new Key[][]
+    ScanCode[][] main = new ScanCode[][]
     {
         {
-            Key.ESCAPE,
-            Key.F1,
-            Key.F2,
-            Key.F3,
-            Key.F4,
-            Key.F5,
-            Key.F6,
-            Key.F7,
-            Key.F8,
-            Key.F9,
-            Key.F10,
-            Key.F11,
-            Key.F12,
+            ScanCode.ESCAPE,
+            ScanCode.F1,
+            ScanCode.F2,
+            ScanCode.F3,
+            ScanCode.F4,
+            ScanCode.F5,
+            ScanCode.F6,
+            ScanCode.F7,
+            ScanCode.F8,
+            ScanCode.F9,
+            ScanCode.F10,
+            ScanCode.F11,
+            ScanCode.F12,
     },
         {
-            Key.BACKQUOTE,
-            Key.KEY_1,
-            Key.KEY_2,
-            Key.KEY_3,
-            Key.KEY_4,
-            Key.KEY_5,
-            Key.KEY_6,
-            Key.KEY_7,
-            Key.KEY_8,
-            Key.KEY_9,
-            Key.KEY_0,
-            Key.MINUS,
-            Key.EQUALS,
-            Key.BACKSPACE
+            // TODO ADD back quote to input picker. ScanCode.BACKQUOTE,
+            ScanCode.KEY_1,
+            ScanCode.KEY_2,
+            ScanCode.KEY_3,
+            ScanCode.KEY_4,
+            ScanCode.KEY_5,
+            ScanCode.KEY_6,
+            ScanCode.KEY_7,
+            ScanCode.KEY_8,
+            ScanCode.KEY_9,
+            ScanCode.KEY_0,
+            ScanCode.MINUS,
+            ScanCode.EQUALS,
+            ScanCode.BACKSPACE
     },
         {
-            Key.TAB,
-            Key.q,
-            Key.w,
-            Key.e,
-            Key.r,
-            Key.t,
-            Key.y,
-            Key.u,
-            Key.i,
-            Key.o,
-            Key.p,
-            Key.LEFTBRACKET,
-            Key.RIGHTBRACKET,
-            Key.RETURN
+            ScanCode.TAB,
+            ScanCode.Q,
+            ScanCode.W,
+            ScanCode.E,
+            ScanCode.R,
+            ScanCode.T,
+            ScanCode.Y,
+            ScanCode.U,
+            ScanCode.I,
+            ScanCode.O,
+            ScanCode.P,
+            ScanCode.LEFTBRACKET,
+            ScanCode.RIGHTBRACKET,
+            ScanCode.RETURN
     },
         {
-            Key.CAPSLOCK,
-            Key.a,
-            Key.s,
-            Key.d,
-            Key.f,
-            Key.g,
-            Key.h,
-            Key.j,
-            Key.k,
-            Key.l,
-            Key.SEMICOLON,
-            Key.QUOTE,
-            Key.HASH
+            ScanCode.CAPSLOCK,
+            ScanCode.A,
+            ScanCode.S,
+            ScanCode.D,
+            ScanCode.F,
+            ScanCode.G,
+            ScanCode.H,
+            ScanCode.J,
+            ScanCode.K,
+            ScanCode.L,
+            ScanCode.SEMICOLON // TODO Add quote and hash keys to input picker,
+            //ScanCode.QUOTE,
+            //ScanCode.HASH
     },
         {
-            Key.LSHIFT,
-            Key.BACKSLASH,
-            Key.z,
-            Key.x,
-            Key.c,
-            Key.v,
-            Key.b,
-            Key.n,
-            Key.m,
-            Key.COMMA,
-            Key.PERIOD,
-            Key.SLASH,
-            Key.RSHIFT
+            ScanCode.LSHIFT,
+            ScanCode.BACKSLASH,
+            ScanCode.Z,
+            ScanCode.X,
+            ScanCode.C,
+            ScanCode.V,
+            ScanCode.B,
+            ScanCode.N,
+            ScanCode.M,
+            ScanCode.COMMA,
+            ScanCode.PERIOD,
+            ScanCode.SLASH,
+            ScanCode.RSHIFT
     },
         {
-            Key.LCTRL,
-            Key.LSUPER,
-            Key.LALT,
-            Key.SPACE,
-            Key.RALT,
-            Key.RSUPER,
-            Key.RCTRL,
+            ScanCode.LCTRL,
+            // TODO Add to input picker : ScanCode.LSUPER,
+            ScanCode.LALT,
+            ScanCode.SPACE,
+            ScanCode.RALT,
+            // TODO Add to input picker : ScanCode.RSUPER,
+            ScanCode.RCTRL,
     }
     };
 
-    Key[][] middle = new Key[][]
+    ScanCode[][] middle = new ScanCode[][]
     {
         {
-            Key.PRINT,
-            Key.SCROLLOCK,
-            Key.PAUSE
+            ScanCode.PRINTSCREEN,
+            ScanCode.SCROLLLOCK,
+            ScanCode.PAUSE
     },
         {
         },
         {
-            Key.INSERT,
-            Key.HOME,
-            Key.PAGEUP,
+            ScanCode.INSERT,
+            ScanCode.HOME,
+            ScanCode.PAGEUP,
         },
         {
-            Key.DELETE,
-            Key.END,
-            Key.PAGEDOWN
+            ScanCode.DELETE,
+            ScanCode.END,
+            ScanCode.PAGEDOWN
         },
         {
         },
         {
-            Key.UP,
+            ScanCode.UP,
         },
         {
-            Key.LEFT,
-            Key.DOWN,
-            Key.RIGHT
+            ScanCode.LEFT,
+            ScanCode.DOWN,
+            ScanCode.RIGHT
         }
     };
 
-    Key[][] keypad = new Key[][] {
+    ScanCode[][] keypad = new ScanCode[][] {
         {
         },
         {
-            Key.NUMLOCK,
-            Key.KP_DIVIDE,
-            Key.KP_MULTIPLY,
+            ScanCode.NUMLOCK,
+            ScanCode.KP_DIVIDE,
+            ScanCode.KP_MULTIPLY,
         },
         {
-            Key.KP7,
-            Key.KP8,
-            Key.KP9,
-            Key.KP_MINUS
+            ScanCode.KP_7,
+            ScanCode.KP_8,
+            ScanCode.KP_9,
+            ScanCode.KP_MINUS
         },
         {
-            Key.KP4,
-            Key.KP5,
-            Key.KP6,
-            Key.KP_PLUS
+            ScanCode.KP_4,
+            ScanCode.KP_5,
+            ScanCode.KP_6,
+            ScanCode.KP_PLUS
         },
         {
-            Key.KP3,
-            Key.KP2,
-            Key.KP1
+            ScanCode.KP_3,
+            ScanCode.KP_2,
+            ScanCode.KP_1
         },
         {
-            Key.KP0,
-            Key.KP_PERIOD,
-            Key.KP_ENTER
+            ScanCode.KP_0,
+            ScanCode.KP_PERIOD,
+            ScanCode.KP_ENTER
         }
     };
 
-    Key[][][] keyboard = new Key[][][] {
+    ScanCode[][][] keyboard = new ScanCode[][][] {
         this.main, this.middle, this.keypad
     };
 
@@ -249,12 +249,12 @@ public abstract class InputPicker extends Window
 
         ButtonGroup buttonGroup = new ButtonGroup();
 
-        for (Key[][] s : this.keyboard) {
+        for (ScanCode[][] s : this.keyboard) {
             PlainContainer section = new PlainContainer();
             section.setLayout(new VerticalLayout());
             keyboardContainer.addChild(section);
 
-            for (Key[] r : s) {
+            for (ScanCode[] r : s) {
                 PlainContainer row = new PlainContainer();
                 if (r.length == 0) {
                     row.setMinimumHeight(20); // Arbitrary spacing
@@ -262,7 +262,7 @@ public abstract class InputPicker extends Window
                     row.addStyle("combo");
                     row.setLayout(new HorizontalLayout());
 
-                    for (Key key : r) {
+                    for (ScanCode key : r) {
                         AbstractComponent button = createKeyButton(buttonGroup, key);
                         row.addChild(button);
                     }
@@ -324,7 +324,7 @@ public abstract class InputPicker extends Window
     public CheckBox alt;
     public CheckBox meta;
 
-    protected AbstractComponent createKeyButton(ButtonGroup buttonGroup, final Key key)
+    protected AbstractComponent createKeyButton(ButtonGroup buttonGroup, final ScanCode key)
     {
         ToggleButton button = new ToggleButton(key.label);
         buttonGroup.add(button);

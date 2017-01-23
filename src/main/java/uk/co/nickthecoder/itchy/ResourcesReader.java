@@ -165,8 +165,6 @@ public class ResourcesReader
         this.resources.registry.add(gameInfo.directorClassName);
 
         this.resources.game.setDirector(gameInfo.createDirector(this.resources));
-
-        Itchy.init(this.resources);
     }
 
     private void readNinePatches(XMLTag eightPatchesTag) throws Exception

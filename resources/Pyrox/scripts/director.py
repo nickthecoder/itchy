@@ -72,7 +72,7 @@ class Director(AbstractDirector) :
         print "starting scene", sceneName
     
         # If we were playing a macro, or recording a macro, then stop.
-        Itchy.eventProcessor.end()
+        # TODO Itchy.eventProcessor.end()
 
         if self.macroRecord :
             MacroRecord( self.macroFile(sceneName) ).begin()

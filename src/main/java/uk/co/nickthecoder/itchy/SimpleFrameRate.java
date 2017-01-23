@@ -5,7 +5,8 @@
 package uk.co.nickthecoder.itchy;
 
 /**
- * Keeps the frame rate at a constant value, so that each Actor's tick is for a known, and consistent time interval. The default frame rate
+ * Keeps the frame rate at a constant value, so that each Actor's tick is for a known, and consistent time interval. The
+ * default frame rate
  * is 60fps, but this can be changed by the game designer by :
  * 
  * <pre>
@@ -25,7 +26,7 @@ public class SimpleFrameRate implements FrameRate
     private int requiredPeriodNanos;
 
     public boolean isRunning;
-    
+
     /**
      * The maximum number of consecutive frames to skip redrawing when the frame rate is too low.
      */
@@ -39,7 +40,8 @@ public class SimpleFrameRate implements FrameRate
     private int sequentialDroppedFrames = 0;
 
     /**
-     * The amount of time away from the perfect frame rate. A negative number means we are ahead of schedule. A positive number means we are
+     * The amount of time away from the perfect frame rate. A negative number means we are ahead of schedule. A positive
+     * number means we are
      * lagging, the time taken was more than the required period.
      */
     private int errorNanos;
@@ -54,7 +56,7 @@ public class SimpleFrameRate implements FrameRate
         this(60);
     }
 
-    public SimpleFrameRate( int framesPerSecond )
+    public SimpleFrameRate(int framesPerSecond)
     {
         this.requiredRate = framesPerSecond;
         this.requiredPeriodNanos = NANOS_TO_SECONDS / this.requiredRate;
@@ -62,16 +64,16 @@ public class SimpleFrameRate implements FrameRate
     }
 
     @Override
-	public void reset()
+    public void reset()
     {
         this.errorNanos = 0;
         this.droppedFrames = 0;
         this.sequentialDroppedFrames = 0;
     }
 
-	@Override
-	public double getFrameRate()
-	{
+    @Override
+    public double getFrameRate()
+    {
         return this.requiredRate;
     }
 
@@ -79,20 +81,18 @@ public class SimpleFrameRate implements FrameRate
      * @return The total number of dropped frames.
      */
     @Override
-	public int getDroppedFrames()
+    public int getDroppedFrames()
     {
         return this.droppedFrames;
     }
 
     @Override
-	public void loop()
+    public void loop()
     {
-    	isRunning = true;
+        isRunning = true;
         this.previousNanoTime = System.nanoTime();
 
         while (isRunning) {
-
-            doGameLogic();
 
             // Should we redraw the screen?
             if (this.errorNanos > this.requiredPeriodNanos) {
@@ -114,15 +114,17 @@ public class SimpleFrameRate implements FrameRate
             }
 
             completeFrame();
+
+            doGameLogic();
         }
     }
 
     @Override
-	public void end()
+    public void end()
     {
-    	isRunning = false;
+        isRunning = false;
     }
-    
+
     private void completeFrame()
     {
         // The time the frame actually took, including in the error from previous frame(s).
@@ -155,10 +157,9 @@ public class SimpleFrameRate implements FrameRate
         this.previousNanoTime = System.nanoTime();
     }
 
-
     public void doGameLogic()
     {
-    	Itchy.getGame().processEvents();
+        Itchy.getGame().processEvents();
         Itchy.getGame().tick();
     }
 

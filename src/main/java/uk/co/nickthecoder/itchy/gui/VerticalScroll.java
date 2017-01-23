@@ -7,7 +7,7 @@ package uk.co.nickthecoder.itchy.gui;
 import uk.co.nickthecoder.itchy.GraphicsContext;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
+import uk.co.nickthecoder.jame.event.Symbol;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 
@@ -46,11 +46,11 @@ public class VerticalScroll extends PlainContainer implements ContainerLayout
     @Override
     public void onKeyDown( KeyboardEvent e )
     {
-        if (e.symbol == Keys.PAGEUP) {
+        if (e.symbol == Symbol.PAGEUP) {
             this.scrollBy((int) (-this.getHeight() * 0.9));
             e.stopPropagation();
         }
-        if (e.symbol == Keys.PAGEDOWN) {
+        if (e.symbol == Symbol.PAGEDOWN) {
             this.scrollBy((int) (this.getHeight() * 0.9));
             e.stopPropagation();
         }
@@ -63,6 +63,7 @@ public class VerticalScroll extends PlainContainer implements ContainerLayout
     {
         super.onMouseDown(event);
 
+        /* TODO Wheel event
         if (event.button == MouseButtonEvent.BUTTON_WHEEL_UP) {
             this.scrollBy(-50);
             event.stopPropagation();
@@ -70,7 +71,7 @@ public class VerticalScroll extends PlainContainer implements ContainerLayout
             this.scrollBy(50);
             event.stopPropagation();
         }
-
+        */
     }
 
     /**

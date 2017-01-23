@@ -96,14 +96,14 @@
     <scene name="menu"/>
   </scenes>
   <inputs>
-    <input name="about" keys="a"/>
+    <input name="about" keys="A"/>
     <input name="debug" keys="F1"/>
     <input name="drop" keys="DOWN,PERIOD"/>
     <input name="editor" keys="F12"/>
     <input name="exit" keys="ESCAPE"/>
-    <input name="left" keys="LEFT,z"/>
-    <input name="play" keys="p,RETURN,KP_ENTER"/>
-    <input name="right" keys="RIGHT,x"/>
+    <input name="left" keys="LEFT,Z"/>
+    <input name="play" keys="P,RETURN,KP_ENTER"/>
+    <input name="right" keys="RIGHT,X"/>
     <input name="rotate" keys="UP,SEMICOLON"/>
   </inputs>
   <layouts>

@@ -131,14 +131,7 @@ public class Launcher extends AbstractDirector
     private static void startClient( String serverAndPort )
         throws Exception
     {
-        // We need to initialise Itchy, so create a dummy resources, so that Itchy can use default width and height
-        // to initialise the video. The Window will be resized to the correct size later.
-        Resources resources = new Resources();
-        GameInfo gameInfo = new GameInfo();
-        gameInfo.width = 640;
-        gameInfo.height = 480;
-        resources.setGameInfo(gameInfo);
-        Itchy.init(resources);
+        Itchy.init();
         
         String[] parts = serverAndPort.split(":");
         Client client = new Client();
@@ -147,6 +140,8 @@ public class Launcher extends AbstractDirector
     
     public static void main(String argv[]) throws Exception
     {
+        Itchy.init();
+        
         boolean editor = false;
         String sceneName = null;
         String gameName = null;

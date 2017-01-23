@@ -139,6 +139,17 @@ public class AbstractDirector implements Director
         // Does nothing
     }
 
+
+    /**
+     * 
+     * @return
+     * @priority 3
+     */
+    public boolean isResizable()
+    {
+        return this.game.resources.getGameInfo().resizable;
+    }
+
     @Override
 	public void onResize( ResizeEvent event )
     {

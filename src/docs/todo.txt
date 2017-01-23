@@ -8,9 +8,6 @@ Game
         Can't Editor be a Director, which is more in keeping with the Itchy philosophy.
         Game could then be a final class.
 
-Itchy
-    Numerous things, if changed, can affect other games. Shouldn't they be on Game instead? e.g. keyboard repeat
-
 View
     getRelativeRect - is this used/needed?
     isVisible - is this used/needed?

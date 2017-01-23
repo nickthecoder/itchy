@@ -5,25 +5,25 @@
 package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Key;
+import uk.co.nickthecoder.jame.event.ScanCode;
 
 public class KeyInput extends AbstractInput
 {
-
-    public Key key;
+    // TODO Should we have a choice of scancode OR symbol?
+    public ScanCode key;
 
     public KeyInput()
     {
     }
 
-    public KeyInput(Key key)
+    public KeyInput(ScanCode key)
     {
         this.key = key;
     }
 
     public boolean matches(KeyboardEvent ke)
     {
-        if (ke.isPressed() && (ke.symbol == this.key.value)) {
+        if (ke.pressed && (ke.scanCode == this.key)) {
             return super.matches(ke);
         }
         return false;

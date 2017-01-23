@@ -186,16 +186,16 @@
   </scenes>
   <inputs>
     <input name="down" keys="DOWN,PERIOD"/>
-    <input name="left" keys="LEFT,z"/>
-    <input name="play" keys="RETURN,KP_ENTER,p"/>
+    <input name="left" keys="LEFT,Z"/>
+    <input name="play" keys="RETURN,KP_ENTER,P"/>
     <input name="quit" keys="ESCAPE"/>
     <input name="restart" keys="F5"/>
-    <input name="right" keys="RIGHT,x"/>
-    <input name="scrollDown" keys="PAGEDOWN,KP2,ctrl+DOWN"/>
-    <input name="scrollLeft" keys="HOME,KP4,ctrl+LEFT"/>
-    <input name="scrollReset" keys="o,KP5,ctrl+RETURN"/>
-    <input name="scrollRight" keys="END,KP6,ctrl+RIGHT"/>
-    <input name="scrollUp" keys="PAGEUP,KP8,ctrl+UP"/>
+    <input name="right" keys="RIGHT,X"/>
+    <input name="scrollDown" keys="PAGEDOWN,KP_2,ctrl+DOWN"/>
+    <input name="scrollLeft" keys="HOME,KP_4,ctrl+LEFT"/>
+    <input name="scrollReset" keys="O,KP_5,ctrl+RETURN"/>
+    <input name="scrollRight" keys="END,KP_6,ctrl+RIGHT"/>
+    <input name="scrollUp" keys="PAGEUP,KP_8,ctrl+UP"/>
     <input name="start" keys="KEY_1,RETURN"/>
     <input name="up" keys="UP,SEMICOLON"/>
   </inputs>

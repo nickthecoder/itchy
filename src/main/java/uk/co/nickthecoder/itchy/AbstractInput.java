@@ -1,14 +1,14 @@
 package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.ModifierKey;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
+import uk.co.nickthecoder.jame.util.ModifierKeyFilter;
 
+/* TODO Use new filters */
 public class AbstractInput implements InputInterface
 {
     public boolean ctrlModifier;
     public boolean shiftModifier;
-    public boolean metaModifier;
     public boolean altModifier;
 
     
@@ -33,9 +33,6 @@ public class AbstractInput implements InputInterface
         if (this.ctrlModifier) {
             buffer.append("ctrl+");
         }
-        if (this.metaModifier) {
-            buffer.append("meta+");
-        }
         if (this.altModifier) {
             buffer.append("alt+");
         }
@@ -45,16 +42,13 @@ public class AbstractInput implements InputInterface
 
     public boolean matches(KeyboardEvent ke)
     {
-        if (this.ctrlModifier != (ke.modifier(ModifierKey.LCTRL) || ke.modifier(ModifierKey.RCTRL))) {
+        if (this.ctrlModifier != ModifierKeyFilter.CTRL.accept(ke)) {
             return false;
         }
-        if (this.shiftModifier != (ke.modifier(ModifierKey.LSHIFT) || ke.modifier(ModifierKey.RSHIFT))) {
+        if (this.shiftModifier != ModifierKeyFilter.SHIFT.accept(ke)) {
             return false;
         }
-        if (this.metaModifier != (ke.modifier(ModifierKey.LMETA) || ke.modifier(ModifierKey.RMETA))) {
-            return false;
-        }
-        if (this.altModifier != (ke.modifier(ModifierKey.LALT) || ke.modifier(ModifierKey.RALT))) {
+        if (this.altModifier != ModifierKeyFilter.ALT.accept(ke)) {
             return false;
         }
         return true;
@@ -79,9 +73,6 @@ public class AbstractInput implements InputInterface
             return false;
         }
         if (this.altModifier && !Itchy.isAltDown()) {
-            return false;
-        }
-        if (this.metaModifier && !Itchy.isMetaDown()) {
             return false;
         }
 

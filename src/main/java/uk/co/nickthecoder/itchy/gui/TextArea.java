@@ -18,9 +18,9 @@ import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.TrueTypeFont;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
+import uk.co.nickthecoder.jame.event.Symbol;
 
 public class TextArea extends PlainContainer implements ContainerLayout, KeyListener, TextWidget
 {
@@ -240,19 +240,19 @@ public class TextArea extends PlainContainer implements ContainerLayout, KeyList
     {
         Label label = getCurrentLabel();
 
-        if (ke.symbol == Keys.HOME) {
+        if (ke.symbol == Symbol.HOME) {
             caretIndex = 0;
             this.update();
             ke.stopPropagation();
         }
 
-        if (ke.symbol == Keys.END) {
+        if (ke.symbol == Symbol.END) {
             caretIndex = label.getText().length();
             this.update();
             ke.stopPropagation();
         }
 
-        if (ke.symbol == Keys.LEFT) {
+        if (ke.symbol == Symbol.LEFT) {
             if (caretIndex > 0) {
                 caretIndex--;
                 this.update();
@@ -260,7 +260,7 @@ public class TextArea extends PlainContainer implements ContainerLayout, KeyList
             ke.stopPropagation();
         }
 
-        if (ke.symbol == Keys.UP) {
+        if (ke.symbol == Symbol.UP) {
             if (currentLine > 0) {
                 currentLine--;
                 this.update();
@@ -268,7 +268,7 @@ public class TextArea extends PlainContainer implements ContainerLayout, KeyList
             ke.stopPropagation();
         }
 
-        if (ke.symbol == Keys.DOWN) {
+        if (ke.symbol == Symbol.DOWN) {
             if (currentLine < labels.size() - 1) {
                 currentLine++;
                 this.update();
@@ -276,7 +276,7 @@ public class TextArea extends PlainContainer implements ContainerLayout, KeyList
             ke.stopPropagation();
         }
 
-        if (ke.symbol == Keys.RIGHT) {
+        if (ke.symbol == Symbol.RIGHT) {
             if (caretIndex < label.getText().length()) {
                 caretIndex++;
                 this.update();
@@ -284,13 +284,13 @@ public class TextArea extends PlainContainer implements ContainerLayout, KeyList
             ke.stopPropagation();
         }
 
-        if (ke.symbol == Keys.RETURN) {
+        if (ke.symbol == Symbol.RETURN) {
             addReturn();
             this.update();
             ke.stopPropagation();
         }
 
-        if (ke.symbol == Keys.BACKSPACE) {
+        if (ke.symbol == Symbol.BACKSPACE) {
             if (caretIndex > 0) {
                 int pos = caretIndex;
                 label.setText(label.getText().substring(0, pos - 1) + label.getText().substring(pos));
@@ -305,7 +305,7 @@ public class TextArea extends PlainContainer implements ContainerLayout, KeyList
             ke.stopPropagation();
         }
 
-        if (ke.symbol == Keys.DELETE) {
+        if (ke.symbol == Symbol.DELETE) {
             if (caretIndex < label.getText().length()) {
                 label.setText(label.getText().substring(0, caretIndex) + label.getText().substring(caretIndex + 1));
                 this.update();
@@ -319,7 +319,7 @@ public class TextArea extends PlainContainer implements ContainerLayout, KeyList
             ke.stopPropagation();
         }
 
-        if ((ke.symbol == Keys.v) && (Itchy.isCtrlDown())) {
+        if ((ke.symbol == Symbol.v) && (Itchy.isCtrlDown())) {
 
             try {
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -337,8 +337,9 @@ public class TextArea extends PlainContainer implements ContainerLayout, KeyList
             ke.stopPropagation();
         }
 
-        if ((ke.c >= 32)) {
-            label.setText(label.getText().substring(0, caretIndex) + ke.c + label.getText().substring(caretIndex));
+        if ((ke.symbolValue >= 32)) {
+            // TODO Replace with TextInput events
+            label.setText(label.getText().substring(0, caretIndex) + ((char) ke.symbolValue) + label.getText().substring(caretIndex));
             caretIndex++;
             ke.stopPropagation();
         }

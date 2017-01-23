@@ -7,10 +7,10 @@ package uk.co.nickthecoder.itchy.gui;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
-import uk.co.nickthecoder.jame.event.ModifierKey;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
+import uk.co.nickthecoder.jame.event.Symbol;
+import uk.co.nickthecoder.jame.util.ModifierKeyFilter;
 
 public class RootContainer extends PlainContainer
 {
@@ -191,9 +191,9 @@ public class RootContainer extends PlainContainer
 
     public void keyDown( KeyboardEvent event )
     {
-        if (event.symbol == Keys.TAB) {
+        if (event.symbol == Symbol.TAB) {
 
-            if (event.modifier(ModifierKey.SHIFT)) {
+            if (ModifierKeyFilter.SHIFT.accept(event)) {
 
                 if (RootContainer.focus == null) {
                     this.previousFocus(null, this);
@@ -287,12 +287,6 @@ public class RootContainer extends PlainContainer
         int height = this.getRequiredHeight();
         Rect position = this.view.getPosition();
         setPosition((position.width - width) / 2, (position.height - height) / 2, width, height);
-    }
-    
-    public void resizeView()
-    {
-    	Rect viewRect = this.view.getPosition();
-    	this.view.setPosition( new Rect( viewRect.x, viewRect.y, this.getWidth(), this.getHeight() ) );
     }
 
     public void captureMouse( AbstractComponent component )

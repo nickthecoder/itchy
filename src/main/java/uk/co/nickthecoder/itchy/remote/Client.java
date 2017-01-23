@@ -26,7 +26,6 @@ import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.TextStyle;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
-import uk.co.nickthecoder.jame.Video;
 
 public class Client
 {
@@ -146,7 +145,7 @@ public class Client
                 beginGame(paramString);
 
             } else if (command.equals("resize")) {
-                Itchy.resizeScreen(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]));
+                Itchy.resizeScreen(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]), false);
 
             } else if (command.equals("fill")) {
                 fill(RGBA.parse(parameters[0]),
@@ -169,7 +168,7 @@ public class Client
                     Integer.parseInt(parameters[5]));
 
             } else if (command.equals("flip")) {
-                Video.flip();
+                // TODO VIDEO : Video.flip();
 
             } else if (command.equals("actor")) {
                 renderActor(

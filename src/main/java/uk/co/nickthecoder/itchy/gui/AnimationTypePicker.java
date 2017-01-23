@@ -46,7 +46,7 @@ public abstract class AnimationTypePicker extends Window
         center.setMinimumHeight(64);
         center.setMaximumHeight(64);
 
-        ImagePose icon = Editor.instance.getStylesheet().resources.getPose("animation-" + animation.getTagName());
+        ImagePose icon = Editor.instance.getGame().getStylesheet().resources.getPose("animation-" + animation.getTagName());
         ImageComponent img = new ImageComponent((icon == null) ? null : icon.getSurface());
         center.addChild(img);
         Button button = new Button(center);

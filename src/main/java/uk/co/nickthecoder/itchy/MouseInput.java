@@ -41,7 +41,7 @@ public class MouseInput extends AbstractInput
     @Override
     public boolean matches(MouseButtonEvent mbe)
     {
-        if ((mbe.button == this.mouseButton.value) && (mbe.state == MouseButtonEvent.STATE_PRESSED)) {
+        if ((mbe.button == this.mouseButton.value) && (mbe.pressed)) {
             return super.matches(mbe);
         }
         return false;

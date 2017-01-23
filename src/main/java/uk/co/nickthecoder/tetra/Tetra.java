@@ -24,7 +24,7 @@ import uk.co.nickthecoder.itchy.role.ExplosionBuilder;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
+import uk.co.nickthecoder.jame.event.Symbol;
 
 public class Tetra extends AbstractDirector
 {
@@ -218,7 +218,7 @@ public class Tetra extends AbstractDirector
     @Override
     public void onKeyDown( KeyboardEvent ke )
     {
-        if (ke.isReleased()) {
+        if (!ke.pressed) {
             return;
         }
 
@@ -230,8 +230,8 @@ public class Tetra extends AbstractDirector
             debug();
         }
 
-        if ((ke.symbol >= Keys.KEY_0) && (ke.symbol <= Keys.KEY_9)) {
-            chooseLevel(ke.symbol - Keys.KEY_0);
+        if ((ke.symbolValue >= Symbol.KEY_0.value) && (ke.symbolValue <= Symbol.KEY_9.value)) {
+            chooseLevel(ke.symbolValue - Symbol.KEY_0.value);
         }
 
         if ((this.inputExit.matches(ke)) && (this.game.getSceneName().equals("main"))) {

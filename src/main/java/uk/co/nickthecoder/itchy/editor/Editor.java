@@ -11,7 +11,6 @@ import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.InputInterface;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.KeyListener;
-import uk.co.nickthecoder.itchy.Layout;
 import uk.co.nickthecoder.itchy.PlainDirector;
 import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
@@ -23,12 +22,16 @@ import uk.co.nickthecoder.itchy.gui.PlainContainer;
 import uk.co.nickthecoder.itchy.gui.RootContainer;
 import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
+import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
+import uk.co.nickthecoder.jame.event.ResizeEvent;
+import uk.co.nickthecoder.jame.event.Symbol;
 
-public final class Editor extends Game implements KeyListener
+public final class Editor extends PlainDirector implements KeyListener
 {
     public static Editor instance;
+
+    public Resources resources;
 
     private static final File RULES = new File(new File(Itchy.getResourcesDirectory(), "editor"), "style.xml");
 
@@ -36,16 +39,12 @@ public final class Editor extends Game implements KeyListener
 
     private Game game;
 
-    private int width = 1000;
-    
-    private int height = 720;
-    
     public RootContainer root;
 
     // public PreferencesEditor preferencesEditor;
 
     private Notebook notebook;
-    
+
     public GameInfoEditor gameInfoEditor;
 
     public ListSpriteSheets listSpriteSheets;
@@ -70,33 +69,45 @@ public final class Editor extends Game implements KeyListener
 
     public SceneDesigner sceneDesigner;
 
-    
     private String designSceneName = null;
 
-    private InputInterface inputTest = Input.parse("ctrl+t");
-    
-    private InputInterface inputRun = Input.parse("ctrl+r");
-    
-    private InputInterface inputQuit = Input.parse("ctrl+q");
-    
-    private InputInterface inputSave = Input.parse("ctrl+s");
-    
-    
-    private InputInterface inputDebug1 = Input.parse("ctrl+F1"); 
+    private InputInterface inputTest;
 
-    private InputInterface inputDebug2 = Input.parse("ctrl+F2"); 
+    private InputInterface inputRun;
 
-    private InputInterface inputDebug3 = Input.parse("ctrl+F3"); 
+    private InputInterface inputQuit;
 
-    
-    public Editor(Game game) throws Exception
+    private InputInterface inputSave;
+
+    private InputInterface inputDebug1;
+
+    private InputInterface inputDebug2;
+
+    private InputInterface inputDebug3;
+
+    public Editor()
     {
-        super(game.resources);
-        this.game = game;
-        instance = this;
-        setDirector(new PlainDirector());
+        try {
+            inputTest = Input.parse("ctrl+t");
+            inputRun = Input.parse("ctrl+r");
+            inputQuit = Input.parse("ctrl+q");
+            inputSave = Input.parse("ctrl+s");
+            inputDebug1 = Input.parse("ctrl+F1");
+            inputDebug2 = Input.parse("ctrl+F2");
+            inputDebug3 = Input.parse("ctrl+F3");
 
-        this.init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void attach(Game game)
+    {
+        super.attach(game);
+        
+        this.game = game;
+        this.resources = game.resources;
+        instance = this;
 
         this.preferences = new EditorPreferences();
 
@@ -111,12 +122,9 @@ public final class Editor extends Game implements KeyListener
         this.listScenes = new ListScenes(this);
         this.listInputs = new ListInputs(this.resources);
         this.listLayouts = new ListLayouts(this.resources);
-        this.layout = new Layout();
-        
-        // this.preferencesEditor = new PreferencesEditor(this);
 
         try {
-            setStylesheet(new Stylesheet(RULES));
+            game.setStylesheet(new Stylesheet(RULES));
         } catch (Exception e) {
             System.err.println("Failed to load stylesheet : " + RULES);
             e.printStackTrace();
@@ -128,59 +136,23 @@ public final class Editor extends Game implements KeyListener
         return this.game;
     }
 
-    @Override
-    public void onActivate()
-    {
-        instance = this;
-        super.onActivate();
-    }
-
-    @Override
-    public String getTitle()
-    {
-        return "Itchy Editor : " + this.game.getTitle();
-    }
-
-    @Override
-    public boolean isResizable()
-    {
-        return true;
-    }
-
-    @Override
-    public int getWidth()
-    {
-        return width;
-    }
-
-    @Override
-    public int getHeight()
-    {
-        return height;
-    }
-
-    @Override
-    public void start(String sceneName)
-    {
-        this.designSceneName = sceneName;
-        this.start();
-    }
-
-    @Override
-    public void start()
-    {
-        Itchy.startGame(this);
+    public void onStarted()
+    {        
+        int width = 1024;
+        int height = 768;
+        
+        Itchy.resizeScreen(width, height, true);
 
         this.root = new RootContainer();
         this.root.setLayout(new VerticalLayout());
         this.root.setFill(true, true);
         this.root.addStyle("editor");
 
-        this.root.setMinimumWidth(this.getWidth());
-        this.root.setMinimumHeight(this.getHeight());
+        this.root.setMinimumWidth(width);
+        this.root.setMinimumHeight(height);
 
-        this.root.setMaximumWidth(this.getWidth());
-        this.root.setMaximumHeight(this.getHeight());
+        this.root.setMaximumWidth(width);
+        this.root.setMaximumHeight(height);
 
         this.root.show();
 
@@ -202,11 +174,11 @@ public final class Editor extends Game implements KeyListener
         notebook.addPage(new Label("Scenes"), this.listScenes.createPage());
         // notebook.addPage(new Label("Preferences"), this.preferencesEditor.createPage());
 
-        for ( int i = 0; i < notebook.size(); i ++ ) {
+        for (int i = 0; i < notebook.size(); i++) {
             Button tab = notebook.getTab(i);
-            tab.setTooltip("F" + (i+1));
+            tab.setTooltip("F" + (i + 1));
         }
-        
+
         PlainContainer buttons = new PlainContainer();
         buttons.addStyle("buttonBar");
         buttons.setXAlignment(1);
@@ -222,7 +194,7 @@ public final class Editor extends Game implements KeyListener
             }
         });
         buttons.addChild(test);
-        
+
         Button run = new Button(new Label("Run"));
         run.setTooltip("ctrl+R");
         run.addActionListener(new ActionListener()
@@ -260,21 +232,20 @@ public final class Editor extends Game implements KeyListener
         });
         this.root.addChild(buttons);
 
-        this.root.setPosition(0, 0, this.getWidth(), this.getHeight());
+        this.root.setPosition(0, 0, width, height);
         this.root.reStyle();
 
-        if (this.designSceneName != null) {
-            this.listScenes.addOrEdit(this.resources.getScene(this.designSceneName));
-        }
-        addKeyListener(this);
-        Itchy.mainLoop();
     }
-    
+
+    public void designScene( String sceneName )
+    {
+        this.listScenes.addOrEdit(this.resources.getScene(this.designSceneName));
+    }
     
     public void run()
     {
         onSave();
-        
+
         try {
 
             Resources duplicate = this.resources.copy();
@@ -283,13 +254,13 @@ public final class Editor extends Game implements KeyListener
 
         } catch (Exception e) {
             e.printStackTrace();
-        }       
+        }
     }
-    
+
     public void test()
     {
         onSave();
-        
+
         try {
 
             Resources duplicate = this.resources.copy();
@@ -298,13 +269,14 @@ public final class Editor extends Game implements KeyListener
 
         } catch (Exception e) {
             e.printStackTrace();
-        }       
+        }
     }
 
     private void onQuit()
     {
         Editor.instance = null;
-        Editor.this.end();
+        this.game.end();
+        // TODO Is this really needed?
         // If the editor was started directly from the command line, then end the non-running game,
         // so that Itchy will terminate in the normal way.
         // Launcher has the corresponding Itchy.startGame(game).
@@ -312,7 +284,7 @@ public final class Editor extends Game implements KeyListener
             Itchy.getGame().end();
         }
     }
-    
+
     private void onSave()
     {
         MessageBox messageBox = null;
@@ -337,36 +309,15 @@ public final class Editor extends Game implements KeyListener
     }
 
     @Override
-    public void resize(int width, int height)
-    {
-        super.resize(width, height);
-        this.width = width;
-        this.height = height;
-        root.setPosition(0, 0, width, height);
-
-        root.resizeView();
-        if (sceneDesigner != null) {
-            sceneDesigner.resize(width, height);
-        }
-        
-        this.root.setMinimumWidth(width);
-        this.root.setMinimumHeight(height);
-
-        this.root.setMaximumWidth(width);
-        this.root.setMaximumHeight(height);
-
-    }
-
-    @Override
     public void onKeyDown(KeyboardEvent ke)
     {
-        if ((ke.symbol >= Keys.F1) && (ke.symbol <= Keys.F12)) {
-            int tab = ke.symbol - Keys.F1;
-            if (tab < notebook.size() ) {
+        if ((ke.symbolValue >= Symbol.F1.value) && (ke.symbolValue <= Symbol.F12.value)) {
+            int tab = ke.symbolValue - Symbol.F1.value;
+            if (tab < notebook.size()) {
                 notebook.getTab(tab).onClick(null);
             }
         }
-        
+
         if (inputTest.matches(ke)) {
             test();
         }
@@ -379,15 +330,15 @@ public final class Editor extends Game implements KeyListener
         if (inputSave.matches(ke)) {
             onSave();
         }
-        
+
         if (inputDebug1.matches(ke)) {
             debug1();
         }
-        
+
         if (inputDebug2.matches(ke)) {
             debug2();
         }
-        
+
         if (inputDebug3.matches(ke)) {
             debug3();
         }
@@ -397,20 +348,40 @@ public final class Editor extends Game implements KeyListener
     {
         this.resources.dump();
     }
-    
+
     public void debug2()
     {
-        
+
     }
-    
+
     public void debug3()
     {
     }
-    
+
     @Override
-    public void onKeyUp(KeyboardEvent ke)
+    public boolean isResizable()
     {
+        return true;
+    }
+
+    @Override
+    public void onResize(ResizeEvent e)
+    {
+        super.onResize(e);
         
+        root.setPosition(0, 0, e.width, e.height);
+        root.getView().setPosition(new Rect(0, 0, e.width, e.height));
+
+        if (sceneDesigner != null) {
+            sceneDesigner.resize(e.width, e.height);
+        }
+
+        this.root.setMinimumWidth(e.width);
+        this.root.setMinimumHeight(e.height);
+
+        this.root.setMaximumWidth(e.width);
+        this.root.setMaximumHeight(e.height);
+
     }
 
 }

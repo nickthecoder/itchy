@@ -7,7 +7,6 @@ package uk.co.nickthecoder.itchy.extras;
 import uk.co.nickthecoder.itchy.Mouse;
 import uk.co.nickthecoder.itchy.MousePointer;
 import uk.co.nickthecoder.itchy.Stage;
-import uk.co.nickthecoder.jame.Video;
 
 /**
  * Responsible for how the mouse is displayed. There are three basic states : No mouse, Regular Mouse, Graphical mouse.
@@ -45,7 +44,8 @@ public class SimpleMouse implements Mouse
     public void showRegularMousePointer( boolean value )
     {
         this.regularMousePointer = value;
-        Video.showMousePointer(value);
+        // TODO Video
+        // Video.showMousePointer(value);
         if (value && this.mousePointer != null) {
             this.mousePointer.getActor().kill();
             this.mousePointer = null;
@@ -55,7 +55,8 @@ public class SimpleMouse implements Mouse
     @Override
     public void onActivate()
     {
-        Video.showMousePointer(this.regularMousePointer);
+        // TODO VIDEO
+        // Video.showMousePointer(this.regularMousePointer);
     }
 
     private Stage mouseStage;

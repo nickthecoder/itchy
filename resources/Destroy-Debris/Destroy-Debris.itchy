@@ -720,17 +720,17 @@
     <scene name="test"/>
   </scenes>
   <inputs>
-    <input name="about" keys="a"/>
-    <input name="cheat" keys="ctrl+alt+c"/>
-    <input name="continue" keys="c"/>
+    <input name="about" keys="A"/>
+    <input name="cheat" keys="ctrl+alt+C"/>
+    <input name="continue" keys="C"/>
     <input name="editor" keys="F12"/>
     <input name="exit" keys="ESCAPE"/>
     <input name="fire" keys="SPACE,RETURN"/>
-    <input name="left" keys="z,LEFT"/>
+    <input name="left" keys="Z,LEFT"/>
     <input name="menu" keys="ESCAPE"/>
-    <input name="pause" keys="p,PAUSE"/>
-    <input name="restart" keys="r"/>
-    <input name="right" keys="x,RIGHT"/>
+    <input name="pause" keys="P,PAUSE"/>
+    <input name="restart" keys="R"/>
+    <input name="right" keys="X,RIGHT"/>
     <input name="start" keys="RETURN,KP_ENTER"/>
     <input name="thrust" keys="SEMICOLON,UP"/>
     <input name="weapon-1" keys="KEY_1"/>

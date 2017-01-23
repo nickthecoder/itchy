@@ -10,17 +10,15 @@ import java.util.Stack;
 
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.jame.Audio;
-import uk.co.nickthecoder.jame.Events;
 import uk.co.nickthecoder.jame.Surface;
-import uk.co.nickthecoder.jame.Video;
 import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButton;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.ResizeEvent;
+import uk.co.nickthecoder.jame.event.ScanCode;
 
 /**
  * The top-level manager of the Itchy game engine. It only has static methods.
@@ -107,7 +105,7 @@ public final class Itchy
      * @throws Exception
      * @priority 5
      */
-    public static void init(Resources resources) throws Exception
+    public static void init() throws Exception
     {
         if (initialised) {
             return;
@@ -115,14 +113,13 @@ public final class Itchy
 
         System.out.println("Itchy.init");
 
-        Video.init();
         Audio.init();
         Audio.open();
-        Events.enableKeyTranslation(true);
 
         keyboardState = new boolean[KEYBOARD_STATE_SIZE];
         mouseState = new boolean[MOUSE_STATE_SIZE];
-        setScreenMode(resources);
+        // TODO Remove?
+        // setScreenMode(resources);
         initialised = true;
     }
 
@@ -136,11 +133,13 @@ public final class Itchy
      *            The new height of the screen in pixels.
      * @priority 3
      */
-    public static void resizeScreen(int width, int height)
+    public static void resizeScreen(int width, int height, boolean resizable)
     {
-        Game game = currentGame;
+        // TODO Handle window resizing
+        //Game game = currentGame;
 
-        setScreenMode(game.getTitle(), game.resources, width, height, game.isResizable());
+        // setScreenMode(game.getTitle(), game.resources, width, height, resizable);
+        // TODO Remove bodge
         lastWindowResizeTime = new Date().getTime();
     }
 
@@ -192,20 +191,30 @@ public final class Itchy
         }
     }
 
+    /*
+     *  TODO Remove setScreenMode
     private static void setScreenMode(Resources resources)
     {
         GameInfo gameInfo = resources.getGameInfo();
         setScreenMode(gameInfo.title, resources, gameInfo.width, gameInfo.height, gameInfo.resizable);
     }
-
+     */
+    
+    /* 
+     * TODO Remove setScreenMode
     private static void setScreenMode(Game game)
     {
-        setScreenMode(game.getTitle(), game.resources, game.getWidth(), game.getHeight(), game.isResizable());
+        setScreenMode(game.getTitle(), game.resources, game.getWidth(), game.getHeight(),
+            game.getDirector().isResizable());
     }
-
+    */
+    
+    /* 
+     * TODO Remove setScreenMode
     private static void setScreenMode(String title, Resources resources, int width, int height, boolean resizable)
     {
-        Video.setWindowTitle(title);
+        // TODO VIDEO
+        //Video.setWindowTitle(title);
 
         // According to the SDL1.2 docs, windows MUST be given a 32x32 image. How very quaint (windows is shite).
         // For good looking OSes, we should try to use a bigger icon if there is one.
@@ -219,9 +228,11 @@ public final class Itchy
 
         try {
             if (new File(filename).exists()) {
-                Video.setWindowIcon(filename);
+                // TODO VIDEO
+                //Video.setWindowIcon(filename);
             } else if (new File(filename32).exists()) {
-                Video.setWindowIcon(filename32);
+                // TODO VIDEO
+                //Video.setWindowIcon(filename32);
             }
         } catch (Exception e) {
             // Do nothing
@@ -237,9 +248,10 @@ public final class Itchy
             e.printStackTrace();
         }
     }
+    */
 
     /**
-     * Used internally by Icthy.
+     * Used internally by Itchy.
      * 
      * @param game
      * @priority 5
@@ -253,7 +265,6 @@ public final class Itchy
         }
         currentGame = game;
         currentGame.onActivate();
-        setScreenMode(currentGame);
     }
 
     /**
@@ -328,7 +339,8 @@ public final class Itchy
         } else {
             currentGame = gameStack.pop();
             try {
-                setScreenMode(currentGame);
+                // TODO Bring back the previous game window.
+                // setScreenMode(currentGame);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -346,8 +358,8 @@ public final class Itchy
     public static void terminate()
     {
         System.out.println("Terminating itchy");
-        getGame().getFrameRate().end();
         running = false;
+        getGame().getFrameRate().end();
     }
 
     /**
@@ -357,7 +369,9 @@ public final class Itchy
      */
     public static Surface getDisplaySurface()
     {
-        return Video.getDisplaySurface();
+        // TODO VIDEO
+        //return Video.getDisplaySurface();
+        return getGame().gameWindow.surface;
     }
 
     /**
@@ -367,12 +381,16 @@ public final class Itchy
      */
     public static void render()
     {
+        GameWindow gameWindow = currentGame.gameWindow;
+        
         try {
-            currentGame.render(Video.getDisplaySurface());
+            gameWindow.render();
         } catch (Exception e) {
             handleException(e);
         }
-        Video.flip();
+
+        gameWindow.render();
+
     }
 
     /**
@@ -407,7 +425,8 @@ public final class Itchy
      */
     public static boolean isShiftDown()
     {
-        return keyboardState[Keys.LSHIFT] || keyboardState[Keys.RSHIFT];
+        /* TODO Use Event.getModifiers */
+        return keyboardState[ScanCode.LSHIFT.value] || keyboardState[ScanCode.RSHIFT.value];
     }
 
     /**
@@ -418,7 +437,8 @@ public final class Itchy
      */
     public static boolean isCtrlDown()
     {
-        return keyboardState[Keys.LCTRL] || keyboardState[Keys.RCTRL];
+        /* TODO Use Event.getModifiers */
+        return keyboardState[ScanCode.LCTRL.value] || keyboardState[ScanCode.RCTRL.value];
     }
 
     /**
@@ -429,18 +449,8 @@ public final class Itchy
      */
     public static boolean isAltDown()
     {
-        return keyboardState[Keys.LALT] || keyboardState[Keys.RALT];
-    }
-
-    /**
-     * Tests state of either meta keys. A convenience method, the same as
-     * <code>isKeyDown( Keys.LMETA ) || isKeyDown( Keys.RMETA )</code>
-     * 
-     * @priority 3
-     */
-    public static boolean isMetaDown()
-    {
-        return keyboardState[Keys.LMETA] || keyboardState[Keys.RMETA];
+        /* TODO Use Event.getModifiers */
+        return keyboardState[ScanCode.LALT.value] || keyboardState[ScanCode.RALT.value];
     }
 
     /**
@@ -469,19 +479,9 @@ public final class Itchy
         if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
 
-            if (ke.isPressed()) {
-                int key = ke.symbol;
-
-                if ((key > 0) && (key < keyboardState.length)) {
-                    keyboardState[key] = true;
-                }
-
-            } else if (ke.isReleased()) {
-
-                int key = ke.symbol;
-                if ((key > 0) && (key < keyboardState.length)) {
-                    keyboardState[key] = false;
-                }
+            int key = ke.scanCodeValue;
+            if ((key > 0) && (key < keyboardState.length)) {
+                keyboardState[key] = ke.pressed;
             }
 
         } else if (event instanceof MouseEvent) {
@@ -493,7 +493,7 @@ public final class Itchy
             if (event instanceof MouseButtonEvent) {
                 MouseButtonEvent mbe = (MouseButtonEvent) event;
                 if (mbe.button < mouseState.length) {
-                    mouseState[mbe.button] = mbe.state == MouseButtonEvent.STATE_PRESSED;
+                    mouseState[mbe.button] = mbe.pressed;
                 }
             }
 

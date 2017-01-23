@@ -31,7 +31,6 @@ import uk.co.nickthecoder.itchy.collision.Block;
 import uk.co.nickthecoder.itchy.collision.StandardNeighbourhood;
 import uk.co.nickthecoder.itchy.role.PlainRole;
 import uk.co.nickthecoder.itchy.util.AcceptFilter;
-import uk.co.nickthecoder.jame.Video;
 
 public class NeighbourhoodTest
 {
@@ -46,8 +45,9 @@ public class NeighbourhoodTest
     public static void setup()
     {
         try {
-            Video.init();
-            Video.setMode(640, 480);
+            /* TODO VIDEO */
+            //Video.init();
+            //Video.setMode(640, 480);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

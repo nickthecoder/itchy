@@ -1,4 +1,5 @@
 version = '0.4'
+group = 'uk.co.nickthecoder'
 
 repositories {
     mavenCentral()
@@ -17,8 +18,8 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 dependencies {
-    compile 'uk.co.nickthecoder:jame:1.1'
-    compile 'uk.co.nickthecoder:jame-native-linux_x86_64:1.1'
+    compile 'uk.co.nickthecoder:jame:2.0'
+    compile 'uk.co.nickthecoder:jame-native-linux_x86_64:2.0'
     //compile 'uk.co.nickthecoder:jame-native-win32:1.1'
     compile 'junit:junit:4.12'
     compile 'org.python:jython-standalone:2.5.2'

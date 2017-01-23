@@ -232,7 +232,7 @@
   </scenes>
   <inputs>
     <input name="click" keys="click+SPACE,click+M_LEFT"/>
-    <input name="exit" keys="click+ESCAPE,click+ctrl+q"/>
+    <input name="exit" keys="click+ESCAPE,click+ctrl+Q"/>
     <input name="scrollDown" keys="DOWN"/>
     <input name="scrollLeft" keys="LEFT"/>
     <input name="scrollRight" keys="RIGHT"/>

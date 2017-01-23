@@ -5,9 +5,9 @@
 package uk.co.nickthecoder.itchy.gui;
 
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
+import uk.co.nickthecoder.jame.event.Symbol;
 
 public abstract class ClickableContainer extends PlainContainer
 {
@@ -24,7 +24,7 @@ public abstract class ClickableContainer extends PlainContainer
     @Override
     public void onKeyDown( KeyboardEvent ke )
     {
-        if (this.hasFocus && ((ke.symbol == Keys.SPACE) || (ke.symbol == Keys.RETURN))) {
+        if (this.hasFocus && ((ke.symbol == Symbol.SPACE) || (ke.symbol == Symbol.RETURN))) {
             this.onClick(null);
             ke.stopPropagation();
         }

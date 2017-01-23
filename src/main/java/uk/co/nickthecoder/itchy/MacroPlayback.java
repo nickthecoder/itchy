@@ -78,12 +78,13 @@ public class MacroPlayback implements EventProcessor
             Event event = null;
 
             if (type.equals("key")) {
+                /* Can't create keyboardEvents correctly */
                 KeyboardEvent ke = new KeyboardEvent();
-                ke.c = (char) Integer.parseInt(parts[2]);
+                //ke.symbolValue = Integer.parseInt(parts[2]); /* TODO, we have a value missing - no "c" */
                 ke.modifiers = Integer.parseInt(parts[3]);
-                ke.scanCode = Integer.parseInt(parts[4]);
-                ke.state = Integer.parseInt(parts[5]);
-                ke.symbol = Integer.parseInt(parts[6]);
+                ke.scanCodeValue = Integer.parseInt(parts[4]);
+                ke.pressed = Boolean.parseBoolean(parts[5]);
+                ke.symbolValue = Integer.parseInt(parts[6]);
                 event = ke;
 
             } else if (type.equals("button")) {
@@ -91,8 +92,8 @@ public class MacroPlayback implements EventProcessor
                 mbe.x = Integer.parseInt(parts[2]);
                 mbe.y = Integer.parseInt(parts[3]);
                 mbe.button = Integer.parseInt(parts[4]);
-                mbe.state = Integer.parseInt(parts[5]);
-                mbe.which = Integer.parseInt(parts[6]);
+                mbe.pressed = Boolean.parseBoolean(parts[5]);
+                mbe.button = Integer.parseInt(parts[6]);
                 event = mbe;
 
             } else if (type.equals("mouse")) {

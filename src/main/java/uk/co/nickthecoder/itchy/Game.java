@@ -24,16 +24,15 @@ import uk.co.nickthecoder.itchy.script.ScriptManager;
 import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.itchy.util.TagCollection;
-import uk.co.nickthecoder.jame.Events;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
 import uk.co.nickthecoder.jame.event.ResizeEvent;
+import uk.co.nickthecoder.jame.event.Symbol;
 import uk.co.nickthecoder.jame.event.WindowEvent;
 
 /**
@@ -64,6 +63,11 @@ import uk.co.nickthecoder.jame.event.WindowEvent;
  */
 public class Game
 {
+    /**
+     * The SDL Window for this game
+     */
+    public GameWindow gameWindow;
+    
     /**
      * Holds all of the images, sounds, fonts, animations costumes etc used by this game.
      */
@@ -202,21 +206,6 @@ public class Game
     private FrameRate frameRate = new SimpleFrameRate();
 
     /**
-     * How long a key is held down for (in milliseconds) before additional fake onKeyDown events are generated.
-     * <p>
-     * The default value is fine for most games.
-     */
-    private int keyboardRepeatDelay = Events.DEFAULT_REPEAT_DELAY;
-
-    /**
-     * The time (in milliseconds) between fake onKeyDown events when a key is held down.
-     * <p>
-     * The default value is fine for most games.
-     * 
-     */
-    private int keyboardRepeatInterval = Events.DEFAULT_REPEAT_INTERVAL;
-
-    /**
      * SoundManager is a thin layer over Jame's sound system adding some extra features; the option to end sounds when
      * its Actor is killed, as well as choosing what to do when a single sound is asked to play more than once
      * simultaneously.
@@ -235,7 +224,6 @@ public class Game
      */
     public EventProcessor eventProcessor = new NormalEventProcessor();
 
-
     /**
      * Game constructor called when the resources are being loaded. Note that not much initialisation can take place
      * yet, as vital
@@ -249,9 +237,6 @@ public class Game
      */
     public Game(Resources resources)
     {
-        if ((!(this instanceof Editor)) && (resources.game != null)) {
-            throw new RuntimeException("Attempted to create more than one game sharing a single resources file");
-        }
         this.resources = resources;
         this.scriptManager = resources.scriptManager;
 
@@ -262,7 +247,6 @@ public class Game
         this.sceneDirector = new PlainSceneDirector();
         this.pause = new SimplePause();
         this.soundManager = new StandardSoundManager();
-
     }
 
     /**
@@ -270,7 +254,7 @@ public class Game
      * resources file. This is
      * where most of Game's initialisation occurs; it couldn't take place in Game's constructor, because vital
      * information wasn't available
-     * at that time (e.g. the game's width and height weren't known then.
+     * at that time (e.g. the game's width and height weren't known then).
      * 
      * @priority 3
      */
@@ -283,6 +267,7 @@ public class Game
         this.glassStage = new ZOrderStage();
         this.glassView = new StageView(displayRect, this.glassStage);
         this.glassView.enableMouseListener(this);
+        this.gameWindow =  new GameWindow( this );
     }
 
     /**
@@ -381,14 +366,7 @@ public class Game
     {
         this.mouse.onActivate();
         this.director.onActivate();
-        Events.keyboardRepeat(keyboardRepeatDelay, keyboardRepeatInterval);
-    }
-
-    public void setKeyboardRepeat(int repeatDelay, int repeatInterval)
-    {
-        this.keyboardRepeatDelay = repeatDelay;
-        this.keyboardRepeatInterval = repeatInterval;
-        Events.keyboardRepeat(keyboardRepeatDelay, keyboardRepeatInterval);
+        gameWindow.show();
     }
 
     /**
@@ -403,7 +381,7 @@ public class Game
     }
 
     /**
-     * Called when the game window is resized. {@link AbstractDirector#onResize(ResizeEvent)} take care of resizable
+     * Called when the game window is resized. {@link AbstractDirector#onResize(ResizeEvent)} takes care of resizable
      * windows, so there is no need for your code to call this.
      * 
      * @param width
@@ -414,7 +392,7 @@ public class Game
      */
     public void resize(int width, int height)
     {
-        Itchy.resizeScreen(width, height);
+        Itchy.resizeScreen(width, height, getDirector().isResizable());
     }
 
     /**
@@ -484,14 +462,20 @@ public class Game
      * 
      * @priority 3
      */
-    public void startEditor()
+    public Editor startEditor()
     {
-        try {
-            Editor editor = new Editor(this);
-            editor.start();
-        } catch (Exception e) {
-            e.printStackTrace();
+        Game game = this;
+        
+        if (game.isRunning()) {
+            // Create a new game if this Game is already running???
+            game = new Game(resources.copy());
+            game.init();
         }
+        Editor editor = new Editor();
+        game.setDirector(editor);
+        game.start(null);
+        game.setSceneDirector(new PlainSceneDirector());
+        return editor;
     }
 
     /**
@@ -500,14 +484,11 @@ public class Game
      * 
      * @priority 3
      */
-    public void startEditor(String designSceneName)
+    public Editor startEditor(String designSceneName)
     {
-        try {
-            Editor editor = new Editor(this);
-            editor.start(designSceneName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Editor editor = startEditor();
+        editor.designScene(designSceneName);
+        return editor;
     }
 
     /**
@@ -661,6 +642,8 @@ public class Game
         }
     }
 
+   
+    
     /**
      * Renders all of the views to the display surface.
      * 
@@ -731,10 +714,10 @@ public class Game
         } else if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
 
-            if (ke.isPressed()) {
+            if (ke.pressed) {
 
                 if (this.testing) {
-                    if ((ke.symbol == Keys.ESCAPE) || (ke.symbol == Keys.F12)) {
+                    if ((ke.symbol == Symbol.ESCAPE) || (ke.symbol == Symbol.F12)) {
                         endTest();
                         event.stopPropagation();
                     }
@@ -755,7 +738,7 @@ public class Game
                     return;
                 }
 
-            } else if (ke.isReleased()) {
+            } else if (! ke.pressed) {
 
                 if (this.modalListener == null) {
 
@@ -1016,16 +999,6 @@ public class Game
     }
 
     /**
-     * 
-     * @return
-     * @priority 3
-     */
-    public boolean isResizable()
-    {
-        return this.resources.getGameInfo().resizable;
-    }
-
-    /**
      * If no further tick methods should be called for this frame, then
      * this flag is set. For example, loading a new Scene will set this flag.
      * The {@link #tick()} method checks this, and returns whenever it is set.
@@ -1045,27 +1018,27 @@ public class Game
     {
         try {
             this.soundManager.tick();
-    
+
             this.abortTicks = false;
             this.director.tick();
-    
+
             if (this.abortTicks) {
                 return;
             }
-    
+
             this.getSceneDirector().tick();
-    
+
             if (this.abortTicks) {
                 return;
             }
-    
+
             for (Stage stage : this.getStages()) {
                 stage.tick();
                 if (this.abortTicks) {
                     return;
                 }
             }
-    
+
             this.glassStage.tick();
         } catch (Exception e) {
             Itchy.handleException(e);
@@ -1311,6 +1284,7 @@ public class Game
     {
         clear();
         running = false;
+        gameWindow.destroy();
         Itchy.endGame();
     }
 
@@ -1344,7 +1318,10 @@ public class Game
      */
     public GuiView show(RootContainer rootContainer)
     {
-        GuiView view = new GuiView(new Rect(0, 0, this.getWidth(), this.getHeight()), rootContainer);
+        System.err.println( "Create GuiView " + Itchy.getDisplaySurface().getWidth() );
+        GuiView view = new GuiView(new Rect(0, 0, Itchy.getDisplaySurface().getWidth(),
+            Itchy.getDisplaySurface().getHeight()), rootContainer);
+
         this.show(view);
 
         return view;

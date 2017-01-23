@@ -11,7 +11,7 @@ import uk.co.nickthecoder.itchy.property.InputStringProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Key;
+import uk.co.nickthecoder.jame.event.ScanCode;
 import uk.co.nickthecoder.jame.event.MouseButton;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 
@@ -72,12 +72,13 @@ public class Input implements NamedSubject<Input>, InputInterface
         String[] parts = str.split("\\+");
 
         String keyStr = parts[parts.length - 1];
-        
-        Key key = null;
+
+        ScanCode key = null;
         try {
-            key = Key.valueOf(keyStr);
+            key = ScanCode.valueOf(keyStr);
         } catch (Exception e) {
         }
+
         if (key == null) {
             MouseButton mouseButton = parseMouseButton(keyStr);
             if (mouseButton != null) {
@@ -87,7 +88,7 @@ public class Input implements NamedSubject<Input>, InputInterface
             } else {
                 throw new Exception("Expected a key or mouse button name, but found : " + keyStr);
             }
-            
+
         } else {
             KeyInput keyInput = new KeyInput();
             keyInput.key = key;
@@ -100,13 +101,12 @@ public class Input implements NamedSubject<Input>, InputInterface
 
             if (part.equals("click")) {
                 result.click = true;
+                
             } else if (part.equals("ctrl")) {
                 result.ctrlModifier = true;
+                
             } else if (part.equals("shift")) {
                 result.shiftModifier = true;
-
-            } else if (part.equals("meta")) {
-                result.metaModifier = true;
 
             } else if (part.equals("alt")) {
                 result.altModifier = true;
@@ -198,7 +198,7 @@ public class Input implements NamedSubject<Input>, InputInterface
         this.keys.clear();
         for (String part : parts) {
             part = part.trim();
-            if (! part.equals("")) {
+            if (!part.equals("")) {
                 this.keys.add(Input.parse(part));
             }
         }
@@ -206,13 +206,13 @@ public class Input implements NamedSubject<Input>, InputInterface
         this.asString = keys;
     }
 
-    public void add( InputInterface input )
+    public void add(InputInterface input)
     {
         this.keys.add(input);
         this.asString = null;
     }
 
-    public void remove( InputInterface input )
+    public void remove(InputInterface input)
     {
         this.keys.remove(input);
         this.asString = null;

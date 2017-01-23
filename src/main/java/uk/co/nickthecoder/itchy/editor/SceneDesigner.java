@@ -20,6 +20,7 @@ import uk.co.nickthecoder.itchy.KeyListener;
 import uk.co.nickthecoder.itchy.Layer;
 import uk.co.nickthecoder.itchy.Layout;
 import uk.co.nickthecoder.itchy.MouseListener;
+import uk.co.nickthecoder.itchy.OrderedStage;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.itchy.RGBAView;
 import uk.co.nickthecoder.itchy.Resources;
@@ -34,7 +35,6 @@ import uk.co.nickthecoder.itchy.StageView;
 import uk.co.nickthecoder.itchy.TextPose;
 import uk.co.nickthecoder.itchy.View;
 import uk.co.nickthecoder.itchy.ZOrderStage;
-import uk.co.nickthecoder.itchy.OrderedStage;
 import uk.co.nickthecoder.itchy.gui.AbstractComponent;
 import uk.co.nickthecoder.itchy.gui.ActionListener;
 import uk.co.nickthecoder.itchy.gui.Button;
@@ -79,10 +79,10 @@ import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.Keys;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
+import uk.co.nickthecoder.jame.event.Symbol;
 
 public class SceneDesigner implements MouseListener, KeyListener
 {
@@ -200,7 +200,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     public void go()
     {
-        Rect wholeRect = new Rect(0, 0, editor.getWidth(), editor.getHeight());
+        Rect wholeRect = new Rect(0, 0, editor.getGame().getWidth(), editor.getGame().getHeight());
 
         editor.root.hide();
 
@@ -210,11 +210,11 @@ public class SceneDesigner implements MouseListener, KeyListener
         backgroundLayer.zOrder = -100;
         backgroundLayer.position = wholeRect;
         backgroundLayer.setName("sd_background");
-        editor.getLayout().addLayer(backgroundLayer);
+        editor.getGame().getLayout().addLayer(backgroundLayer);
 
         createToolbar();
 
-        Rect editRect = new Rect(0, toolbar.getHeight(), editor.getWidth(), editor.getHeight() - toolbar.getHeight());
+        Rect editRect = new Rect(0, toolbar.getHeight(), editor.getGame().getWidth(), editor.getGame().getHeight() - toolbar.getHeight());
 
         createToolbox();
 
@@ -227,10 +227,10 @@ public class SceneDesigner implements MouseListener, KeyListener
         overlayLayer.zOrder = Integer.MAX_VALUE;
         overlayLayer.position = wholeRect;
         overlayLayer.setName("sd_overlay");
-        editor.getLayout().addLayer(overlayLayer);
+        editor.getGame().getLayout().addLayer(overlayLayer);
 
-        editor.addMouseListener(this);
-        editor.addKeyListener(this);
+        editor.getGame().addMouseListener(this);
+        editor.getGame().addKeyListener(this);
 
         createPageBorder();
         createHandles();
@@ -248,7 +248,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void addDesignLayers(Layout layout)
     {
-        Rect editRect = new Rect(0, toolbar.getHeight(), editor.getWidth(), editor.getHeight() - toolbar.getHeight());
+        Rect editRect = new Rect(0, toolbar.getHeight(), editor.getGame().getWidth(), editor.getGame().getHeight() - toolbar.getHeight());
 
         for (Layer layer : layout.getLayersByZOrder()) {
             View view = layer.getView();
@@ -256,7 +256,8 @@ public class SceneDesigner implements MouseListener, KeyListener
             StageView stageView = layer.getStageView();
             if (stageView != null) {
                 Stage stage = stageView.getStage();
-                editor.getStages().add(stage);
+                // TODO Shouldn't add stages any more, use layouts instead.
+                editor.getGame().getStages().add(stage);
                 currentLayer = layer;
                 currentStageView = stageView;
                 view.setPosition(editRect);
@@ -267,7 +268,7 @@ public class SceneDesigner implements MouseListener, KeyListener
             designLayer.zOrder = layer.zOrder;
 
             this.designLayers.add(designLayer);
-            editor.getLayout().addLayer(designLayer);
+            editor.getGame().getLayout().addLayer(designLayer);
         }
     }
 
@@ -275,7 +276,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     {
         for (Iterator<Layer> i = layout.getLayers().iterator(); i.hasNext();) {
             Layer layer = i.next();
-            editor.getLayout().removeLayer(editor.getLayout().findLayer(layer.getName()));
+            editor.getGame().getLayout().removeLayer(editor.getGame().getLayout().findLayer(layer.getName()));
         }
         this.designLayers.clear();
     }
@@ -346,19 +347,20 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void exit()
     {
         removeDesignLayers(scene.layout);
-        editor.clear();
+        editor.getGame().clear();
         editor.sceneDesigner = null;
         overlayStage.clear();
 
-        Layout layout = editor.getLayout();
+        Layout layout = editor.getGame().getLayout();
         layout.removeLayer(toolbarLayer);
         layout.removeLayer(toolboxLayer);
         layout.removeLayer(overlayLayer);
         layout.removeLayer(backgroundLayer);
 
-        editor.getStages().remove(overlayStage);
-        editor.removeMouseListener(this);
-        editor.removeKeyListener(this);
+        // TODO Don't use stages directly
+        editor.getGame().getStages().remove(overlayStage);
+        editor.getGame().removeMouseListener(this);
+        editor.getGame().removeKeyListener(this);
 
         Itchy.getGame().removeKeyListener(this);
 
@@ -402,7 +404,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void createPageBorder()
     {
         int margin = 0;
-        NinePatch ninePatch = editor.getStylesheet().resources.getNinePatch("pageBorder");
+        NinePatch ninePatch = editor.getGame().getStylesheet().resources.getNinePatch("pageBorder");
         Surface newSurface = ninePatch.createSurface(
             sceneRect.width + margin * 2,
             sceneRect.height + margin * 2);
@@ -427,10 +429,10 @@ public class SceneDesigner implements MouseListener, KeyListener
         toolbox.addStyle("toolbox");
         toolbox.draggable = true;
 
-        toolbox.setStylesheet(editor.getStylesheet());
+        toolbox.setStylesheet(editor.getGame().getStylesheet());
         toolbox.reStyle();
         toolbox.forceLayout();
-        toolbox.setPosition(0, 0, editor.getWidth(), 200);
+        toolbox.setPosition(0, 0, editor.getGame().getWidth(), 200);
         toolbox.addStyle("semi");
 
         PlainContainer costumes = new PlainContainer();
@@ -492,18 +494,18 @@ public class SceneDesigner implements MouseListener, KeyListener
         toolbox.addChild(toolboxNotebook);
 
         int toolHeight = 200;
-        toolbox.setMinimumWidth(editor.getWidth());
+        toolbox.setMinimumWidth(editor.getGame().getWidth());
         toolbox.setMaximumHeight(toolHeight);
         toolbox.setMinimumHeight(toolHeight);
 
-        Rect rect = new Rect(0, editor.getHeight() - toolHeight, editor.getWidth(), toolHeight);
+        Rect rect = new Rect(0, editor.getGame().getHeight() - toolHeight, editor.getGame().getWidth(), toolHeight);
         GuiView view = new GuiView(rect, toolbox);
         Itchy.getGame().show(view);
 
         toolboxLayer = new Layer(view);
         toolboxLayer.setName("sd_toolbox");
         toolboxLayer.zOrder = 90;
-        editor.getLayout().addLayer(toolboxLayer);
+        editor.getGame().getLayout().addLayer(toolboxLayer);
     }
 
     private void createToolbar()
@@ -512,25 +514,25 @@ public class SceneDesigner implements MouseListener, KeyListener
 
         toolbar.addStyle("toolbar");
 
-        toolbar.setStylesheet(editor.getStylesheet());
+        toolbar.setStylesheet(editor.getGame().getStylesheet());
         toolbar.reStyle();
         toolbar.forceLayout();
 
         addToolbarButtons(toolbar);
 
-        toolbar.setMinimumWidth(editor.getWidth());
+        toolbar.setMinimumWidth(editor.getGame().getWidth());
         toolbar.show();
-        toolbar.setPosition(0, 0, editor.getWidth(), toolbar.getRequiredHeight());
+        toolbar.setPosition(0, 0, editor.getGame().getWidth(), toolbar.getRequiredHeight());
 
         toolbarLayer = new Layer(toolbar.getView());
         toolbarLayer.setName("sd_toolbar");
         toolbarLayer.zOrder = 90;
-        editor.getLayout().addLayer(toolbarLayer);
+        editor.getGame().getLayout().addLayer(toolbarLayer);
     }
 
     public Button createButton(String name, String text)
     {
-        Pose pose = editor.getStylesheet().resources.getPose("icon_" + name);
+        Pose pose = editor.getGame().getStylesheet().resources.getPose("icon_" + name);
         if (pose == null) {
             return new Button(text);
         } else {
@@ -917,7 +919,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         SceneDesignerRole sdb = (SceneDesignerRole) currentActor.getRole();
 
         roleClassName = new ClassNameBox(
-            editor.getScriptManager(), sdb.actualRole.getClassName(), Role.class);
+            editor.getGame().getScriptManager(), sdb.actualRole.getClassName(), Role.class);
 
         roleClassName.addChangeListener(new ComponentChangeListener()
         {
@@ -965,7 +967,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         Makeup makeup = currentActor.getAppearance().getMakeup();
 
         makeupClassName = new ClassNameBox(
-            editor.getScriptManager(), makeup.getClassName(), Makeup.class);
+            editor.getGame().getScriptManager(), makeup.getClassName(), Makeup.class);
 
         makeupClassName.addChangeListener(new ComponentChangeListener()
         {
@@ -1283,7 +1285,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     public void onKeyDown(KeyboardEvent event)
     {
 
-        if (event.symbol == Keys.ESCAPE) {
+        if (event.symbol == Symbol.ESCAPE) {
             onEscape();
             event.stopPropagation();
         }
@@ -1292,11 +1294,11 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             int scrollAmount = Itchy.isShiftDown() ? 100 : 10;
 
-            if (event.symbol == Keys.s) {
+            if (event.symbol == Symbol.s) {
                 onSave();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.z) {
+            } else if (event.symbol == Symbol.z) {
                 if (Itchy.isShiftDown()) {
                     undoList.redo();
                 } else {
@@ -1304,73 +1306,73 @@ public class SceneDesigner implements MouseListener, KeyListener
                 }
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.y) {
+            } else if (event.symbol == Symbol.y) {
                 undoList.redo();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.w) {
+            } else if (event.symbol == Symbol.w) {
                 onDone();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.x) {
+            } else if (event.symbol == Symbol.x) {
                 onCopy();
                 onActorDelete();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.c) {
+            } else if (event.symbol == Symbol.c) {
                 onCopy();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.v) {
+            } else if (event.symbol == Symbol.v) {
                 onPaste();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.LEFT) {
+            } else if (event.symbol == Symbol.LEFT) {
                 scrollBy(-scrollAmount, 0);
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.RIGHT) {
+            } else if (event.symbol == Symbol.RIGHT) {
                 scrollBy(scrollAmount, 0);
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.UP) {
+            } else if (event.symbol == Symbol.UP) {
                 scrollBy(0, scrollAmount);
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.DOWN) {
+            } else if (event.symbol == Symbol.DOWN) {
                 scrollBy(0, -scrollAmount);
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.DELETE) {
+            } else if (event.symbol == Symbol.DELETE) {
                 onActorDelete();
                 event.stopPropagation();
 
-            } else if ((event.symbol >= Keys.KEY_1)
-                && (event.symbol <= Keys.KEY_7)) {
-                toolboxNotebook.selectPage(event.symbol - Keys.KEY_1);
+            } else if ((event.symbolValue >= Symbol.KEY_1.value)
+                && (event.symbolValue <= Symbol.KEY_7.value)) {
+                toolboxNotebook.selectPage(event.symbolValue - Symbol.KEY_1.value);
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.HOME) {
+            } else if (event.symbol == Symbol.HOME) {
                 onCenter();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.PAGEUP) {
+            } else if (event.symbol == Symbol.PAGEUP) {
                 onActorUpStage();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.PAGEDOWN) {
+            } else if (event.symbol == Symbol.PAGEDOWN) {
                 onActorDownStage();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.o) {
+            } else if (event.symbol == Symbol.o) {
                 onActorUnrotate();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.KEY_0) {
+            } else if (event.symbol == Symbol.KEY_0) {
                 onActorUnscale();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.HASH) {
+            } else if (event.symbol == Symbol.HASH) {
                 onResetZOrders();
                 event.stopPropagation();
             }
@@ -1379,47 +1381,47 @@ public class SceneDesigner implements MouseListener, KeyListener
 
             int moveAmount = Itchy.isShiftDown() ? 10 : 1;
 
-            if (event.symbol == Keys.PAGEUP) {
+            if (event.symbol == Symbol.PAGEUP) {
                 onActorUp();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.PAGEDOWN) {
+            } else if (event.symbol == Symbol.PAGEDOWN) {
                 onActorDown();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.HOME) {
+            } else if (event.symbol == Symbol.HOME) {
                 onActorTop();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.END) {
+            } else if (event.symbol == Symbol.END) {
                 onActorBottom();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.LEFT) {
+            } else if (event.symbol == Symbol.LEFT) {
                 moveActor(-moveAmount, 0);
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.RIGHT) {
+            } else if (event.symbol == Symbol.RIGHT) {
                 moveActor(moveAmount, 0);
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.UP) {
+            } else if (event.symbol == Symbol.UP) {
                 moveActor(0, moveAmount);
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.DOWN) {
+            } else if (event.symbol == Symbol.DOWN) {
                 moveActor(0, -moveAmount);
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.F2) {
+            } else if (event.symbol == Symbol.F2) {
                 onEditText();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.F8) {
+            } else if (event.symbol == Symbol.F8) {
                 onEditText();
                 event.stopPropagation();
 
-            } else if (event.symbol == Keys.F12) {
+            } else if (event.symbol == Symbol.F12) {
                 onTest();
                 event.stopPropagation();
             }
@@ -2097,7 +2099,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         Surface actorSurface = currentActor.getAppearance().getSurface();
 
         int margin = 10;
-        NinePatch ninePatch = editor.getStylesheet().resources
+        NinePatch ninePatch = editor.getGame().getStylesheet().resources
             .getNinePatch("highlight");
         Surface newSurface = ninePatch.createSurface(actorSurface.getWidth() + margin * 2,
             actorSurface.getHeight() + margin * 2);
@@ -2149,7 +2151,7 @@ public class SceneDesigner implements MouseListener, KeyListener
     private void createHandles()
     {
 
-        ImagePose rotatePose = editor.getStylesheet().resources.getPose("rotateHandle");
+        ImagePose rotatePose = editor.getGame().getStylesheet().resources.getPose("rotateHandle");
         Actor rotateActor = new Actor(rotatePose);
         rotateHandle = new RotateHandleRole();
         rotateActor.setRole(rotateHandle);
@@ -2157,7 +2159,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         overlayStage.addTop(rotateActor);
         handles.add(rotateHandle);
 
-        ImagePose headingPose = editor.getStylesheet().resources.getPose("headingHandle");
+        ImagePose headingPose = editor.getGame().getStylesheet().resources.getPose("headingHandle");
         Actor headingActor = new Actor(headingPose);
         headingHandle = new HeadingHandleRole();
         headingActor.setRole(headingHandle);
@@ -2165,7 +2167,7 @@ public class SceneDesigner implements MouseListener, KeyListener
         overlayStage.addTop(headingActor);
         handles.add(headingHandle);
 
-        ImagePose scalePose = editor.getStylesheet().resources.getPose("scaleHandle");
+        ImagePose scalePose = editor.getGame().getStylesheet().resources.getPose("scaleHandle");
         for (int dx = -1; dx < 2; dx += 2) {
             for (int dy = -1; dy < 2; dy += 2) {
                 Actor scaleHandle = new Actor(scalePose);
