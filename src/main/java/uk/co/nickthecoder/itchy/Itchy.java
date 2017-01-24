@@ -388,9 +388,6 @@ public final class Itchy
         } catch (Exception e) {
             handleException(e);
         }
-
-        gameWindow.render();
-
     }
 
     /**
