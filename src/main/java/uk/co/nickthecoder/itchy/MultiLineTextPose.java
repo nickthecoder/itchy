@@ -5,8 +5,10 @@
 package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.jame.RGBA;
+import uk.co.nickthecoder.jame.Renderer;
 import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.Surface.BlendMode;
+import uk.co.nickthecoder.jame.Texture;
 import uk.co.nickthecoder.jame.TrueTypeFont;
 
 public class MultiLineTextPose extends AbstractTextPose
@@ -19,19 +21,19 @@ public class MultiLineTextPose extends AbstractTextPose
 
     private int fixedHeight;
 
-    public MultiLineTextPose( Font font, double fontSize )
+    public MultiLineTextPose(Font font, double fontSize)
     {
         this(font, fontSize, new RGBA(255, 255, 255));
     }
 
-    public MultiLineTextPose( Font font, double fontSize, RGBA color )
+    public MultiLineTextPose(Font font, double fontSize, RGBA color)
     {
         super(font, fontSize, color);
     }
 
-    public MultiLineTextPose( TextStyle textStyle )
+    public MultiLineTextPose(TextStyle textStyle)
     {
-        super( textStyle );
+        super(textStyle);
     }
 
     @Override
@@ -43,6 +45,10 @@ public class MultiLineTextPose extends AbstractTextPose
             this.surface.free();
         }
         this.surface = null;
+        if (this.texture != null) {
+            this.texture.destroy();
+            this.texture = null;
+        }
     }
 
     private void ensureCached()
@@ -90,19 +96,30 @@ public class MultiLineTextPose extends AbstractTextPose
         return this.surface;
     }
 
+    private Texture texture;
+
+    @Override
+    public Texture getTexture(Renderer renderer)
+    {
+        if (texture == null) {
+            texture = new Texture(renderer, getSurface());
+        }
+        return texture;
+    }
+
     public void autoSize()
     {
         this.fixedSize = false;
     }
 
-    public void setSize( int width, int height )
+    public void setSize(int width, int height)
     {
         this.fixedSize = true;
         this.fixedWidth = width;
         this.fixedHeight = height;
     }
 
-    public void setSizeInCharacters( int across, int down )
+    public void setSizeInCharacters(int across, int down)
     {
         int em = getTrueTypeFont().sizeText("M");
         this.setSize(em * across, getTrueTypeFont().getLineHeight() * down);

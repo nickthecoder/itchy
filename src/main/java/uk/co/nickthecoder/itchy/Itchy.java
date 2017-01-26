@@ -5,7 +5,6 @@
 package uk.co.nickthecoder.itchy;
 
 import java.io.File;
-import java.util.Date;
 import java.util.Stack;
 
 import uk.co.nickthecoder.itchy.editor.Editor;
@@ -17,7 +16,6 @@ import uk.co.nickthecoder.jame.event.MouseButton;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
-import uk.co.nickthecoder.jame.event.ResizeEvent;
 import uk.co.nickthecoder.jame.event.ScanCode;
 
 /**
@@ -82,12 +80,6 @@ public final class Itchy
     private static File baseDirectory;
 
     /**
-     * Used in a bodge attempting to fix a bug in SDL, where the incorrect window size is returned when dragging a
-     * window's border.
-     */
-    private static long lastWindowResizeTime = 0;
-
-    /**
      * A registry of standard classes/scripts (Roles, SceneDirectors, Directors) as well as Animations, Makeup and
      * Eases.
      * Used by the {@link Editor}
@@ -140,7 +132,6 @@ public final class Itchy
 
         // setScreenMode(game.getTitle(), game.resources, width, height, resizable);
         // TODO Remove bodge
-        lastWindowResizeTime = new Date().getTime();
     }
 
     /**
@@ -458,20 +449,6 @@ public final class Itchy
      */
     public static void processEvent(Event event)
     {
-        if (event instanceof ResizeEvent) {
-
-            // Using Gnome 3.14.1, when a window border is dragged, the correct resize event is sent, but
-            // then the window is resized, and ANOTHER resize event is fired which includes the
-            // size of the chrome (title bar and borders). This bodge stops a runaway, where the window
-            // is made higher and higher when dragging sideways. It does not completely fix the problem, but
-            // makes it bearable.
-            long diff = new Date().getTime() - lastWindowResizeTime;
-            if (diff < 500) {
-                // Ignore the resize event which happens within 0.5 seconds of the window being resized.
-                lastWindowResizeTime = 0;
-                return;
-            }
-        }
 
         if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;

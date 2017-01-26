@@ -67,9 +67,11 @@ public class ResourcesReader
         GameInfo gameInfo = this.resources.getGameInfo();
         if (gameInfo == null) {
             gameInfo = new GameInfo();
-            resources.setGameInfo(gameInfo);
-            ;
+            /* TODO Setting gameInfo in two places??? */
+            //resources.setGameInfo(gameInfo);
         }
+        
+        
         Director director = this.resources.game.getDirector();
         if (director == null) {
             director = new PlainDirector();

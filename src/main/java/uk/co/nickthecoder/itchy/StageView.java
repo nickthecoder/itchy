@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import uk.co.nickthecoder.itchy.editor.Editor;
+import uk.co.nickthecoder.itchy.editor.SceneDesigner;
 import uk.co.nickthecoder.itchy.property.BooleanProperty;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.Rect;
@@ -27,7 +29,7 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     protected static final List<Property<View, ?>> properties = new ArrayList<Property<View, ?>>();
 
     static {
-        properties.addAll(AbstractScrollableView.properties);
+        properties.addAll(AbstractView.properties);
         properties.add(new BooleanProperty<View>("enableMouse"));
     }
 
@@ -257,6 +259,64 @@ public class StageView extends AbstractScrollableView implements StageListener, 
     {
         gc.render(actor, alpha);
     }
+
+    /**
+     * Used internally by Itchy.
+     * 
+     * @priority 3
+     */
+    @Override
+    public void render(NewGraphicsContext gc)
+    {
+        for (Iterator<Actor> i = this.stage.iterator(); i.hasNext();) {
+
+            Actor actor = i.next();
+
+            try {
+
+                if (actor.isDead()) {
+                    i.remove();
+                    continue;
+                }
+
+                // Don't render actors that are invisible (or very nearly invisible)
+                if ((actor.getAppearance().getAlpha() > 1) || (this.minimumAlpha > 1)) {
+                    if (actor.getAppearance().visibleWithin(this.worldRect)) {
+
+                        int alpha = (int) (actor.getAppearance().getAlpha());
+                        if (alpha < this.minimumAlpha) {
+                            alpha = this.minimumAlpha;
+                        }
+                        if (alpha > this.maximumAlpha) {
+                            alpha = this.maximumAlpha;
+                        }
+
+                        if (alpha > 0) {
+                            render(gc, actor, alpha);
+                        }
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Failed to render " + actor);
+            }
+        }
+    }
+
+    /**
+     * Renders a single Actor
+     * 
+     * @param gc
+     * @param actor
+     * @param alpha
+     * @priority 3
+     */
+    protected void render(NewGraphicsContext gc, Actor actor, int alpha)
+    {
+        gc.render(actor, alpha);
+    }
+
 
     /**
      * Part of the {@link StageListener} interface, used to keep track of which Actors need to receive mouse events.

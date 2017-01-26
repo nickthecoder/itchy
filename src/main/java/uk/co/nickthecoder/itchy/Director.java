@@ -10,7 +10,6 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
-import uk.co.nickthecoder.jame.event.ResizeEvent;
 
 /**
  * A Director is a place where some of your game's logic lives.
@@ -177,7 +176,7 @@ public interface Director extends InputListener, QuitListener, MessageListener, 
      * @param e
      * @priority 2
      */
-    public void onResize(ResizeEvent e);
+    public void onResize(int width, int height);
 
     /**
      * Called once per frame (60 times per second).
@@ -191,4 +190,5 @@ public interface Director extends InputListener, QuitListener, MessageListener, 
      */
     public Preferences getPreferenceNode();
 
+    
 }

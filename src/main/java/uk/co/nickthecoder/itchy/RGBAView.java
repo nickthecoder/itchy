@@ -17,27 +17,27 @@ import uk.co.nickthecoder.jame.Rect;
  */
 public class RGBAView extends AbstractView
 {
-    protected static final List<Property<View,?>> properties = new ArrayList<Property<View,?>>();
+    protected static final List<Property<View, ?>> properties = new ArrayList<Property<View, ?>>();
 
     static {
         properties.add(new RGBAProperty<View>("color"));
     }
-    
+
     @Override
-    public List<Property<View,?>> getProperties()
+    public List<Property<View, ?>> getProperties()
     {
         return properties;
     }
-    
+
     public RGBA color;
 
     public RGBAView()
     {
         super();
-        this.color = new RGBA(0,0,0);
+        this.color = new RGBA(0, 0, 0);
     }
 
-    public RGBAView( Rect position, RGBA color )
+    public RGBAView(Rect position, RGBA color)
     {
         super(position);
         this.color = color;
@@ -50,7 +50,13 @@ public class RGBAView extends AbstractView
     }
 
     @Override
-    public void render( GraphicsContext gc )
+    public void render(GraphicsContext gc)
+    {
+        gc.fill(new Rect(0, 0, position.width, position.height), this.color);
+    }
+
+    @Override
+    public void render(NewGraphicsContext gc)
     {
         gc.fill(new Rect(0,0,position.width, position.height), this.color);
     }
@@ -60,4 +66,5 @@ public class RGBAView extends AbstractView
     {
         return "RGBAView " + this.color;
     }
+
 }

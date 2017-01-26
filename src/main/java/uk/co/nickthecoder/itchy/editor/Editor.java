@@ -24,7 +24,6 @@ import uk.co.nickthecoder.itchy.gui.Stylesheet;
 import uk.co.nickthecoder.itchy.gui.VerticalLayout;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
-import uk.co.nickthecoder.jame.event.ResizeEvent;
 import uk.co.nickthecoder.jame.event.Symbol;
 
 public final class Editor extends PlainDirector implements KeyListener
@@ -88,10 +87,10 @@ public final class Editor extends PlainDirector implements KeyListener
     public Editor()
     {
         try {
-            inputTest = Input.parse("ctrl+t");
-            inputRun = Input.parse("ctrl+r");
-            inputQuit = Input.parse("ctrl+q");
-            inputSave = Input.parse("ctrl+s");
+            inputTest = Input.parse("ctrl+T");
+            inputRun = Input.parse("ctrl+R");
+            inputQuit = Input.parse("ctrl+Q");
+            inputSave = Input.parse("ctrl+S");
             inputDebug1 = Input.parse("ctrl+F1");
             inputDebug2 = Input.parse("ctrl+F2");
             inputDebug3 = Input.parse("ctrl+F3");
@@ -101,10 +100,11 @@ public final class Editor extends PlainDirector implements KeyListener
         }
     }
 
+    @Override
     public void attach(Game game)
     {
         super.attach(game);
-        
+
         this.game = game;
         this.resources = game.resources;
         instance = this;
@@ -131,17 +131,20 @@ public final class Editor extends PlainDirector implements KeyListener
         }
     }
 
+    @Override
     public Game getGame()
     {
         return this.game;
     }
 
+    @Override
     public void onStarted()
-    {        
+    {
         int width = 1024;
         int height = 768;
-        
-        Itchy.resizeScreen(width, height, true);
+
+        game.gameWindow.setSize(width, height);
+
 
         this.root = new RootContainer();
         this.root.setLayout(new VerticalLayout());
@@ -234,14 +237,15 @@ public final class Editor extends PlainDirector implements KeyListener
 
         this.root.setPosition(0, 0, width, height);
         this.root.reStyle();
-
+        
+        
     }
 
-    public void designScene( String sceneName )
+    public void designScene(String sceneName)
     {
         this.listScenes.addOrEdit(this.resources.getScene(this.designSceneName));
     }
-    
+
     public void run()
     {
         onSave();
@@ -365,22 +369,22 @@ public final class Editor extends PlainDirector implements KeyListener
     }
 
     @Override
-    public void onResize(ResizeEvent e)
+    public void onResize(int width, int height)
     {
-        super.onResize(e);
-        
-        root.setPosition(0, 0, e.width, e.height);
-        root.getView().setPosition(new Rect(0, 0, e.width, e.height));
+        super.onResize(width, height);
+
+        root.setPosition(0, 0, width, height);
+        root.getView().setPosition(new Rect(0, 0, width, height));
 
         if (sceneDesigner != null) {
-            sceneDesigner.resize(e.width, e.height);
+            sceneDesigner.resize(width, height);
         }
 
-        this.root.setMinimumWidth(e.width);
-        this.root.setMinimumHeight(e.height);
+        this.root.setMinimumWidth(width);
+        this.root.setMinimumHeight(height);
 
-        this.root.setMaximumWidth(e.width);
-        this.root.setMaximumHeight(e.height);
+        this.root.setMaximumWidth(width);
+        this.root.setMaximumHeight(height);
 
     }
 

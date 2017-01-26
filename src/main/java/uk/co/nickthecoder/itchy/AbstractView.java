@@ -74,6 +74,11 @@ public abstract class AbstractView implements View
         return gc.window( this.position );
     }
     
+    public NewGraphicsContext adjustGraphicsContext( NewGraphicsContext gc )
+    {
+        return gc.window( this.position );
+    }
+    
     @Override
     public abstract void render( GraphicsContext gc );
 

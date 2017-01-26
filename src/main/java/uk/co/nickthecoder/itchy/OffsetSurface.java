@@ -4,7 +4,9 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import uk.co.nickthecoder.jame.Renderer;
 import uk.co.nickthecoder.jame.Surface;
+import uk.co.nickthecoder.jame.Texture;
 
 public interface OffsetSurface
 {
@@ -17,6 +19,8 @@ public interface OffsetSurface
     public int getOffsetY();
 
     public Surface getSurface();
+    
+    public Texture getTexture(Renderer renderer);
 
     /**
      * @return true iff the surface should not be freed, because it is shared by another entity.

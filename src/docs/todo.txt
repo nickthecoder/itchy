@@ -1,7 +1,20 @@
 Current Tasks
 =============
 
-Javadoc & code review...
+Convert rendering to use new SDL2 hardware accelerated features
+    Render actors using Textures
+        Use simplistic one texture per Pose
+        Ignore all Makeup/pipeline stuff.
+        Ignore rotate and scale at first.
+
+    Optimise to use one large Textures and bounding rectangles for each Sprite within a SpriteSheet
+    
+    Do something sensible with Makeup and Pipeline stuff.
+        Remove rotate and scale from
+    
+    Render GuiViews using Textures
+
+
 
 Game
     Does Editor need to be a subclass of Game?

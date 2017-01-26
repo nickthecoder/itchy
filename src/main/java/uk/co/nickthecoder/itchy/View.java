@@ -24,6 +24,13 @@ public interface View extends PropertySubject<View>
     public GraphicsContext adjustGraphicsContext(GraphicsContext gc);
 
     /**
+     * Return a GraphicsContext, clipped to this view's position, and taking care of any scrolling.
+     * 
+     * @priority 3
+     */
+    public NewGraphicsContext adjustGraphicsContext(NewGraphicsContext gc);
+
+    /**
      * Draws the view. This is how layers are drawn to the display, but can also be used to draw
      * to non-display surfaces.
      * For example, if you want to take a snapshot of the game, you could render to a surface which you
@@ -31,6 +38,8 @@ public interface View extends PropertySubject<View>
      * 
      */
     public void render(GraphicsContext gc);
+
+    public void render(NewGraphicsContext gc);
 
     /**
      * @return The position of the view relative to the parent view

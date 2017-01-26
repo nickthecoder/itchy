@@ -4,7 +4,9 @@
  ******************************************************************************/
 package uk.co.nickthecoder.itchy;
 
+import uk.co.nickthecoder.jame.Renderer;
 import uk.co.nickthecoder.jame.Surface;
+import uk.co.nickthecoder.jame.Texture;
 
 public class SimpleOffsetSurface implements OffsetSurface
 {
@@ -13,6 +15,8 @@ public class SimpleOffsetSurface implements OffsetSurface
     public int offsetY;
 
     public Surface surface;
+    
+    private Texture texture;
 
     public boolean shared;
 
@@ -54,6 +58,15 @@ public class SimpleOffsetSurface implements OffsetSurface
     public boolean isShared()
     {
         return this.shared;
+    }
+
+    @Override
+    public Texture getTexture(Renderer renderer)
+    {
+        if ( texture == null ) {
+            texture = new Texture( renderer, getSurface() );
+        }
+        return texture;
     }
 
 }

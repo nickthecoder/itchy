@@ -10,6 +10,7 @@ import uk.co.nickthecoder.itchy.GraphicsContext;
 import uk.co.nickthecoder.itchy.InputListener;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.MultiLineTextPose;
+import uk.co.nickthecoder.itchy.NewGraphicsContext;
 import uk.co.nickthecoder.itchy.SurfaceGraphicsContext;
 import uk.co.nickthecoder.itchy.TextStyle;
 import uk.co.nickthecoder.itchy.View;
@@ -25,6 +26,7 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 
+// TODO, Using my standard naming convention this should be GUIView, not GuiView???
 /**
  */
 public class GuiView extends AbstractView implements View, InputListener
@@ -69,7 +71,6 @@ public class GuiView extends AbstractView implements View, InputListener
     @Override
     public void setPosition(Rect position)
     {
-        System.err.println( "Setting GuiView position : " + position );
         super.setPosition(position);
         this.invalid = true;
         this.surface = null;
@@ -276,6 +277,13 @@ public class GuiView extends AbstractView implements View, InputListener
     public String toString()
     {
         return "GuiView : " + this.rootContainer;
+    }
+
+    @Override
+    public void render(NewGraphicsContext gc)
+    {
+        // TODO Implement hardware rendering for GuiViews
+        throw new RuntimeException( "Hardware acellerated rendering not implemented yet" );
     }
 
 }

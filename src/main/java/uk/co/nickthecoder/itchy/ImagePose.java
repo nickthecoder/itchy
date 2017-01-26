@@ -5,7 +5,9 @@
 package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.jame.JameException;
+import uk.co.nickthecoder.jame.Renderer;
 import uk.co.nickthecoder.jame.Surface;
+import uk.co.nickthecoder.jame.Texture;
 
 /**
  * An ImagePose uses a simple bitmap
@@ -86,7 +88,7 @@ public class ImagePose implements Pose
 
     /**
      * Creates an ImagePose by loading it from a file.
-     * The offsets will be at the center of the image.
+     * The offsets will be at the centre of the image.
      * 
      * @param filename
      *            The absolute path of the image.
@@ -99,7 +101,7 @@ public class ImagePose implements Pose
 
     /**
      * Creates an ImagePose from an existing Surface.
-     * The offsets will be at the center of the image.
+     * The offsets will be at the centre of the image.
      * 
      * @param surface
      */
@@ -201,6 +203,18 @@ public class ImagePose implements Pose
     public Surface getSurface()
     {
         return this.surface;
+    }
+
+    private Texture texture;
+
+    // TODO Currently every ImagePose will have its own Texture, even if they came from a SpriteSheet.
+    // Should really use one big Texture, and keep track of the rectangle.
+    public Texture getTexture(Renderer renderer)
+    {
+        if (texture == null) {
+            texture = new Texture(renderer, getSurface());
+        }
+        return texture;
     }
 
     /**

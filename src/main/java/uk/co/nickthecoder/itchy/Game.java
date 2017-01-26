@@ -15,7 +15,6 @@ import java.util.WeakHashMap;
 
 import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.editor.SceneDesigner;
-import uk.co.nickthecoder.itchy.extras.SceneTransition;
 import uk.co.nickthecoder.itchy.extras.SimpleMouse;
 import uk.co.nickthecoder.itchy.gui.GuiView;
 import uk.co.nickthecoder.itchy.gui.RootContainer;
@@ -25,13 +24,11 @@ import uk.co.nickthecoder.itchy.util.AutoFlushPreferences;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 import uk.co.nickthecoder.itchy.util.TagCollection;
 import uk.co.nickthecoder.jame.Rect;
-import uk.co.nickthecoder.jame.Surface;
 import uk.co.nickthecoder.jame.event.Event;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
-import uk.co.nickthecoder.jame.event.ResizeEvent;
 import uk.co.nickthecoder.jame.event.Symbol;
 import uk.co.nickthecoder.jame.event.WindowEvent;
 
@@ -129,6 +126,8 @@ public class Game
      */
     private StageView glassView;
 
+    // TODO Rename to guiViews, rather than windows, especially now that there are REAL windows.
+    // TODO Maybe replace GUIViews with real windows (wasn't possible when using SDL version 1.x). 
     /**
      * The list of all of the windows currently shown.
      */
@@ -471,10 +470,13 @@ public class Game
             game = new Game(resources.copy());
             game.init();
         }
+
         Editor editor = new Editor();
         game.setDirector(editor);
-        game.start(null);
         game.setSceneDirector(new PlainSceneDirector());
+        game.start(null);
+        
+
         return editor;
     }
 
@@ -643,35 +645,6 @@ public class Game
     }
 
    
-    
-    /**
-     * Renders all of the views to the display surface.
-     * 
-     * Itchy will call this from inside the game loop, so there is normally no need for you to call it explicitly.
-     * However, you may call
-     * this with a surface of your own creation to obtain a screenshot of the game. {@link SceneTransition} takes
-     * screenshots in this manner,
-     * which are then slid, or faded from view.
-     * 
-     * @param display
-     *            The surface to draw onto. This will normally be the display surface, but can be any surface WITHOUT an
-     *            alpha channel.
-     * @priority 3
-     */
-    public void render(Surface display)
-    {
-        GraphicsContext gc = new SurfaceGraphicsContext(display);
-        if (this.layout != null) {
-            for (Layer layer : this.layout.getLayersByZOrder()) {
-                View view = layer.getView();
-                view.render(view.adjustGraphicsContext(gc));
-            }
-        }
-        for (GuiView window : this.windows) {
-            window.render(window.adjustGraphicsContext(gc));
-        }
-        this.glassView.render(this.glassView.adjustGraphicsContext(gc));
-    }
 
     /**
      * Use this to time actual game play, which will exclude time while the game is paused. A single value from
@@ -706,10 +679,6 @@ public class Game
             this.director.onQuit((QuitEvent) event);
             // Itchy won't terminate if the director calls event.stopPropagation().
             Itchy.terminate();
-
-        } else if (event instanceof ResizeEvent) {
-            ResizeEvent re = (ResizeEvent) event;
-            this.director.onResize(re);
 
         } else if (event instanceof KeyboardEvent) {
             KeyboardEvent ke = (KeyboardEvent) event;
@@ -1318,7 +1287,6 @@ public class Game
      */
     public GuiView show(RootContainer rootContainer)
     {
-        System.err.println( "Create GuiView " + Itchy.getDisplaySurface().getWidth() );
         GuiView view = new GuiView(new Rect(0, 0, Itchy.getDisplaySurface().getWidth(),
             Itchy.getDisplaySurface().getHeight()), rootContainer);
 

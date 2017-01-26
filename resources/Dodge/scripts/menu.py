@@ -1,4 +1,5 @@
 from common import * #@UnusedWildImport
+from uk.co.nickthecoder.jame.event import TextInputEvent
 
 properties = ArrayList()
 
@@ -27,8 +28,9 @@ class Menu(PlainSceneDirector) :
         
     def onKeyDown(self, event) :
         # Press a letter to start the scene.
-        if game.hasScene( event.c ) :
-            game.startScene( event.c )
+        # TODO Use TextInputEvents to check for letters typed on the menu screen.
+        #if game.hasScene( event.symbol.value ) :
+        #    game.startScene( event.symbol.value.tostring )
         
         if self.inputNext.matches(event) :
             self.changeScene( 1 )

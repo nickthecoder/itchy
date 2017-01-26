@@ -5,23 +5,26 @@
 package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.jame.RGBA;
+import uk.co.nickthecoder.jame.Renderer;
 import uk.co.nickthecoder.jame.Surface;
+import uk.co.nickthecoder.jame.Texture;
 import uk.co.nickthecoder.jame.TrueTypeFont;
 
 public class TextPose extends AbstractTextPose
 {
     private Surface surface;
 
-    public TextPose( String text, TextStyle style )
+    public TextPose(String text, TextStyle style)
     {
-        this(text, style.font, style.fontSize, style.color );
-    }
-    public TextPose( String text, Font font, double fontSize )
-    {
-        this(text, font, fontSize, new RGBA(255,255,255));
+        this(text, style.font, style.fontSize, style.color);
     }
 
-    public TextPose( String text, Font font, double fontSize, RGBA color )
+    public TextPose(String text, Font font, double fontSize)
+    {
+        this(text, font, fontSize, new RGBA(255, 255, 255));
+    }
+
+    public TextPose(String text, Font font, double fontSize, RGBA color)
     {
         super(font, fontSize, color);
         this.setText(text);
@@ -36,6 +39,10 @@ public class TextPose extends AbstractTextPose
             this.surface.free();
         }
         this.surface = null;
+        if (this.texture != null) {
+            this.texture.destroy();
+            this.texture = null;
+        }
     }
 
     private void ensureCached()
@@ -53,6 +60,18 @@ public class TextPose extends AbstractTextPose
         return this.surface;
     }
 
+    private Texture texture;
+
+    @Override
+    public Texture getTexture(Renderer renderer)
+    {
+        if (texture == null) {
+            System.out.println("TextPose creating texture");
+            texture = new Texture(renderer, getSurface());
+        }
+        return texture;
+    }
+
     @Override
     public int getWidth()
     {
@@ -68,7 +87,8 @@ public class TextPose extends AbstractTextPose
     }
 
     /**
-     * Sets the y alignment, so that it uses the baseline of the text as the reference line. Use this to line up text sensibly.
+     * Sets the y alignment, so that it uses the baseline of the text as the reference line. Use this to line up text
+     * sensibly.
      */
     public void setBaselineAlignment()
     {

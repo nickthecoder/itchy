@@ -27,7 +27,9 @@ import uk.co.nickthecoder.itchy.property.RGBAProperty;
 import uk.co.nickthecoder.itchy.property.StringProperty;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
+import uk.co.nickthecoder.jame.Renderer;
 import uk.co.nickthecoder.jame.Surface;
+import uk.co.nickthecoder.jame.Texture;
 
 /**
  * Part of an {@link Actor}, defines how the actor looks on screen, including its {@link Pose} a scaling factor, an
@@ -703,5 +705,12 @@ public final class Appearance implements OffsetSurface, PropertySubject<Appearan
     {
         return true;
     }
+
+    @Override
+    public Texture getTexture(Renderer renderer)
+    {
+        return pose.getTexture(renderer);
+    }
+
 
 }

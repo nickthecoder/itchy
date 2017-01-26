@@ -116,9 +116,10 @@ public class AnimationSceneTransition implements SceneTransition
             this.complete();
         }
         
-        Game game = Itchy.getGame();
-        snapshot = new Surface(game.getWidth(), game.getHeight(), false);
-        game.render(snapshot);
+        // TODO Fix AnimationSceneTransition
+        //Game game = Itchy.getGame();
+        //snapshot = new Surface(game.getWidth(), game.getHeight(), false);
+        //game.render(snapshot);
     }
 
     @Override

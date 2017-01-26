@@ -11,7 +11,6 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
-import uk.co.nickthecoder.jame.event.ResizeEvent;
 import uk.co.nickthecoder.jame.event.WindowEvent;
 
 public class AbstractDirector implements Director
@@ -151,10 +150,10 @@ public class AbstractDirector implements Director
     }
 
     @Override
-	public void onResize( ResizeEvent event )
+	public void onResize( int width, int height )
     {
     	try {
-    		this.game.resize( event.width, event.height );
+    		this.game.resize( width, height );
     		
     	} catch (Exception e) {
     		e.printStackTrace();
