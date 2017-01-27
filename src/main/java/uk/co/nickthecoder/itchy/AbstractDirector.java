@@ -11,6 +11,7 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
+import uk.co.nickthecoder.jame.event.TextInputEvent;
 import uk.co.nickthecoder.jame.event.WindowEvent;
 
 public class AbstractDirector implements Director
@@ -96,6 +97,16 @@ public class AbstractDirector implements Director
     public void onKeyDown( KeyboardEvent event )
     {
         this.game.getSceneDirector().onKeyDown(event);
+    }
+    
+    /**
+     * Called when a button is pressed. Most games don't use onKeyDown or onKeyUp during game play, instead, each Actor uses :
+     * Itchy.isKeyDown( ... ). onKeyDown and onKeyUp are useful for typing, not for game play.
+     */
+    @Override
+    public void onTextInput( TextInputEvent event )
+    {
+        this.game.getSceneDirector().onTextInput(event);
     }
 
     /**

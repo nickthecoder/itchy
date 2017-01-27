@@ -54,16 +54,14 @@ public class GameWindow extends Window
 
         texture.update(surface);
         renderer.copy(texture, 0, 0);
-
+        
         if (game.layout != null) {
             for (Layer layer : game.layout.getLayersByZOrder()) {
                 View view = layer.getView();
-                // view.render(view.adjustGraphicsContext(gc));
                 view.render(view.adjustGraphicsContext(newgc));
             }
         }
 
-        // game.getGlassView().render(game.getGlassView().adjustGraphicsContext(gc));
         game.getGlassView().render(game.getGlassView().adjustGraphicsContext(newgc));
 
         renderer.present();

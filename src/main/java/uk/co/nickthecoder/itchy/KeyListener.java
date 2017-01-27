@@ -5,11 +5,14 @@
 package uk.co.nickthecoder.itchy;
 
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.TextInputEvent;
 
 public interface KeyListener
 {
     public void onKeyDown( KeyboardEvent ke );
 
     public void onKeyUp( KeyboardEvent ke );
+
+    public void onTextInput( TextInputEvent tie );
 
 }

@@ -5,7 +5,6 @@
 package uk.co.nickthecoder.itchy.editor;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
@@ -83,6 +82,7 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.Symbol;
+import uk.co.nickthecoder.jame.event.TextInputEvent;
 
 public class SceneDesigner implements MouseListener, KeyListener
 {
@@ -274,8 +274,7 @@ public class SceneDesigner implements MouseListener, KeyListener
 
     private void removeDesignLayers(Layout layout)
     {
-        for (Iterator<Layer> i = layout.getLayers().iterator(); i.hasNext();) {
-            Layer layer = i.next();
+        for (Layer layer : layout.getLayers()) {
             editor.getGame().getLayout().removeLayer(editor.getGame().getLayout().findLayer(layer.getName()));
         }
         this.designLayers.clear();
@@ -1427,6 +1426,11 @@ public class SceneDesigner implements MouseListener, KeyListener
             }
 
         }
+    }
+    
+    public void onTextInput(TextInputEvent tie)
+    {
+        
     }
 
     private void onEscape()

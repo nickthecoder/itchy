@@ -25,6 +25,7 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
+import uk.co.nickthecoder.jame.event.TextInputEvent;
 
 // TODO, Using my standard naming convention this should be GUIView, not GuiView???
 /**
@@ -174,6 +175,11 @@ public class GuiView extends AbstractView implements View, InputListener
 
     @Override
     public void onKeyUp(KeyboardEvent ke)
+    {
+    }
+
+    @Override
+    public void onTextInput(TextInputEvent tie)
     {
     }
 

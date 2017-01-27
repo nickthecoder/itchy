@@ -20,6 +20,7 @@ import uk.co.nickthecoder.jame.TrueTypeFont;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.Symbol;
+import uk.co.nickthecoder.jame.event.TextInputEvent;
 
 public class EntryBox extends PlainContainer implements ContainerLayout, KeyListener
 {
@@ -232,20 +233,16 @@ public class EntryBox extends PlainContainer implements ContainerLayout, KeyList
                 ke.stopPropagation();
             }
 
-            /* TODO Change to using TextInputEvent */
-            if ((ke.symbolValue >= 32)) {
-                insert((char) ke.symbolValue);
-                ke.stopPropagation();
-            }
 
         }
 
         super.onKeyDown(ke);
     }
-
-    private boolean insert(char text)
+    
+    public void onTextInput( TextInputEvent tie )
     {
-        return insert(Character.toString(text));
+        insert(tie.text);
+        tie.stopPropagation();        
     }
 
     private boolean insert(String text)

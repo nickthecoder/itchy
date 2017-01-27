@@ -30,6 +30,7 @@ import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
 import uk.co.nickthecoder.jame.event.QuitEvent;
 import uk.co.nickthecoder.jame.event.Symbol;
+import uk.co.nickthecoder.jame.event.TextInputEvent;
 import uk.co.nickthecoder.jame.event.WindowEvent;
 
 /**
@@ -684,11 +685,13 @@ public class Game
     void processEvent(Event event)
     {
         if (event instanceof QuitEvent) {
+            
             this.director.onQuit((QuitEvent) event);
             // Itchy won't terminate if the director calls event.stopPropagation().
             Itchy.terminate();
 
         } else if (event instanceof KeyboardEvent) {
+            
             KeyboardEvent ke = (KeyboardEvent) event;
 
             if (ke.pressed) {
@@ -727,6 +730,25 @@ public class Game
                     this.modalListener.onKeyUp(ke);
                     return;
                 }
+            }
+
+        } else if (event instanceof TextInputEvent) {
+            
+            TextInputEvent tie = (TextInputEvent) event;
+
+            if (this.keyboardFocus != null) {
+                this.keyboardFocus.onTextInput(tie);
+            }
+
+            if (this.modalListener == null) {
+
+                for (KeyListener listener : this.keyListeners) {
+                    listener.onTextInput(tie);
+                }
+
+            } else {
+                this.modalListener.onTextInput(tie);
+                return;
             }
 
         } else if (event instanceof MouseButtonEvent) {

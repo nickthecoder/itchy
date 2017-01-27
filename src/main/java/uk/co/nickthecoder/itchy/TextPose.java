@@ -66,7 +66,6 @@ public class TextPose extends AbstractTextPose
     public Texture getTexture(Renderer renderer)
     {
         if (texture == null) {
-            System.out.println("TextPose creating texture");
             texture = new Texture(renderer, getSurface());
         }
         return texture;

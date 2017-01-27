@@ -1,11 +1,18 @@
 Current Tasks
 =============
 
+Text boxes to use the new TextInputEvent
+
+
 Convert rendering to use new SDL2 hardware accelerated features
-    Render actors using Textures
-        Use simplistic one texture per Pose
-        Ignore all Makeup/pipeline stuff.
-        Ignore rotate and scale at first.
+
+    Re-implement scale and rotate
+
+    ImagePose should not have a simple surface/texture, but a partial surface and bounding rectangle
+        Therefore it can use one big surface/texture from the spritesheet.
+        
+    Re-implement Makeup features
+        Pipeline no longer includes the scale and rotate (as that is done when rendering the scene)
 
     Optimise to use one large Textures and bounding rectangles for each Sprite within a SpriteSheet
     
@@ -14,7 +21,7 @@ Convert rendering to use new SDL2 hardware accelerated features
     
     Render GuiViews using Textures
 
-
+Implement selections in text boxes 
 
 Game
     Does Editor need to be a subclass of Game?

@@ -1,0 +1,9 @@
+<scene name="menu" layout="default" sceneDirector="uk.co.nickthecoder.itchy.PlainSceneDirector" showMouse="true">
+  <layer name="background"/>
+  <layer name="main">
+    <text x="100.0" y="500.0" font="veraBold" fontSize="43.0" text="Sprites" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.SceneButton">
+      <role sceneName="sprites"/>
+    </text>
+    <text x="100.0" y="200.0" font="veraBold" fontSize="43.0" text="Quit" xAlignment="0.0" yAlignment="0.0" role="uk.co.nickthecoder.itchy.role.QuitButton"/>
+  </layer>
+</scene>

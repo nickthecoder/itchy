@@ -1,0 +1,7 @@
+<scene name="sprites" layout="default" sceneDirector="Sprites.groovy" showMouse="true">
+  <layer name="background"/>
+  <layer name="main">
+    <actor costume="angry" x="168.0" y="383.0"/>
+    <actor costume="laugh" x="440.0" y="234.0"/>
+  </layer>
+</scene>

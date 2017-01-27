@@ -20,6 +20,7 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
+import uk.co.nickthecoder.jame.event.TextInputEvent;
 
 public abstract class AbstractComponent implements Focusable, Component
 {
@@ -183,6 +184,11 @@ public abstract class AbstractComponent implements Focusable, Component
 
     @Override
     public void onKeyUp(KeyboardEvent ke)
+    {
+    }
+    
+    @Override
+    public void onTextInput(TextInputEvent tie)
     {
     }
 

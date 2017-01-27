@@ -13,6 +13,7 @@ import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.MouseButtonEvent;
 import uk.co.nickthecoder.jame.event.MouseMotionEvent;
+import uk.co.nickthecoder.jame.event.TextInputEvent;
 
 /**
  * Does nothing, but it is handy to use as a subclass, rather than creating your own empty methods for those methods
@@ -64,6 +65,11 @@ public class PlainSceneDirector implements SceneDirector
 
     @Override
     public void onKeyUp(KeyboardEvent ke)
+    {
+    }
+
+    @Override
+    public void onTextInput(TextInputEvent tie)
     {
     }
 
