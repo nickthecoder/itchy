@@ -182,65 +182,6 @@ public final class Itchy
         }
     }
 
-    /*
-     *  TODO Remove setScreenMode
-    private static void setScreenMode(Resources resources)
-    {
-        GameInfo gameInfo = resources.getGameInfo();
-        setScreenMode(gameInfo.title, resources, gameInfo.width, gameInfo.height, gameInfo.resizable);
-    }
-     */
-    
-    /* 
-     * TODO Remove setScreenMode
-    private static void setScreenMode(Game game)
-    {
-        setScreenMode(game.getTitle(), game.resources, game.getWidth(), game.getHeight(),
-            game.getDirector().isResizable());
-    }
-    */
-    
-    /* 
-     * TODO Remove setScreenMode
-    private static void setScreenMode(String title, Resources resources, int width, int height, boolean resizable)
-    {
-        // TODO VIDEO
-        //Video.setWindowTitle(title);
-
-        // According to the SDL1.2 docs, windows MUST be given a 32x32 image. How very quaint (windows is shite).
-        // For good looking OSes, we should try to use a bigger icon if there is one.
-        // Note that these must be bmp (yuck!), and not png, because it uses SDL_LoadBMP. Annoying!
-        String filename32 = resources.resolveFilename("icon32.bmp");
-        String filename = resources.resolveFilename("icon.bmp");
-
-        if (System.getProperty("os.name").startsWith("Windows")) {
-            filename = filename32;
-        }
-
-        try {
-            if (new File(filename).exists()) {
-                // TODO VIDEO
-                //Video.setWindowIcon(filename);
-            } else if (new File(filename32).exists()) {
-                // TODO VIDEO
-                //Video.setWindowIcon(filename32);
-            }
-        } catch (Exception e) {
-            // Do nothing
-        }
-
-        try {
-            int flags = Video.SWSURFACE | Video.DOUBLEBUF;
-            if (resizable) {
-                flags = flags | Video.RESIZABLE;
-            }
-            Video.setMode(width, height, 32, flags);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    */
-
     /**
      * Used internally by Itchy.
      * 

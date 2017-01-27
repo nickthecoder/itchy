@@ -365,7 +365,9 @@ public class Game
     {
         this.mouse.onActivate();
         this.director.onActivate();
+        System.out.println( "Game showing window "  + getTitle());
         gameWindow.show();
+        gameWindow.restore();
     }
 
     /**
@@ -377,6 +379,12 @@ public class Game
     {
         this.soundManager.stopAll();
         this.director.onDeactivate();
+
+        System.out.println( "Game hiding window " + getTitle() );
+        // Grr, If I hide, and then show a window, it doesn't reappear. SDL2 suckage? (Using Gnome3 under Linux)
+        // this.gameWindow.hide();
+        // gameWindow.minimize();
+        // Grr, sometimes it doesn't hide it either, and then the window doesn't redraw when it is maximised.
     }
 
     /**

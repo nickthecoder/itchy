@@ -62,14 +62,20 @@ public class ImagePose implements Pose
     private double direction;
 
     private Surface surface;
+    
+    private Texture texture;
 
     private static Surface loadSurface(String filename) throws JameException
     {
-        Surface loaded = new Surface(filename);
-        Surface result = loaded.convert();
-        loaded.free();
+        return new Surface(filename);
+        // We used to convert the surface to ensure it is in the same format as the video.
+        // This is no longer needed.
+        
+        //Surface loaded = new Surface(filename);
+        //Surface result = loaded.convert();
+        //loaded.free();
 
-        return result;
+        //return result;
     }
 
     /**
@@ -205,14 +211,13 @@ public class ImagePose implements Pose
         return this.surface;
     }
 
-    private Texture texture;
-
     // TODO Currently every ImagePose will have its own Texture, even if they came from a SpriteSheet.
     // Should really use one big Texture, and keep track of the rectangle.
     public Texture getTexture(Renderer renderer)
     {
         if (texture == null) {
             texture = new Texture(renderer, getSurface());
+            System.out.println( "Created ImagePose Texture " + texture + " from " + surface );
         }
         return texture;
     }

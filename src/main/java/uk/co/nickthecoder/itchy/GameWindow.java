@@ -25,16 +25,17 @@ public class GameWindow extends Window
     {
         this(game, game.resources.getGameInfo());
         this.game = game;
+        
+        System.out.println( "Created GameWindow " + this );
     }
 
     private GameWindow(Game game, GameInfo gameInfo)
     {
         super(gameInfo.title, gameInfo.width, gameInfo.height, true,
             Window.HIDDEN | (gameInfo.resizable ? Window.RESIZABLE : 0));
-                
+
         renderer = new Renderer(this);
-        surface = createSurface(gameInfo.width, gameInfo.height, true);
-        texture = createTexture(gameInfo.width, gameInfo.height, true);
+        rebuild(gameInfo.width, gameInfo.height);
     }
 
     public void render()
@@ -76,23 +77,50 @@ public class GameWindow extends Window
             if (we.getType() == WindowEventType.CLOSE) {
 
                 game.end();
-                surface.free();
-                texture.destroy();
+                free();
                 this.destroy();
 
             } else if (we.getType() == WindowEventType.RESIZED) {
 
-                surface.free();
-                texture.destroy();
                 int width = we.data1;
                 int height = we.data2;
 
-                surface = new Surface(width, height, true);
-                texture = new Texture(renderer, surface);
+                free();
+                rebuild(width, height);
 
-                this.game.getDirector().onResize( width, height );
+                System.out.println("GameWindow Resized " + width + "," + height + " " + this);
+                this.game.getDirector().onResize(width, height);
 
+            } else if (we.getType() == WindowEventType.MINIMIZED) {
+                System.out.println("GameWindow minimized " + game.getTitle() + " " + this);
+
+            } else if (we.getType() == WindowEventType.RESTORED) {
+                System.out.println("GameWindow restored " + game.getTitle() + " " + this);
+                rebuild(game.getWidth(), game.getHeight());
+            
+            } else if (we.getType() == WindowEventType.SHOWN) {
+                System.out.println("GameWindow shown " + game.getTitle() + " " + this);
+                rebuild(game.getWidth(), game.getHeight());
+
+            } else if (we.getType() == WindowEventType.HIDDEN) {
+                System.out.println("GameWindow hidden " + game.getTitle() + " " + this);
+                free();
+
+            } else {
+                System.out.println("Window Event " + we.getType());
             }
         }
+    }
+
+    private void free()
+    {
+        surface.free();
+        texture.destroy();
+    }
+
+    private void rebuild(int width, int height)
+    {
+        surface = createSurface(width, height, true);
+        texture = createTexture(width, height, true);
     }
 }

@@ -6,8 +6,8 @@ BASE=`pwd -P`
 LIB=${BASE}/build/install/itchy/lib
 popd > /dev/null
 
-NATIVE_DIR=${BASE}/build/natives/linux_`uname -m`
-CLASSPATH=${LIB}/itchy-0.4.jar:${LIB}/jame-1.1.jar:${LIB}/jython-standalone-2.5.2.jar:${LIB}/groovy-all-2.4.5.jar
+NATIVE_DIR=${BASE}/build/natives/linux_x86_64
+CLASSPATH=${LIB}/itchy-2.0.jar:${LIB}/jame-2.0.jar:${LIB}/jython-standalone-2.5.2.jar:${LIB}/groovy-all-2.4.5.jar
 MAIN=uk.co.nickthecoder.itchy.Launcher
 
 #
@@ -25,5 +25,6 @@ if [[ "${BASE}/resources/Launcher/template.desktop" -nt "${BASE}/resources/Launc
     xdg-mime default nickthecoder.itchy.desktop application/x-itchy  > /dev/null 2>&1
 fi
 
+echo java -Ditchy.base="${BASE}" -Djava.library.path="${NATIVE_DIR}" -classpath "${CLASSPATH}" "${MAIN}" "$@"
 java -Ditchy.base="${BASE}" -Djava.library.path="${NATIVE_DIR}" -classpath "${CLASSPATH}" "${MAIN}" "$@"
 
