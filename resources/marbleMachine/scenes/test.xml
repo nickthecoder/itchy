@@ -1,0 +1,16 @@
+<scene name="test" layout="default" sceneDirector="MachineScene.groovy" showMouse="true">
+  <layer name="background"/>
+  <layer name="grid">
+    <actor costume="rampL" x="315.0" y="315.0"/>
+    <actor costume="crossover" x="420.0" y="420.0"/>
+    <actor costume="rampR" x="525.0" y="315.0"/>
+    <actor costume="rampR" x="315.0" y="525.0"/>
+    <actor costume="rampL" x="525.0" y="525.0"/>
+    <actor costume="crossover" x="630.0" y="210.0"/>
+    <actor costume="rampR" x="735.0" y="105.0"/>
+    <actor costume="rampR" x="210.0" y="210.0"/>
+  </layer>
+  <layer name="foreground">
+    <actor costume="ballBlue" x="554.0" y="634.0"/>
+  </layer>
+</scene>

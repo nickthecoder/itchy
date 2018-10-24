@@ -1,0 +1,56 @@
+<resources>
+  <game title="Marble Machine" width="1000" height="720" resizable="false" initialScene="test" testScene="test" directorClassName="TheDirector.groovy"/>
+  <spriteSheets/>
+  <poses>
+    <pose name="ballBlue" filename="images/ballBlue.png" offsetX="17"/>
+    <pose name="ballRed" filename="images/ballRed.png"/>
+    <pose name="crossover" filename="images/crossover.png" offsetY="74"/>
+    <pose name="rampL" filename="images/rampL.png" offsetX="59" offsetY="55"/>
+    <pose name="rampR" filename="images/rampR.png" offsetY="56"/>
+  </poses>
+  <ninePatches/>
+  <fonts>
+    <font name="vera" file="fonts/Vera/Vera.ttf"/>
+    <font name="veraBold" file="fonts/Vera/VeraBd.ttf"/>
+  </fonts>
+  <sounds/>
+  <animations/>
+  <costumes>
+    <costume name="ballBlue" defaultZOrder="0" order="0" showInDesigner="true" role="Ball.groovy">
+      <pose name="default" pose="ballBlue"/>
+    </costume>
+    <costume name="ballRed" defaultZOrder="0" order="0" showInDesigner="true" role="Ball.groovy">
+      <pose name="default" pose="ballRed"/>
+    </costume>
+    <costume name="crossover" defaultZOrder="0" order="0" showInDesigner="true" role="Crossover.groovy">
+      <pose name="default" pose="crossover"/>
+      <properties mirror="false"/>
+    </costume>
+    <costume name="rampL" defaultZOrder="0" order="0" showInDesigner="true" role="Ramp.groovy">
+      <pose name="default" pose="rampL"/>
+      <properties mirror="false"/>
+    </costume>
+    <costume name="rampR" defaultZOrder="0" order="0" showInDesigner="true" role="Ramp.groovy">
+      <pose name="default" pose="rampR"/>
+      <properties mirror="true"/>
+    </costume>
+  </costumes>
+  <scenes>
+    <scene name="test"/>
+  </scenes>
+  <inputs/>
+  <layouts>
+    <layout name="default" defaultLayer="grid">
+      <layer name="background" zOrder="10" x="0" y="0" width="1000" height="720" viewClassName="uk.co.nickthecoder.itchy.RGBAView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view color="#e4dedeff"/>
+      </layer>
+      <layer name="grid" zOrder="50" x="0" y="0" width="1000" height="720" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.GridStageConstraint">
+        <view enableMouse="false"/>
+        <stageConstraint boxWidth="105" boxHeight="105"/>
+      </layer>
+      <layer name="foreground" zOrder="90" x="0" y="0" width="1000" height="720" viewClassName="uk.co.nickthecoder.itchy.StageView" stageClassName="uk.co.nickthecoder.itchy.ZOrderStage" stageConstraintClassName="uk.co.nickthecoder.itchy.NullStageConstraint">
+        <view enableMouse="false"/>
+      </layer>
+    </layout>
+  </layouts>
+</resources>
